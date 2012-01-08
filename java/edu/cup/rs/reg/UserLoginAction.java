@@ -3,7 +3,7 @@ package edu.cup.rs.reg;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
+import java.util.Calendar;
 import javax.servlet.ServletException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -106,14 +106,17 @@ public class UserLoginAction extends javax.servlet.http.HttpServlet implements j
             finally{
                 if(null!=dbo) dbo.dispose();
             }
+
+			Calendar c = Calendar.getInstance();
+			long timestamp = c.getTimeInMillis();
 			if(null!=s_SrcUrl && s_SrcUrl.length()>0){
 				response.sendRedirect(s_SrcUrl);
 			}
 			else{
 				if(isAdmin == 1)
-					response.sendRedirect("admin/adminindex.jsp");
+					response.sendRedirect("admin/adminindex.jsp?"+timestamp);
 				else
-					response.sendRedirect("loginin/stumain.jsp");
+					response.sendRedirect("loginin/stumain.jsp?"+timestamp);
 			}
             return;
         }

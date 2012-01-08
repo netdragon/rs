@@ -551,7 +551,6 @@ public class AddBmxxAction extends BaseAction
             finally{
                 if(null!=dbo) dbo.dispose();
             }
-//            response.sendRedirect("loginin/browseinfo.jsp?bmxxid="+seqKey);
             response.sendRedirect("loginin/saveok.html");
             return;
         }
