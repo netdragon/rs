@@ -36,6 +36,12 @@ table {
 
 </head>
 <%
+
+	if(true) {
+		response.sendRedirect("/error.jsp?error=" + new UTF8String("考试成绩未发布！").toUTF8String());
+		return;
+	}
+
 	LogHandler logger=LogHandler.getInstance("browseinfo.jsp");
 	ArrayList al;
 	ICommonList icl;

@@ -1,0 +1,132 @@
+<project name="RS" default="war" basedir=".">
+    <property environment="env" />
+    <property name="RS_DEPLOY" value="../../" />
+    <property name="cactus.home.tomcat5x" value="${RS_DEPLOY}/system/apache-tomcat-6.0.26" />
+    <property name="tomcat.home" value="${RS_DEPLOY}/system/apache-tomcat-6.0.26" />
+    <property name="project.name" value="RS Web" />
+    <property name="project.version" value="1.0" />
+    <property name="source.home" value="${basedir}/java" />
+    <property name="web.source.home" value="${basedir}/web" />
+    <property name="lib.home" value="${basedir}/lib" />
+    <property name="web.dir" value="${basedir}/web" />
+    <property name="build.dir" value="${RS_DEPLOY}/build" />
+    <property name="build.lib" value="${lib.home}" />
+    <property name="classes.dir" value="${build.dir}/classes" />
+    <property name="warlib.dir" value="${build.dir}/warlib" />
+    <property name="jsp.src.dir" value="${build.dir}/jspcache" />
+    <property name="classes.src" value="${source.home}" />
+    <!-- Construct classpath of all jars in lib repository -->
+    <path id="compile.classpath">
+        <pathelement location="." />
+        <pathelement path="${classes.dir}" />
+        <fileset dir="${lib.home}">
+            <include name="**/*.jar" />
+        </fileset>
+        <pathelement location="${tomcat.home}/bin/tomcat-juli.jar" />
+        <pathelement location="${tomcat.home}/lib/el-api.jar" />
+        <pathelement location="${tomcat.home}/lib/jasper.jar" />
+        <pathelement location="${tomcat.home}/lib/jasper-el.jar" />
+        <pathelement location="${tomcat.home}/lib/jasper-jdt.jar" />
+        <pathelement location="${tomcat.home}/lib/servlet-api.jar" />
+        <pathelement location="${tomcat.home}/lib/jsp-api.jar" />
+        <pathelement location="${tomcat.home}/lib/catalina.jar" />
+        <pathelement location="${tomcat.home}/lib/commons-modeler.jar" />
+    </path>
+    <!-- Prepare directories -->
+    <target name="prepare" depends="clean">
+        <echo>#################################</echo>
+        <echo>#                               #</echo>
+        <echo>#       RS.Web.prepare          #</echo>
+        <echo>#                               #</echo>
+        <echo>#################################</echo>
+        <echo message="-------- ${project.name} ${project.version} --------" />
+        <mkdir dir="${build.dir}" />
+        <mkdir dir="${classes.dir}" />
+        <mkdir dir="${jsp.src.dir}" />
+    </target>
+    <target name="clean">
+        <echo>#################################</echo>
+        <echo>#                               #</echo>
+        <echo>#       RS.Web.clean            #</echo>
+        <echo>#                               #</echo>
+        <echo>#################################</echo>
+        <delete dir="${build.dir}" />
+    </target>
+    <!-- Compile Source Code -->
+    <target name="compilejava" depends="prepare" description="Compiles the Source">
+        <echo>#################################</echo>
+        <echo>#                               #</echo>
+        <echo>#     RS.Web_java.compile       #</echo>
+        <echo>#                               #</echo>
+        <echo>#################################</echo>
+        <javac srcdir="${classes.src}" debug="on" optimize="${compile.optimize}" deprecation="${compile.deprecation}" destdir="${classes.dir}">
+        	<compilerarg line="-encoding UTF-8 "/>
+            <classpath refid="compile.classpath" />
+            <include name="edu/**" />
+        </javac>
+        <copy todir="${classes.dir}">
+            <fileset dir="${classes.src}" includes="**/*.dtd,**/*.sql,**/*.xml,**/*.properties" />
+        </copy>
+        <mkdir dir="${warlib.dir}" />
+        <copy todir="${warlib.dir}">
+            <fileset dir="${lib.home}" includes="**/*.jar">
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compilejsp" depends="jsp_src_generate" description="Compiles the Source">
+        <echo>#################################</echo>
+        <echo>#                               #</echo>
+        <echo>#       RS.Web_jsp.compile      #</echo>
+        <echo>#                               #</echo>
+        <echo>#################################</echo>
+        <javac srcdir="${jsp.src.dir}" debug="on" optimize="${compile.optimize}" deprecation="${compile.deprecation}" destdir="${classes.dir}">
+        	<compilerarg line="-encoding UTF-8 "/>
+            <classpath refid="compile.classpath" />
+            <include name="org/**" />
+        </javac>
+    </target>
+
+    <target name='jsp_src_generate' depends='compilejava'>
+        <taskdef classname='org.apache.jasper.JspC' name='jasper2'>
+            <classpath refid='compile.classpath'/>
+        </taskdef>
+        <jasper2 validateXml='false'
+        verbose='9'
+        uriroot='${web.source.home}'
+        outputDir='${jsp.src.dir}'
+        webXmlFragment='${jsp.src.dir}/generated-web.xml'/>
+    </target>
+
+    <target name="war" depends="compilejsp">
+        <echo>#################################</echo>
+        <echo>#                               #</echo>
+        <echo>#       RS.Web.war              #</echo>
+        <echo>#                               #</echo>
+        <echo>#################################</echo>
+        <copy todir="${classes.dir}/meta-inf">
+            <fileset dir="${web.dir}/meta-inf" />
+        </copy>
+
+        <war casesensitive="false" destfile="${build.dir}/RS.war" webxml="${web.dir}/web.xml">
+            <lib dir="${warlib.dir}"></lib>
+        	<classes dir="${classes.dir}"/>
+        	<metainf dir="${web.dir}/meta-inf"/>
+            <fileset dir="${web.source.home}" includes="**/*.htm,**/*.css,**/*.html,**/*.js,**/*.xml,**/*.png,**/*.gif,**/*.pdf">
+            </fileset>
+        </war>
+    </target>
+
+	<target name="deploy" depends="war">
+        <echo>#################################</echo>
+        <echo>#                               #</echo>
+        <echo>#       RS.Web.deploy           #</echo>
+        <echo>#                               #</echo>
+        <echo>#################################</echo>
+        <delete file="${tomcat.home}/RS.war" />
+    	<delete dir="${tomcat.home}/RS"></delete>
+        <copy file="${build.dir}/RS.war" todir="${tomcat.home}" />
+	<unwar dest="${tomcat.home}/RS" src="${tomcat.home}/RS.war" />
+    </target>
+</project>
+

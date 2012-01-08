@@ -156,12 +156,13 @@ background-color:#FFFFFF;
 <table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0"> 
   <tr>
     <td width="75%"  height="25" class="STYLE5">&nbsp;&nbsp;&nbsp;&nbsp;欢迎&nbsp;<%=userName%>&nbsp;登录</td>
-  <td width="25%"  height="25" align="right" class="STYLE5"><%
+  <td width="25%"  height="25" align="right" class="STYLE5">
+<%
 Calendar c = Calendar.getInstance();
 int year = c.get(Calendar.YEAR);
 int month = c.get(Calendar.MONTH) +1;
 int day = c.get(Calendar.DAY_OF_MONTH);
-
+long timestamp = c.getTimeInMillis();
 %>
 		<span id="floatleft"><span class="STYLE6">今天是：<%=year%>年<%=month%>月<%=day%>日&nbsp;&nbsp;&nbsp;</span></td>
    </tr>
@@ -189,24 +190,24 @@ int day = c.get(Calendar.DAY_OF_MONTH);
   </tr>
   <tr>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
-    <td><a href="attention.jsp" target="ifr">报名须知</a></td>
+    <td><a href="attention.jsp?<%=timestamp%>" target="ifr">报名须知</a></td>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
-    <td><a href="bmsq.jsp" target="ifr">填写报名表</a></td>
+    <td><a href="bmsq.jsp?<%=timestamp%>" target="ifr">填写报名表</a></td>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
-    <td><a href="bmsq_br.jsp" target="ifr">查看报名表</a></td>
+    <td><a href="bmsq_br.jsp?<%=timestamp%>" target="ifr">查看报名表</a></td>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
-    <td><a href="bmsq_mo.jsp" target="ifr">修改报名表</a></td>
+    <td><a href="bmsq_mo.jsp?<%=timestamp%>" target="ifr">修改报名表</a></td>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
-    <td><a href="shenhejieguo.jsp" target="ifr">初审结果及<span class="styjf">交费</span>查询</a></td>
+    <td><a href="shenhejieguo.jsp?<%=timestamp%>" target="ifr">初审结果及<span class="styjf">交费</span>查询</a></td>
 <!-- <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>    <td><a href="chengji.jsp" target="ifr">考试成绩查询</a></t d>-->
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
-    <td><a href="zhun.jsp" target="ifr">打印准考证</a></td>
+    <td><a href="zhun.jsp?<%=timestamp%>" target="ifr">打印准考证</a></td>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
-    <td><a href="luqu.jsp" target="ifr">录取结果</a></td>
+    <td><a href="luqu.jsp?<%=timestamp%>" target="ifr">录取结果</a></td>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
     <td><a href="../register/modireg.html" target="ifr">修改注册信息</a></td>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
-    <td><a href="../index.jsp" target="_self">退&nbsp;&nbsp;出</a></td>
+    <td><a href="../index.jsp?<%=timestamp%>" target="_self">退&nbsp;&nbsp;出</a></td>
   </tr>
  </table>
 </div>
