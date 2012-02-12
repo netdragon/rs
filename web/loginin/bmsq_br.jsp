@@ -48,7 +48,11 @@ a:hover {
 
 <body>
 <br /><br />
+<%
+Calendar c = Calendar.getInstance();
 
+long timestamp = c.getTimeInMillis();
+%>
 
 <table width="451"  border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
@@ -63,11 +67,11 @@ a:hover {
     <td height="3" align="center"   class="STYLE6" ></td>
   </tr>
  <tr>
-    <td bgcolor="#FFFFFF" width="443" height="47"  class="STYLE3">1.<a href="browseinfo.jsp">查看申请表</a></td>
+    <td bgcolor="#FFFFFF" width="443" height="47"  class="STYLE3">1.<a href="browseinfo.jsp?<%=timestamp%>">查看申请表</a></td>
 
   </tr>
   <tr>
-    <td height="40"  bgcolor="#FFFFFF" class="STYLE3">2.<a href="browsecjjd.jsp">查看高中成绩鉴定表</a></td>
+    <td height="40"  bgcolor="#FFFFFF" class="STYLE3">2.<a href="browsecjjd.jsp?<%=timestamp%>">查看高中成绩鉴定表</a></td>
 
   </tr>
 </table>

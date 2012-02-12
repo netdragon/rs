@@ -124,7 +124,7 @@ body{
 	String bmxxIdSesn = (String)session.getAttribute("bmxxid");
 	if(!bmxxId.equals(bmxxIdSesn)) {
 		if(null == adminFlag || 0 == adminFlag.length() || !"1".equals(adminFlag)) {
-			logger.error("无权访问些数据！");
+			logger.error("无权访问此数据！");
 			response.sendRedirect("/error.jsp?error=" + new UTF8String("无权访问此数据！").toUTF8String());
 			return;
 		}

@@ -49,9 +49,10 @@ a:hover {
 
 <body>
 <br /><br />
-
-
-
+<%
+Calendar c = Calendar.getInstance();
+long timestamp = c.getTimeInMillis();
+%>
 <table width="451"  border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td height="1" align="center"  bgcolor="#FFFFFF" class="STYLE6"></td>
@@ -65,11 +66,11 @@ a:hover {
     <td height="3" align="center"   class="STYLE6" ></td>
   </tr>
  <tr>
-    <td bgcolor="#FFFFFF" width="364" height="47"  class="STYLE3">1.<a href="enrollment.jsp">填写自主选拔录取申请表</a></td>
+    <td bgcolor="#FFFFFF" width="364" height="47"  class="STYLE3">1.<a href="enrollment.jsp?<%=timestamp%>">填写自主选拔录取申请表</a></td>
   
   </tr>
   <tr>
-    <td height="40"  bgcolor="#FFFFFF" class="STYLE3">2.<a href="cjjdb.jsp">填写高中成绩鉴定表</a></td>
+    <td height="40"  bgcolor="#FFFFFF" class="STYLE3">2.<a href="cjjdb.jsp?<%=timestamp%>">填写高中成绩鉴定表</a></td>
 
   </tr>
 </table>

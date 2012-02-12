@@ -92,13 +92,22 @@ a:hover{
             response.sendRedirect("/error.jsp?error=" + new UTF8String("未通过初审，没有准考证信息！").toUTF8String());
 			return;
 		} 
+		if(bmxx.getSfjbmf() != 1) {
+            response.sendRedirect("/error.jsp?error=" + new UTF8String("未交报名费，没有准考证信息！").toUTF8String());
+			return;
+		}
+		if(bmxx.getZhkzhid() == null || bmxx.getZhkzhid().length() < 3) {
+            response.sendRedirect("/error.jsp?error=" + new UTF8String("没有准考证信息！").toUTF8String());
+			return;
+		} 
 		KemuList kl;
 		Kemu kemu;
 		kl = new KemuList();
 		al = dbo.getList(kl);
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
-			int month = c.get(Calendar.MONTH)+1;
+		int month = c.get(Calendar.MONTH)+1;
+		long timestamp = c.getTimeInMillis();
 	year = (11 > month) ? year : (year + 1);
 
 %>
@@ -108,7 +117,7 @@ a:hover{
     <td height="20"></td>
   </tr>
   <tr>
-    <td align="right"><img src="../images/print.gif" width="19" height="16" /><a href="zhun_prt.jsp" target="_blank">打&nbsp;&nbsp;印</a>&nbsp;&nbsp;</td>
+    <td align="right"><img src="../images/print.gif" width="19" height="16" /><a href="zhun_prt.jsp?<%=timestamp%>" target="_blank">打&nbsp;&nbsp;印</a>&nbsp;&nbsp;</td>
   </tr>
 </table>
 <table width="649" border="0" align="center" cellpadding="0" cellspacing="0">

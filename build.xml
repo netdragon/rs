@@ -108,7 +108,7 @@
             <fileset dir="${web.dir}/meta-inf" />
         </copy>
 
-        <war casesensitive="false" destfile="${build.dir}/RS.war" webxml="${web.dir}/web.xml">
+        <war casesensitive="false" destfile="${build.dir}/RS.war" webxml="${web.dir}/WEB-INF/web.xml">
             <lib dir="${warlib.dir}"></lib>
         	<classes dir="${classes.dir}"/>
         	<metainf dir="${web.dir}/meta-inf"/>

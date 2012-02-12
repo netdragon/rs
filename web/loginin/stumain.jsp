@@ -169,7 +169,7 @@ long timestamp = c.getTimeInMillis();
  </table>
  <table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0"> 
   <tr>
-    <td  height="136" background="../images/systupian.gif"></td>
+    <td width="100%" height="136" background="../images/systupian.gif"></td>
   </tr> 
  </table>
 </div>
@@ -205,7 +205,7 @@ long timestamp = c.getTimeInMillis();
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
     <td><a href="luqu.jsp?<%=timestamp%>" target="ifr">录取结果</a></td>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
-    <td><a href="../register/modireg.html" target="ifr">修改注册信息</a></td>
+    <td><a href="../register/modireg.jsp?<%=timestamp%>" target="ifr">修改注册信息</a></td>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
     <td><a href="../index.jsp?<%=timestamp%>" target="_self">退&nbsp;&nbsp;出</a></td>
   </tr>

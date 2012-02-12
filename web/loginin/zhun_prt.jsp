@@ -102,6 +102,14 @@ function printIt(n){
             response.sendRedirect("/error.jsp?error=" + new UTF8String("未通过初审，没有准考证信息！").toUTF8String());
 			return;
 		} 
+		if(bmxx.getSfjbmf() != 1) {
+            response.sendRedirect("/error.jsp?error=" + new UTF8String("未交报名费，没有准考证信息！").toUTF8String());
+			return;
+		}
+		if(bmxx.getZhkzhid() == null || bmxx.getZhkzhid().length() < 3) {
+            response.sendRedirect("/error.jsp?error=" + new UTF8String("没有准考证信息！").toUTF8String());
+			return;
+		} 
 		KemuList kl;
 		Kemu kemu;
 		kl = new KemuList();
