@@ -34,14 +34,6 @@ public abstract class BaseAction extends javax.servlet.http.HttpServlet implemen
             request.setCharacterEncoding("UTF-8");
             response.setContentType("text/html; charset=UTF-8");
             session = request.getSession(true);
-			String ipSesn = (String)session.getAttribute("clientip");
-			String ip = HttpHelper.getIpAddress(request);
-			String bmxxidInfo=(String)session.getAttribute("bmxxid");
-			if(!ip.equals(ipSesn)) {
-				logger.error(bmxxidInfo + " IP地址不匹配，非法访问!IP:" + ipSesn + "变化为新IP:" + ip);
-				response.sendRedirect("/error.jsp?error=" + new UTF8String("IP地址不匹配，非法访问!IP:" + ipSesn + "变化为新IP:" + ip).toUTF8String());
-				return;
-			}
 
             USERID = (String) session.getAttribute("user_id");
 			USERNAME = (String) session.getAttribute("user_name");
@@ -58,6 +50,15 @@ public abstract class BaseAction extends javax.servlet.http.HttpServlet implemen
 				logger.error("没有登录!");
 				response.sendRedirect("reindex.jsp?url="+s_URL);
 				return;
+			} else {
+				String ipSesn = (String)session.getAttribute("clientip");
+				String ip = HttpHelper.getIpAddress(request);
+				String bmxxidInfo=(String)session.getAttribute("bmxxid");
+				if(!ip.equals(ipSesn)) {
+					logger.error(bmxxidInfo + " IP地址不匹配，非法访问!IP:" + ipSesn + "变化为新IP:" + ip);
+					response.sendRedirect("/error.jsp?error=" + new UTF8String("IP地址不匹配，非法访问!IP:" + ipSesn + "变化为新IP:" + ip).toUTF8String());
+					return;
+				}
 			}
             execute(request, response);
         } catch (Exception e) {
