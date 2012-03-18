@@ -109,7 +109,8 @@ public class InputScoreAction extends BaseAction
 					dbo.insert(sl.insert(score));
 					score.setKmid(2);
 					score.setFenshu(i_cj_2);
-					dbo.update(bl.setSumScore(sa_bmxx[i], i_cj_1*rate+i_cj_2*(1.0f-rate)));
+					//dbo.update(bl.setSumScore(sa_bmxx[i], i_cj_1*rate+i_cj_2*(1.0f-rate)));
+					dbo.update(bl.setSumScore(sa_bmxx[i], i_cj_1+i_cj_2));
 					dbo.insert(sl.insert(score));
 				}
 				ICommonList logslist;

@@ -518,7 +518,15 @@
         <servlet-name>org.apache.jsp.register.modireg_jsp</servlet-name>
         <servlet-class>org.apache.jsp.register.modireg_jsp</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>org.apache.jsp.loginin.chengji_005flq_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.loginin.chengji_005flq_jsp</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.loginin.chengji_005flq_jsp</servlet-name>
+        <url-pattern>/loginin/chengji_lq.jsp</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>org.apache.jsp.register.modireg_jsp</servlet-name>
         <url-pattern>/register/modireg.jsp</url-pattern>

@@ -199,11 +199,11 @@ long timestamp = c.getTimeInMillis();
     <td><a href="bmsq_mo.jsp?<%=timestamp%>" target="ifr">修改报名表</a></td>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
     <td><a href="shenhejieguo.jsp?<%=timestamp%>" target="ifr">初审结果及<span class="styjf">交费</span>查询</a></td>
-<!-- <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>    <td><a href="chengji.jsp" target="ifr">考试成绩查询</a></t d>-->
+<!-- <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>    <td><a href="#" target="ifr">考试成绩查询</a></t d>-->
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
     <td><a href="zhun.jsp?<%=timestamp%>" target="ifr">打印准考证</a></td>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
-    <td><a href="luqu.jsp?<%=timestamp%>" target="ifr">录取结果</a></td>
+    <td><a href="chengji_lq.jsp?<%=timestamp%>" target="ifr">录取结果</a></td>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
     <td><a href="../register/modireg.jsp?<%=timestamp%>" target="ifr">修改注册信息</a></td>
     <td align="right"><img src="../images/loginitem.gif" width="10" height="10" /></td>
