@@ -2,7 +2,11 @@
 <%@ page import="edu.cup.rs.common.*"%>
 <%@ page import="edu.cup.rs.log.*"%>
 <%@ page import="java.util.*" %>
+<%@ page import="java.io.*" %>
 <%@ page import="edu.cup.rs.reg.*"%>
+<%@ page import="jxl.*"%>
+<%@ page import="jxl.write.*"%>
+
 <%@include file="../common/admin_control.jsp"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 
@@ -195,6 +199,15 @@ table a:hover{
 	String s_operate="";
 	String s_isPublic = "";
 	try {
+		HashMap<String,String> hm_env=CachedItem.getEnv();
+		String filePath = hm_env.get("RS_HOME").trim() + "\\data\\temp\\cj_1.xls";
+		String bs;
+		String ms;
+		
+		InputStream is = new FileInputStream(filePath); 
+		Workbook rwb = Workbook.getWorkbook(is); 
+		Sheet sheet = rwb.getSheet(0);
+
 		SystemSettingsList ssl;
 		ArrayList al_settings;
 		ssl = new SystemSettingsList("isPublic_Score");
@@ -268,8 +281,8 @@ table a:hover{
 <%
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
-			int month = c.get(Calendar.MONTH)+1;
-	year = (11 > month) ? year : (year + 1);
+		int month = c.get(Calendar.MONTH)+1;
+		year = (11 > month) ? year : (year + 1);
 %>
 <div class="con">
 <form method="get" action="lrlq.jsp">
@@ -283,7 +296,19 @@ table a:hover{
 </table><br />
 <table width="98%" border="0" cellspacing="0" cellpadding="0"  align="center">
   <tr>
-    <td colspan="2" height="6"></td>
+    <td colspan="2" height="6">数据来自：
+	<%=filePath%><br>
+<%
+	for (int i = 2; i < sheet.getRows(); i++) {
+		bs = sheet.getCell(59, i).getContents().trim(); 
+		ms = sheet.getCell(60, i).getContents().trim();
+%>
+<%=bs%>&nbsp;::<%=ms%>
+<br>
+<%
+	} 
+%>
+	</td>
   </tr>
   <tr>
   <td>
@@ -375,7 +400,7 @@ table a:hover{
      <td  class="tdfont" align="center"><%=bmxx.getKskl()%></td>
      <td  class="tdfont"><%=bmxx.getShfzh()%></td>
 <%
-		if(!("1".equals(s_isPublic))) {
+		if(1 == 0) {
 %>
      <td  class="tdfont" align="center"><input type="text" size="4"  name="cj1_<%=bmxx.getBmxxid()%>" value="<%=cj_1%>"></td>
 	 <td  class="tdfont" align="center"><input type="text" size="4"  name="cj2_<%=bmxx.getBmxxid()%>" value="<%=cj_2%>"></td>
@@ -423,7 +448,7 @@ table a:hover{
 </div>
 <%
 	}catch(Exception e) {
-		logger.error(e.getMessage());
+		logger.error(e.getStackTrace()[0].toString());
 		response.sendRedirect("/error.jsp?error=" + new UTF8String("没有该考生或数据发生错误！").toUTF8String());
 		return;
 	}finally {

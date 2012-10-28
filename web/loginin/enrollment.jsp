@@ -529,11 +529,8 @@ body{
 		}
 %>
       </select></td>
-        <td align="center" class="td1 STYLE6">是否服从调剂</td>
-        <td class="td2"><input type="radio" name="psftj" value="1"  checked="checked"/>
-        <span class="STYLE7">是</span>&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="radio" name="psftj" value="0" />
-        <span class="STYLE7">否</span></td>
+        <td align="center" class="td1 STYLE6">&nbsp;</td>
+        <td class="td2">&nbsp;</td>
       </tr>
 
     </table></td>

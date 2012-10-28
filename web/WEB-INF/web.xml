@@ -187,7 +187,37 @@
         <servlet-name>update_fbcz</servlet-name>
         <servlet-class>edu.cup.rs.reg.UpdateResetSettingAction</servlet-class>
     </servlet>
+    <servlet>
+        <description></description>
+        <display-name>delete_zszy</display-name>
+        <servlet-name>delete_zszy</servlet-name>
+        <servlet-class>edu.cup.rs.reg.DeleteZszyAction</servlet-class>
+    </servlet>
+    <servlet>
+        <description></description>
+        <display-name>add_zszy</display-name>
+        <servlet-name>add_zszy</servlet-name>
+        <servlet-class>edu.cup.rs.reg.AddZszyAction</servlet-class>
+    </servlet>
+    <servlet>
+        <description></description>
+        <display-name>update_zszy</display-name>
+        <servlet-name>update_zszy</servlet-name>
+        <servlet-class>edu.cup.rs.reg.UpdateZszyAction</servlet-class>
+    </servlet>
 	
+    <servlet-mapping>
+        <servlet-name>update_zszy</servlet-name>
+        <url-pattern>/update_zszy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>add_zszy</servlet-name>
+        <url-pattern>/add_zszy</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>delete_zszy</servlet-name>
+        <url-pattern>/delete_zszy</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>update_fbcz</servlet-name>
         <url-pattern>/update_fbcz</url-pattern>
@@ -522,7 +552,23 @@
         <servlet-name>org.apache.jsp.loginin.chengji_005flq_jsp</servlet-name>
         <servlet-class>org.apache.jsp.loginin.chengji_005flq_jsp</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>org.apache.jsp.admin.zywh_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.admin.zywh_jsp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>org.apache.jsp.admin.zy_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.admin.zy_jsp</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.admin.zy_jsp</servlet-name>
+        <url-pattern>/admin/zy.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.admin.zywh_jsp</servlet-name>
+        <url-pattern>/admin/zywh.jsp</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>org.apache.jsp.loginin.chengji_005flq_jsp</servlet-name>
         <url-pattern>/loginin/chengji_lq.jsp</url-pattern>

@@ -335,7 +335,7 @@ function printIt(n){
       <tr>
         <td class="td2"><strong>第七志愿</strong>：<%=hm.get(""+bkzy7.getZyid()) %>&nbsp;</td>
         <td class="td2"><strong>第八志愿</strong>：<%=hm.get(""+bkzy8.getZyid()) %>&nbsp;</td>
-        <td class="td2"><strong>是否服从调剂</strong>：<%=(bkzy1.getTjf() == 1) ? "是":"否" %></td>
+        <td class="td2">&nbsp;</td>
       </tr>
 
     </table></td>

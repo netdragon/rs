@@ -128,43 +128,43 @@
 		
 		if(bk1 == bk2 || bk1==bk3 || bk1==bk4 || bk1==bk5 || bk1==bk6 
 			|| bk1==bk7 || bk1==bk8) {
-			if(bk1!="0") {
+			if(bk1!="1") {
 				alert("报考志愿中不能选择相同专业。请确认！");
 				return false;
 			}
 		}
 		if(bk2==bk3 || bk2==bk4 || bk2==bk5 ||
 			bk2==bk6 || bk2==bk7 || bk2==bk8 ) {
-			if(bk2!="0") {
+			if(bk2!="1") {
 				alert("报考志愿中不能选择相同专业。请确认！");
 				return false;
 			}
 		}
 		if(bk3==bk4 || bk3==bk5 || bk3==bk6 || bk3==bk7 || bk3==bk8) {
-			if(bk3!="0") {
+			if(bk3!="1") {
 				alert("报考志愿中不能选择相同专业。请确认！");
 				return false;
 			}
 		}
 		if(bk4==bk5 || bk4==bk6 || bk4==bk7 || bk4==bk8) {
-			if(bk4!="0") {
+			if(bk4!="1") {
 				alert("报考志愿中不能选择相同专业。请确认！");
 				return false;
 			}
 		}
 		if(bk5==bk6 || bk5==bk7 || bk5==bk8) {
-			if(bk5!="0") {
+			if(bk5!="1") {
 				alert("报考志愿中不能选择相同专业。请确认！");
 				return false;
 			}
 		}
 		if(bk6==bk7 || bk6==bk8) {
-			if(bk6!="0") {
+			if(bk6!="1") {
 				alert("报考志愿中不能选择相同专业。请确认！");
 				return false;
 			}
 		}
-		if( bk7!="0" && bk7==bk8) {
+		if( bk7!="1" && bk7==bk8) {
 			alert("报考志愿中不能选择相同专业。请确认！");
 			return false;
 		}

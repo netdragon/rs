@@ -460,43 +460,43 @@ public class AddBmxxAction extends BaseAction
             	bkzy1 = new Bkzy();
                 bkzy1.setBmxxid(seqKey);
                 bkzy1.setZyid(Integer.parseInt(pzhiyuan1));
-                bkzy1.setTjf(Integer.parseInt(ksSftj));
+                bkzy1.setTjf(1);
 				bkzy1.setXh(1);
                 bkzy2 = new Bkzy();
                 bkzy2.setBmxxid(seqKey);
                 bkzy2.setZyid(Integer.parseInt(pzhiyuan2));
-                bkzy2.setTjf(Integer.parseInt(ksSftj));
+                bkzy2.setTjf(1);
 				bkzy2.setXh(2);
 
             	bkzy3 = new Bkzy();   //报考专业志愿3
                 bkzy3.setBmxxid(seqKey);
                 bkzy3.setZyid(Integer.parseInt(pzhiyuan3));
-                bkzy3.setTjf(Integer.parseInt(ksSftj));
+                bkzy3.setTjf(1);
 				bkzy3.setXh(3);
             	bkzy4 = new Bkzy();
                 bkzy4.setBmxxid(seqKey);
                 bkzy4.setZyid(Integer.parseInt(pzhiyuan4));
-                bkzy4.setTjf(Integer.parseInt(ksSftj));
+                bkzy4.setTjf(1);
 				bkzy4.setXh(4);
             	bkzy5 = new Bkzy();
                 bkzy5.setBmxxid(seqKey);
                 bkzy5.setZyid(Integer.parseInt(pzhiyuan5));
-                bkzy5.setTjf(Integer.parseInt(ksSftj));
+                bkzy5.setTjf(1);
 				bkzy5.setXh(5);
             	bkzy6 = new Bkzy();
                 bkzy6.setBmxxid(seqKey);
                 bkzy6.setZyid(Integer.parseInt(pzhiyuan6));
-                bkzy6.setTjf(Integer.parseInt(ksSftj));
+                bkzy6.setTjf(1);
 				bkzy6.setXh(6);
             	bkzy7 = new Bkzy();
                 bkzy7.setBmxxid(seqKey);
                 bkzy7.setZyid(Integer.parseInt(pzhiyuan7));
-                bkzy7.setTjf(Integer.parseInt(ksSftj));
+                bkzy7.setTjf(1);
 				bkzy7.setXh(7);
             	bkzy8 = new Bkzy();
                 bkzy8.setBmxxid(seqKey);
                 bkzy8.setZyid(Integer.parseInt(pzhiyuan8));
-                bkzy8.setTjf(Integer.parseInt(ksSftj));
+                bkzy8.setTjf(1);
 				bkzy8.setXh(8);
 
 				

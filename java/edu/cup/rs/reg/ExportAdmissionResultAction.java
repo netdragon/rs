@@ -183,11 +183,16 @@ public class ExportAdmissionResultAction extends BaseAction{
 					k++;
 					tjf = rs_bkzy.getInt("tjf");
                 }
+				/*
 				if(tjf == 1)
 					columnValue = "是";
 				else
 					columnValue = "否";
-				label = new Label(k, j, columnValue, border); 
+				*/
+				label = new Label(k, j, "", border); 
+				sheet.addCell(label);
+				k++;
+				label = new Label(k, j, "", border); 
 				sheet.addCell(label);
 				k++;
             }

@@ -329,7 +329,7 @@ int year = c.get(Calendar.YEAR);
       <tr>
         <td class="td2a"><strong>第七志愿</strong>：<%=hm.get(""+bkzy7.getZyid()) %>&nbsp;</td>
         <td class="td2a"><strong>第八志愿</strong>：<%=hm.get(""+bkzy8.getZyid()) %>&nbsp;</td>
-        <td class="td2a"><strong>是否服从调剂</strong>：<%=(bkzy1.getTjf() == 1) ? "是":"否" %></td>
+        <td class="td2a">&nbsp;</td>
       </tr>
 
     </table></td>
