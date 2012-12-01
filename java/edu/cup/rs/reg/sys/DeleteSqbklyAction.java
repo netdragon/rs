@@ -1,4 +1,4 @@
-package edu.cup.rs.reg;
+package edu.cup.rs.reg.sys;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -14,6 +14,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import edu.cup.rs.common.*;
+import edu.cup.rs.reg.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,11 +23,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class AddZszyAction extends BaseAction
+public class DeleteSqbklyAction extends BaseAction
 {
 
-	protected static final LogHandler logger=LogHandler.getInstance(AddZszyAction.class);
-	public AddZszyAction() {
+	protected static final LogHandler logger=LogHandler.getInstance(DeleteSqbklyAction.class);
+	public DeleteSqbklyAction() {
 		super();
 	}
 
@@ -42,16 +43,15 @@ public class AddZszyAction extends BaseAction
                 response.sendRedirect("/error.jsp?error=" + new UTF8String("请先以管理员登录!").toUTF8String());
     			return;
     		}
-			String zymc = BaseFunction.null2value(request.getParameter("zymc"));
-			String zytype = BaseFunction.null2value(request.getParameter("zytype"));
+			String mc = BaseFunction.null2value(request.getParameter("mc"));
+			if(mc.length() == 0) {
+                response.sendRedirect("/error.jsp?error=" + new UTF8String("请选择对象!").toUTF8String());
+    			return;
+			}
 
             DBOperator dbo=new DBOperator();
-            ZhshzyList zl;
-            if(0==zymc.length())
-            {
-                response.sendRedirect("error.jsp?error="+new UTF8String("请输入专业名称！").toUTF8String());
-                return;
-            }
+            SqbklyList zl;
+
             try {
                 dbo.init(false);
             } catch (Exception e2) {
@@ -61,16 +61,14 @@ public class AddZszyAction extends BaseAction
             }
 
             try {
-				Zhshzy zy = new Zhshzy();
-				zy.setZymc(zymc);
-				zy.setType(Integer.parseInt(zytype));
-				zl = new ZhshzyList();
-				dbo.insert(zl.insert(zy));
+
+				zl = new SqbklyList();
+				dbo.update(zl.delete(mc));
 				
 				ICommonList logslist;
 				Log log = new Log();
 				logslist = new LogsList();
-				log.setContent(USERNAME + " 增加了招生专业。");
+				log.setContent(USERNAME + " 删除了报考理由。");
 				dbo.insert(logslist.insert(log));
                 dbo.commit();
 
@@ -83,7 +81,7 @@ public class AddZszyAction extends BaseAction
             finally{
                 if(null!=dbo) dbo.dispose();
             }
-            response.sendRedirect("admin/zywh.jsp?info=" + new UTF8String("删除成功！").toUTF8String());
+            response.sendRedirect("admin/sqlywh.jsp?info=" + new UTF8String("删除成功！").toUTF8String());
             return;
         }
         catch(Exception e)

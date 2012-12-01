@@ -4,6 +4,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <%@ page import="edu.cup.rs.reg.*" %>
+<%@ page import="edu.cup.rs.reg.sys.*" %>
 <%@include file="../common/access_control.jsp"%>
 <html>
 <head>
@@ -1262,12 +1263,20 @@ body{
       （面试分组）</td>
       <td height="37" colspan="5" align="left"  class="td2"><select name="psqly" id="psqly">
         <option value="qxz" selected="selected">--请选择--</option> 
+<%
 
-        <option value="数学特长">数学特长</option>
-        <option value="外语特长">外语特长</option>
-        <option value="物理特长">物理特长</option>
-        <option value="化学特长">化学特长</option>
-        <option value="文艺特长">文艺特长</option>
+	SqbklyList sqbklyList;
+	Sqbkly sqbkly;
+		sqbklyList = new SqbklyList();
+		al = dbo.getList(sqbklyList);
+		for(i=0; i<al.size(); i++) {
+			sqbkly = (Sqbkly)al.get(i);
+			if(null == sqbkly.getMc() || 0 == sqbkly.getMc().length()) continue;
+%>
+        <option value="<%=sqbkly.getMc()%>"><%=sqbkly.getMc()%></option>
+<%
+		}
+%>
       </select></td>
     </tr>
 

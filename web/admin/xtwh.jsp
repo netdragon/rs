@@ -93,6 +93,11 @@
     <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('zywh.jsp');" class="zh2" value="招生专业设置" />
 	</td>
    </tr>
+  <tr>
+    <td height="36" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
+    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('sqlywh.jsp');" class="zh2" value="申请理由设置" />
+	</td>
+   </tr>
    <tr>
     <td height="7" colspan="2"></td>
   </tr>

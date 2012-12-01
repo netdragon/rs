@@ -205,7 +205,37 @@
         <servlet-name>update_zszy</servlet-name>
         <servlet-class>edu.cup.rs.reg.UpdateZszyAction</servlet-class>
     </servlet>
+    <servlet>
+        <description></description>
+        <display-name>update_sqbkly</display-name>
+        <servlet-name>update_sqbkly</servlet-name>
+        <servlet-class>edu.cup.rs.reg.sys.UpdateSqbklyAction</servlet-class>
+    </servlet>
+    <servlet>
+        <description></description>
+        <display-name>add_sqbkly</display-name>
+        <servlet-name>add_sqbkly</servlet-name>
+        <servlet-class>edu.cup.rs.reg.sys.AddSqbklyAction</servlet-class>
+    </servlet>
+    <servlet>
+        <description></description>
+        <display-name>delete_sqbkly</display-name>
+        <servlet-name>delete_sqbkly</servlet-name>
+        <servlet-class>edu.cup.rs.reg.sys.DeleteSqbklyAction</servlet-class>
+    </servlet>
 	
+    <servlet-mapping>
+        <servlet-name>delete_sqbkly</servlet-name>
+        <url-pattern>/delete_sqbkly</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>add_sqbkly</servlet-name>
+        <url-pattern>/add_sqbkly</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>update_sqbkly</servlet-name>
+        <url-pattern>/update_sqbkly</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>update_zszy</servlet-name>
         <url-pattern>/update_zszy</url-pattern>
@@ -560,7 +590,23 @@
         <servlet-name>org.apache.jsp.admin.zy_jsp</servlet-name>
         <servlet-class>org.apache.jsp.admin.zy_jsp</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>org.apache.jsp.admin.sqlywh_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.admin.sqlywh_jsp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>org.apache.jsp.admin.sqly_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.admin.sqly_jsp</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.admin.sqly_jsp</servlet-name>
+        <url-pattern>/admin/sqly.jsp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.admin.sqlywh_jsp</servlet-name>
+        <url-pattern>/admin/sqlywh.jsp</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>org.apache.jsp.admin.zy_jsp</servlet-name>
         <url-pattern>/admin/zy.jsp</url-pattern>

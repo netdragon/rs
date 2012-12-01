@@ -4,6 +4,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <%@ page import="edu.cup.rs.reg.*"%>
+<%@ page import="edu.cup.rs.reg.sys.*" %>
 <%@include file="../common/access_control.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -136,6 +137,9 @@ body{
 	ZhshzyList zyl;
 	Zhshzy zy;
 	int i;
+	SqbklyList sqbklyList;
+	Sqbkly sqbkly;
+	ArrayList alSqly;
 	Calendar c_curr = Calendar.getInstance();
 	Calendar cl = Calendar.getInstance();
 	try {
@@ -219,6 +223,10 @@ body{
 		shgz3 = (Hdqk)al.get(2);
 		zyl = new ZhshzyList();
 		al = dbo.getList(zyl);
+
+
+		sqbklyList = new SqbklyList();
+		alSqly = dbo.getList(sqbklyList);
 	}catch(Exception e) {
 		logger.error(e.getMessage());
 		return;
@@ -864,14 +872,16 @@ body{
     <tr>
       <td align="center"   class="td1 STYLE6">申请理由 <br>（面试分组）</td>
       <td height="37" colspan="5" align="left"  class="td2"><select name="psqly" id="psqly">
-        
-        <option value="数学特长" <%=("数学特长".equals(bmxx.getSqly())) ? "selected":""%>>数学特长</option>
-        <option value="外语特长" <%=("外语特长".equals(bmxx.getSqly())) ? "selected":""%>>外语特长</option>
-        <option value="物理特长" <%=("物理特长".equals(bmxx.getSqly())) ? "selected":""%>>物理特长</option>
-        <option value="化学特长" <%=("化学特长".equals(bmxx.getSqly())) ? "selected":""%>>化学特长</option>
-        
-        <option value="文艺特长" <%=("文艺特长".equals(bmxx.getSqly())) ? "selected":""%>>文艺特长</option>
+<%
 
+		for(i=0; i<alSqly.size(); i++) {
+			sqbkly = (Sqbkly)alSqly.get(i);
+			if(null == sqbkly.getMc() || 0 == sqbkly.getMc().length()) continue;
+%>
+        <option value="<%=sqbkly.getMc()%>" <%=((sqbkly.getMc().equals(bmxx.getSqly())) ? "selected":"")%>><%=sqbkly.getMc()%></option>
+<%
+		}
+%>
       </select></td>
     </tr>
 

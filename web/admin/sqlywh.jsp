@@ -4,13 +4,14 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <%@ page import="edu.cup.rs.reg.*"%>
+<%@ page import="edu.cup.rs.reg.sys.*"%>
 <%@include file="../common/admin_control.jsp"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>招生专业维护</title>
+<title>申请理由维护</title>
 <style type="text/css">
 <!--
 .con{
@@ -58,26 +59,21 @@
 -->
 </style>
 <script>
-	function deleteZy(value, name){
-	    if(!window.confirm("您将要删除" + name + "专业，请确认。")) return;
-		document.getElementById("zyid").value = value;
+	function deleteLy(name){
+	    if(!window.confirm("您将要删除'" + name + "'申请理由，请确认。")) return;
+		document.getElementById("mc").value = name;
 		document.forms[0].method = "post";
-		document.forms[0].action = "/delete_zszy";
+		document.forms[0].action = "/delete_sqbkly";
 		document.forms[0].submit();
 	}
-	function addZy(){
-		window.location.assign('zy.jsp');;
+	function addsqbkly(){
+		window.location.assign('sqly.jsp');;
 	}
 </script>
 </head>
 
 <body>
-<%
 
-		Calendar c = Calendar.getInstance();
-		int year = c.get(Calendar.YEAR);
-
-%>
 <br/>
 <div class="con">
 <br />
@@ -86,10 +82,10 @@
    <tr>
     <td height="19">
 <%
-	LogHandler logger=LogHandler.getInstance("zywh.jsp");
+	LogHandler logger=LogHandler.getInstance("sqlywh.jsp");
 	ArrayList al;
-	ZhshzyList zyList;
-	Zhshzy zy;
+	SqbklyList sqbklyList;
+	Sqbkly sqbkly;
 	SystemSettingsList ssl;
 	SystemSettings ss;
 	int i = 0;
@@ -134,37 +130,35 @@
 				c2.setTime(sdf.parse(ss.getValue()));
 		}
 		if(c_curr.after(cl) && c_curr.before(c2)) {
-			response.sendRedirect("/error.jsp?error=" + new UTF8String("在本期报名时间内不能修改专业设置，否则会引起数据不一致!").toUTF8String());
+			response.sendRedirect("/error.jsp?error=" + new UTF8String("在本期报名时间内不能修改申请理由，否则会引起数据不一致!").toUTF8String());
 			return;
 		}
-		zyList = new ZhshzyList();
-		al = dbo.getList(zyList);
+		sqbklyList = new SqbklyList();
+		al = dbo.getList(sqbklyList);
 %>
 	<br>
 <table width="522" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td width="600" height="43" class="tdbline"><img src="../images/zkzpic01.gif" alt="pic" width="40" height="42" align="absmiddle" /><span class="STYLE1">招生专业维护(注：在本期报名时间内不能修改专业设置，否则会引起数据不一致。)</span></td>
+    <td width="600" height="43" class="tdbline"><img src="../images/zkzpic01.gif" alt="pic" width="40" height="42" align="absmiddle" /><span class="STYLE1">申请理由维护(注：在本期报名时间内不能修改申请理由设置，否则会引起数据不一致。)</span></td>
   </tr>
     <tr>
-    <td align="right"><input type="button" name="add" onclick="addZy()" value="增  加" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="Subkssj" value="取 消"  onclick="window.history.back();"/></td>
+    <td align="right"><input type="button" name="add" onclick="addsqbkly()" value="增  加" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="Subkssj" value="取 消"  onclick="window.history.back();"/></td>
   </tr>
   </table>
 
   <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#999999">
       <tr>
-        <td width="20%" align="center" bgcolor="#FFFFFF" class="km_bt">类&nbsp;&nbsp;别</td>
-        <td width="60%" align="center" bgcolor="#FFFFFF" class="km_bt">名&nbsp;&nbsp;称</td>
+        <td width="80%" align="center" bgcolor="#FFFFFF" class="km_bt">名&nbsp;&nbsp;称</td>
 		<td width="20%" bgcolor="#FFFFFF">&nbsp;</td>
       </tr>  
   <%
 		for(i=0; i<al.size(); i++) {
-			zy = (Zhshzy)al.get(i);
-			if(null == zy.getZymc() || 0 == zy.getZymc().length()) continue;
+			sqbkly = (Sqbkly)al.get(i);
+			if(null == sqbkly.getMc() || 0 == sqbkly.getMc().length()) continue;
   %>
       <tr>
-        <td width="20%" bgcolor="#FFFFFF" class="km_bt"><%=(zy.getType() == 1)?"文科":"理科"%></td>
-        <td width="60%" bgcolor="#FFFFFF" class="km_bt"><a href="zy.jsp?zyid=<%=zy.getZyid()%>"><%=zy.getZymc()%></a> </td>
-		<td width="20%" bgcolor="#FFFFFF">&nbsp;&nbsp;<input type="button" onclick="deleteZy('<%=zy.getZyid()%>', '<%=zy.getZymc()%>')" value="删除"></td>
+        <td width="80%" bgcolor="#FFFFFF" class="km_bt"><a href="sqly.jsp?mc=<%=sqbkly.getMc()%>"><%=sqbkly.getMc()%></a> </td>
+		<td width="20%" bgcolor="#FFFFFF">&nbsp;&nbsp;<input type="button" onclick="deleteLy('<%=sqbkly.getMc()%>', '<%=sqbkly.getMc()%>')" value="删除"></td>
       </tr>
 <%
 		}
@@ -183,7 +177,7 @@
   </tr>
 
 </table>
-<input id="zyid" name="zyid" type="hidden" value="-100">
+<input id="mc" name="mc" type="hidden" value="">
 </form>
 </div>
 </body>
