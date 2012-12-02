@@ -130,7 +130,11 @@
     <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('../register/modipwd.jsp');" class="zh3" value="修 改 密 码" />
 	</td>
    </tr>
-
+  <tr>
+    <td height="36" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
+    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('../admin/backup.jsp');" class="zh3" value="备      份" />
+	</td>
+   </tr>
    <tr>
     <td height="19" colspan="2">&nbsp;</td>
   </tr>

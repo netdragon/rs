@@ -223,7 +223,17 @@
         <servlet-name>delete_sqbkly</servlet-name>
         <servlet-class>edu.cup.rs.reg.sys.DeleteSqbklyAction</servlet-class>
     </servlet>
+    <servlet>
+        <description></description>
+        <display-name>backup</display-name>
+        <servlet-name>backup</servlet-name>
+        <servlet-class>edu.cup.rs.reg.sys.SysBackupAction</servlet-class>
+    </servlet>
 	
+    <servlet-mapping>
+        <servlet-name>backup</servlet-name>
+        <url-pattern>/backup</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>delete_sqbkly</servlet-name>
         <url-pattern>/delete_sqbkly</url-pattern>
@@ -598,7 +608,15 @@
         <servlet-name>org.apache.jsp.admin.sqly_jsp</servlet-name>
         <servlet-class>org.apache.jsp.admin.sqly_jsp</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>org.apache.jsp.admin.backup_jsp</servlet-name>
+        <servlet-class>org.apache.jsp.admin.backup_jsp</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>org.apache.jsp.admin.backup_jsp</servlet-name>
+        <url-pattern>/admin/backup.jsp</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>org.apache.jsp.admin.sqly_jsp</servlet-name>
         <url-pattern>/admin/sqly.jsp</url-pattern>
