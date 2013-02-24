@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>申请理由维护</title>
+<title>考试科目</title>
 <style type="text/css">
 <!--
 .con{
@@ -56,50 +56,34 @@
 	font-size: 12px;
 }
 .p1{font-size:12px;color:black}
-.con .km_bt a {
-	color: #0066FF;
-	text-decoration: none;
-}
-.con .km_bt a:hover {
-	color: #990000;
-	text-decoration: none;
-}
--->
 -->
 </style>
 <script>
-	function deleteLy(name){
-	    if(!window.confirm("您将要删除'" + name + "'申请理由，请确认。")) return;
-		document.getElementById("mc").value = name;
+	function addNew(){
+	    var mc = document.getElementById("kmidkey").value;
+		if(mc == null || mc.length == 0){
+			document.forms[0].action = "/add_kemu";
+		} else {
+			document.forms[0].action = "/update_kemu";
+		}
 		document.forms[0].method = "post";
-		document.forms[0].action = "/delete_sqbkly";
+		
 		document.forms[0].submit();
-	}
-	function addsqbkly(){
-		window.location.assign('sqly.jsp');;
 	}
 </script>
 </head>
 
 <body>
-
-<br/>
-<div class="con">
-<br />
-<form action="" method="post">
-  <table width="522" border="0" align="center" cellpadding="0" cellspacing="0">
-   <tr>
-    <td height="19">
 <%
-	LogHandler logger=LogHandler.getInstance("sqlywh.jsp");
+	LogHandler logger=LogHandler.getInstance("kemu.jsp");
 	ArrayList al;
-	SqbklyList sqbklyList;
-	Sqbkly sqbkly;
-	SystemSettingsList ssl;
-	SystemSettings ss;
-	int i = 0;
+	KemuList kmList;
+	Kemu km;
+	String kmmc = "";
+
 	DBOperator dbo = new DBOperator();
-	
+	String kmid = request.getParameter("kmid");
+	String kmlxid = request.getParameter("kmlxid");
 	String userId = (String)session.getAttribute("user_id");
 	if(null == userId){
            logger.error("没有登录信息！");
@@ -115,39 +99,49 @@
 		return;
 	}
 
-	try {
+%>
+<br/>
+<div class="con">
+<br />
+<form action="" method="post">
+  <table width="522" border="0" align="center" cellpadding="0" cellspacing="0">
+   <tr>
+    <td height="19">
+<%
 
-		sqbklyList = new SqbklyList();
-		al = dbo.getList(sqbklyList);
+	try {
+		if(kmid != null) {
+			kmList = new KemuList(Integer.parseInt(kmid));
+			al = dbo.getList(kmList);
+			if(al.size() == 1) {
+				km = (Kemu)al.get(0);
+				kmmc = km.getKmmc();
+			}
+		} else {
+			kmmc = "";
+			kmid = "";
+		}
 %>
 	<br>
 <table width="522" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td width="600" height="43" class="tdbline"><img src="../images/zkzpic01.gif" alt="pic" width="40" height="42" align="absmiddle" /><span class="STYLE1">申请理由维护(注：在本期报名时间内不能修改申请理由设置，否则会引起数据不一致。)</span></td>
-  </tr>
-    <tr>
-    <td align="right"><input type="button" name="add" onclick="addsqbkly()" value="增  加" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="Subkssj" value="取 消"  onclick="window.history.back();"/></td>
+    <td width="600" height="43" class="tdbline"><img src="../images/zkzpic01.gif" alt="pic" width="40" height="42" align="absmiddle" /><span class="STYLE1">考试科目</span></td>
   </tr>
   </table>
 
   <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#999999">
+
       <tr>
-        <td width="80%" align="center" bgcolor="#FFFFFF" class="km_bt">名&nbsp;&nbsp;称</td>
-		<td width="20%" bgcolor="#FFFFFF">&nbsp;</td>
+        <td width="30%" bgcolor="#FFFFFF" class="km_bt">科目名称</td>
+        <td width="70%" bgcolor="#FFFFFF" class="km_bt"><input size="20" maxlength="20" id="kmmc" name="kmmc" value="<%=kmmc%>"></td>
       </tr>  
-  <%
-		for(i=0; i<al.size(); i++) {
-			sqbkly = (Sqbkly)al.get(i);
-			if(null == sqbkly.getMc() || 0 == sqbkly.getMc().length()) continue;
-  %>
-      <tr>
-        <td width="80%" bgcolor="#FFFFFF" class="km_bt"><a href="sqly.jsp?mc=<%=sqbkly.getMc()%>"><%=sqbkly.getMc()%></a> </td>
-		<td width="20%" bgcolor="#FFFFFF">&nbsp;&nbsp;<input type="button" onclick="deleteLy('<%=sqbkly.getMc()%>', '<%=sqbkly.getMc()%>')" value="删除"></td>
-      </tr>
-<%
-		}
-%>
    </table>
+	</td>
+  </tr>
+  <tr>
+    <td height="36" align="center"><input type="button" name="add" onclick="addNew()" value="确  定" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="Subkssj" value="取 消"  onclick="window.history.back();"/></td>
+  </tr>
+</table>
 <%
 	}catch(Exception e) {
 		logger.error(e.getMessage());
@@ -157,11 +151,9 @@
 		if(null != dbo) dbo.dispose();
 	}
 %>
-	</td>
-  </tr>
+<input id="kmidkey" name="kmidkey" type="hidden" value="<%=kmid%>">
+<input id="kmlxidkey" name="kmlxidkey" type="hidden" value="<%=kmlxid%>">
 
-</table>
-<input id="mc" name="mc" type="hidden" value="">
 </form>
 </div>
 </body>

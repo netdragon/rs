@@ -1,5 +1,10 @@
 ﻿<%@ page contentType="text/html; charset=utf-8"%>
 <%@ page import="edu.cup.rs.log.*"%>
+<%@ page import="edu.cup.rs.common.*"%>
+<%@ page import="java.util.*" %>
+<%@ page import="java.text.*" %>
+<%@ page import="edu.cup.rs.reg.*" %>
+<%@ page import="edu.cup.rs.reg.sys.*" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <html>
 <head>
@@ -157,8 +162,55 @@ function reg_submit() {
 
 <body>
 <center>
+<%
+	LogHandler logger=LogHandler.getInstance("userreg.jsp");
+	DBOperator dbo = new DBOperator();
+	String isDesc="";
 
- 
+	try{
+		dbo.init(false);
+	}catch(Exception e){
+		logger.error(e.getMessage());
+        response.sendRedirect("/error.jsp?error=" + new UTF8String("数据库访问错误！").toUTF8String());
+		return;
+	}
+ 	SystemSettingsList ssl;
+	int i;
+	ArrayList al;
+	SystemSettings ss;
+	String date_limit;
+	ArrayList al_settings;
+	String s_isPublic = "";
+	
+	try {
+		Calendar c_curr = Calendar.getInstance();
+		Calendar cl = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    	
+		ssl = new SystemSettingsList();
+		ssl.setItem("regStartDate");
+		al = dbo.getList(ssl);
+		if(1 == al.size()) {
+			ss = (SystemSettings)al.get(0);
+			if(null != ss.getValue())
+				cl.setTime(sdf.parse(ss.getValue()));
+		}
+		if(c_curr.before(cl)) {
+			response.sendRedirect("/error.jsp?error=" + new UTF8String("未到报名时间！").toUTF8String());
+			return;
+		}
+		ssl.setItem("regEndDate");
+		al = dbo.getList(ssl);
+		if(1 == al.size()) {
+			ss = (SystemSettings)al.get(0);
+			if(null != ss.getValue())
+				cl.setTime(sdf.parse(ss.getValue()));
+		}
+		if(c_curr.after(cl)) {
+			response.sendRedirect("/error.jsp?error=" + new UTF8String("报名时间已过！").toUTF8String());
+			return;
+		}
+%>
  <form action="/add_user" method="post">
  
 <div class="regtit"><img src="../images/regnew.gif" width="16" height="16" />注册新用户</div>
@@ -204,7 +256,7 @@ function reg_submit() {
     <td height="60"><input type="text" name="email" maxlength="80" id="idemail" class="inputsty" /></td>
   </tr>
   <tr>
-    <td align="right" class="tdlbl">验证码：<span class="emdot">*</span></td>
+    <td align="right" class="tdlbl">验证码：</td>
     <td height="60">
     <img id="verify_img" border=0 src=""/>
   	<a onClick="document.getElementById('verify_img').src='../get_verifyimg?gg='+Math.random();" >换一个</a>
@@ -220,7 +272,15 @@ function reg_submit() {
 </table>
 
 </form>
-
+<%
+	}catch(Exception e) {
+		logger.error(e.getMessage());
+		response.sendRedirect("/error.jsp?error=" + new UTF8String("数据发生错误！").toUTF8String());
+		return;
+	}finally {
+		if(null != dbo) dbo.dispose();
+	}
+%>
 </center>
 <script>
 	var img = document.getElementById("verify_img");

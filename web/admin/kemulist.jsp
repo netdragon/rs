@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>申请理由维护</title>
+<title>考试科目</title>
 <style type="text/css">
 <!--
 .con{
@@ -68,15 +68,15 @@
 -->
 </style>
 <script>
-	function deleteLy(name){
-	    if(!window.confirm("您将要删除'" + name + "'申请理由，请确认。")) return;
-		document.getElementById("mc").value = name;
+	function deleteIt(id, name){
+	    if(!window.confirm("您将要删除'" + name + "'科目，请确认。")) return;
+		document.getElementById("kmidkey").value = id;
 		document.forms[0].method = "post";
-		document.forms[0].action = "/delete_sqbkly";
+		document.forms[0].action = "/delete_kemu";
 		document.forms[0].submit();
 	}
-	function addsqbkly(){
-		window.location.assign('sqly.jsp');;
+	function addNew(kmlxid){
+		window.location.assign('kemu.jsp?kmlxid=' + kmlxid);;
 	}
 </script>
 </head>
@@ -91,15 +91,15 @@
    <tr>
     <td height="19">
 <%
-	LogHandler logger=LogHandler.getInstance("sqlywh.jsp");
+	LogHandler logger=LogHandler.getInstance("kemulist.jsp");
 	ArrayList al;
-	SqbklyList sqbklyList;
-	Sqbkly sqbkly;
+	KemuList sqbklyList;
+	Kemu sqbkly;
 	SystemSettingsList ssl;
 	SystemSettings ss;
 	int i = 0;
 	DBOperator dbo = new DBOperator();
-	
+	String kmlxid = request.getParameter("kmlxid");
 	String userId = (String)session.getAttribute("user_id");
 	if(null == userId){
            logger.error("没有登录信息！");
@@ -116,17 +116,16 @@
 	}
 
 	try {
-
-		sqbklyList = new SqbklyList();
+		sqbklyList = new KemuList(kmlxid);
 		al = dbo.getList(sqbklyList);
 %>
 	<br>
 <table width="522" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td width="600" height="43" class="tdbline"><img src="../images/zkzpic01.gif" alt="pic" width="40" height="42" align="absmiddle" /><span class="STYLE1">申请理由维护(注：在本期报名时间内不能修改申请理由设置，否则会引起数据不一致。)</span></td>
+    <td width="600" height="43" class="tdbline"><img src="../images/zkzpic01.gif" alt="pic" width="40" height="42" align="absmiddle" /><span class="STYLE1">考试科目管理(注：在本期报名及考试时间内不能修改考试科目设置，否则会引起数据不一致。)</span></td>
   </tr>
     <tr>
-    <td align="right"><input type="button" name="add" onclick="addsqbkly()" value="增  加" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="Subkssj" value="取 消"  onclick="window.history.back();"/></td>
+    <td align="right"><input type="button" name="add" onclick="addNew(<%=kmlxid%>)" value="增  加" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="Subkssj" value="取 消"  onclick="window.history.back();"/></td>
   </tr>
   </table>
 
@@ -137,12 +136,12 @@
       </tr>  
   <%
 		for(i=0; i<al.size(); i++) {
-			sqbkly = (Sqbkly)al.get(i);
-			if(null == sqbkly.getMc() || 0 == sqbkly.getMc().length()) continue;
+			sqbkly = (Kemu)al.get(i);
+			if(null == sqbkly.getKmmc() || 0 == sqbkly.getKmmc().length()) continue;
   %>
       <tr>
-        <td width="80%" bgcolor="#FFFFFF" class="km_bt"><a href="sqly.jsp?mc=<%=sqbkly.getMc()%>"><%=sqbkly.getMc()%></a> </td>
-		<td width="20%" bgcolor="#FFFFFF">&nbsp;&nbsp;<input type="button" onclick="deleteLy('<%=sqbkly.getMc()%>', '<%=sqbkly.getMc()%>')" value="删除"></td>
+        <td width="80%" bgcolor="#FFFFFF" class="km_bt"><a href="kemu.jsp?kmid=<%=sqbkly.getKmid()%>&kmlxid=<%=sqbkly.getKmlxid()%>"><%=sqbkly.getKmmc()%></a> </td>
+		<td width="20%" bgcolor="#FFFFFF">&nbsp;&nbsp;<input type="button" onclick="deleteIt(<%=sqbkly.getKmid()%>, '<%=sqbkly.getKmmc()%>')" value="删除"></td>
       </tr>
 <%
 		}
@@ -161,7 +160,8 @@
   </tr>
 
 </table>
-<input id="mc" name="mc" type="hidden" value="">
+<input id="kmidkey" name="kmidkey" type="hidden" value="">
+<input id="kmlxidkey" name="kmlxidkey" type="hidden" value="<%=kmlxid%>">
 </form>
 </div>
 </body>

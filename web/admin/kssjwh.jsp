@@ -82,8 +82,8 @@ int year = c.get(Calendar.YEAR);
 <%
 	LogHandler logger=LogHandler.getInstance("lq.jsp");
 	ArrayList al;
-	KemuList kl;
-	Kemu kemu;
+	KemulxList kl;
+	Kemulx kemu;
 	DBOperator dbo = new DBOperator();
 	try{
 		dbo.init(false);
@@ -92,7 +92,7 @@ int year = c.get(Calendar.YEAR);
         response.sendRedirect("/error.jsp?error=" + new UTF8String("数据库访问错误！").toUTF8String());
 		return;
 	}
-	kl = new KemuList();
+	kl = new KemulxList();
 	al = dbo.getList(kl);
 	Calendar cl = Calendar.getInstance();
 	int ks_n,ks_y,ks_r;
@@ -104,7 +104,7 @@ int year = c.get(Calendar.YEAR);
 	int bm_n,bm_y,bm_r;
 	try {
 		for(int i = 0; i<al.size(); i++) {
-			kemu = (Kemu)al.get(i);
+			kemu = (Kemulx)al.get(i);
 			if(null != kemu.getKsrq()) {
 				cl.setTime(kemu.getKsrq());
 			}
@@ -116,12 +116,12 @@ int year = c.get(Calendar.YEAR);
 	<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#999999">
       <tr>
         <td width="22%" height="28" align="left" bgcolor="#FFFFFF"><span class="km_bt">科目名称</span></td>
-        <td width="78%" align="left" bgcolor="#FFFFFF"><%=kemu.getKmmc()%>&nbsp;</td>
+        <td width="78%" align="left" bgcolor="#FFFFFF"><%=kemu.getLxmc()%>&nbsp;<input type="button" value="科目管理" onclick="window.location.assign('kemulist.jsp?kmlxid=<%=kemu.getLxid()%>');"></td>
       </tr>
       <tr>
         <td height="28" bgcolor="#FFFFFF"><span class="km_bt">考试日期</span></td>
         <td bgcolor="#FFFFFF">
-		<select name="ksnian_<%=kemu.getKmid()%>" >
+		<select name="ksnian_<%=kemu.getLxid()%>" >
 <%
 			for(int j = 2013; j < 2030; j++) {
 %>
@@ -131,7 +131,7 @@ int year = c.get(Calendar.YEAR);
 %>
 		</select>
           <span class="STYLE7 STYLE9"> 年</span>
-          <select name="ksyue_<%=kemu.getKmid()%>"  class="p1">
+          <select name="ksyue_<%=kemu.getLxid()%>"  class="p1">
 <%
 			for(int j = 1; j < 13; j++) {
 %>
@@ -141,7 +141,7 @@ int year = c.get(Calendar.YEAR);
 %>
           </select>
           <span class="STYLE9">月</span>
-   <select name="ksri_<%=kemu.getKmid()%>" class="p1" >
+   <select name="ksri_<%=kemu.getLxid()%>" class="p1" >
 <%
 			for(int j = 1; j < 32; j++) {
 %>
@@ -166,7 +166,7 @@ int year = c.get(Calendar.YEAR);
       <tr>
         <td height="28" bgcolor="#FFFFFF" class="km_bt">开始时间</td>
         <td bgcolor="#FFFFFF">
-		<select name="ksdian_<%=kemu.getKmid()%>"  class="p1">
+		<select name="ksdian_<%=kemu.getLxid()%>"  class="p1">
 <%
 			for(int j = 6; j < 24; j++) {
 %>
@@ -174,7 +174,7 @@ int year = c.get(Calendar.YEAR);
 <%
 			}
 %>
-          </select><span class="STYLE9">点</span><select name="ksfen_<%=kemu.getKmid()%>"  class="p1">
+          </select><span class="STYLE9">点</span><select name="ksfen_<%=kemu.getLxid()%>"  class="p1">
 <%
 			for(int j = 0; j < 12; j++) {
 				if(j<2) {
@@ -203,7 +203,7 @@ int year = c.get(Calendar.YEAR);
 %>
       <tr>
         <td height="28" bgcolor="#FFFFFF" class="km_bt">结束时间</td>
-        <td bgcolor="#FFFFFF"> <select name="jsdian_<%=kemu.getKmid()%>"  class="p1">
+        <td bgcolor="#FFFFFF"> <select name="jsdian_<%=kemu.getLxid()%>"  class="p1">
 <%
 			for(int j = 6; j < 24; j++) {
 %>
@@ -211,7 +211,7 @@ int year = c.get(Calendar.YEAR);
 <%
 			}
 %>
-          </select><span class="STYLE9">点</span><select name="jsfen_<%=kemu.getKmid()%>"  class="p1">
+          </select><span class="STYLE9">点</span><select name="jsfen_<%=kemu.getLxid()%>"  class="p1">
 <%
 			for(int j = 0; j < 12; j++) {
 				if(j<2) {
@@ -297,7 +297,7 @@ int year = c.get(Calendar.YEAR);
         <td bgcolor="#FFFFFF">
 		<select name="jsnian" >
 <%
-			for(int j = 2013; j < 2030; j++) {
+			for(int j = 2012; j < 2030; j++) {
 %>
             <option value="<%=j%>" <%=((j == bm_n) ? "selected":"")%>><%=j%></option>
 <%

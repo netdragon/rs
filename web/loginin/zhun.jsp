@@ -100,9 +100,9 @@ a:hover{
             response.sendRedirect("/error.jsp?error=" + new UTF8String("没有准考证信息！").toUTF8String());
 			return;
 		} 
-		KemuList kl;
-		Kemu kemu;
-		kl = new KemuList();
+		KemulxList kl;
+		Kemulx kemu;
+		kl = new KemulxList();
 		al = dbo.getList(kl);
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
@@ -131,9 +131,9 @@ a:hover{
 </table>
 <table width="649" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#000000">
   <tr>
-    <td  bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <td  width="75%" bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="22%" height="34" valign="top" class="tbl_a">准考证号：</td>
+        <td width="22%" height="34" valign="top" nowrap="nowrap" class="tbl_a">准考证号：</td>
         <td width="78%" valign="top" class="cuti tbl_a"><%=bmxx.getZhkzhid()%>&nbsp;</td>
       </tr>
       <tr>
@@ -149,16 +149,16 @@ a:hover{
         <td valign="middle" class="cuti tbl_a"><%=bmxx.getKskl()%>&nbsp;</td>
       </tr>
       <tr>
-        <td height="34" valign="middle" class="tbl_a">身份证号：</td>
+        <td height="34" valign="middle" nowrap="nowrap"  class="tbl_a">身份证号：</td>
         <td valign="middle" class="cuti tbl_a"><%=bmxx.getShfzh()%>&nbsp;</td>
       </tr>
       <tr>
-        <td height="34" valign="middle" class="tbl_a">考试时间：</td>
+        <td height="34" valign="middle" nowrap="nowrap"  class="tbl_a">考试时间：</td>
 <%
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
 		String rq = "";
 		if(0 < al.size()) {
-			kemu = (Kemu)al.get(0);
+			kemu = (Kemulx)al.get(0);
 			rq = sdf.format(kemu.getKsrq());
 		}
 %>
@@ -166,7 +166,7 @@ a:hover{
       </tr>
 <%
 		for(int i = 0; i<al.size(); i++) {
-			kemu = (Kemu)al.get(i);
+			kemu = (Kemulx)al.get(i);
 %>
           <tr>
 		  <td height="34" class="tbl_a">&nbsp;</td>
@@ -199,17 +199,17 @@ a:hover{
 				if(jssj_f.length() == 1) jssj_f = "0"+jssj_f;
 			}
 %>
-			<td valign="middle" class="cuti tbl_a"><%=kemu.getKmmc()%>:&nbsp;<%=kssj_s%>:<%=kssj_f%>－<%=jssj_s%>:<%=jssj_f%></td>
+			<td valign="middle" class="cuti tbl_a"><%=kemu.getLxmc()%>:&nbsp;<%=kssj_s%>:<%=kssj_f%>－<%=jssj_s%>:<%=jssj_f%></td>
 		</tr>
 <%
 		}
 %>
       <tr>
-        <td height="34" valign="middle" class="tbl_a">考试地点：</td>
+        <td height="34" valign="middle" nowrap="nowrap" class="tbl_a">考试地点：</td>
         <td  colspan="2" valign="middle" class="cuti tbl_a">北京市昌平区中国石油大学（北京）</td>
       </tr>
     </table></td>
-    <td width="164" align="center" valign="middle" bgcolor="#FFFFFF"　valign="top"><span class="STYLE1">贴与报名表<br />
+    <td  align="center" valign="middle" bgcolor="#FFFFFF"　valign="top"><span class="STYLE1">贴与报名表<br />
     同一底版照片</span></td>
   </tr>
   <tr>

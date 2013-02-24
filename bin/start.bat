@@ -1,4 +1,4 @@
-@echo off
+@echo on
 call set_env.bat
 start "MySQL Process is running" call startdb.bat
 set CLASSPATH=%CLASSPATH%:%JAVA_HOME%/lib/tools.jar:%JAVA_HOME%/lib/dt.jar:.

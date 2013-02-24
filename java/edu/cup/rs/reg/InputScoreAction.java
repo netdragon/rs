@@ -1,35 +1,69 @@
 package edu.cup.rs.reg;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import edu.cup.rs.log.LogHandler;
-import edu.cup.rs.reg.Bkzy;
-import edu.cup.rs.reg.Bmxx;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import edu.cup.rs.common.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import jxl.Sheet;
+import jxl.Workbook;
+import edu.cup.rs.common.BaseAction;
+import edu.cup.rs.common.CachedItem;
+import edu.cup.rs.common.DBOperator;
+import edu.cup.rs.common.ICommonList;
+import edu.cup.rs.common.UTF8String;
+import edu.cup.rs.log.LogHandler;
+import edu.cup.rs.reg.sys.Kemu;
+import edu.cup.rs.reg.sys.KemuList;
 
 public class InputScoreAction extends BaseAction
 {
-
+    private static int UPLOAD_FILE_MAX_SIZE = 0;
+    private static String RS_TEMP_PATH=null;
+	private static final long serialVersionUID = 1L;
 	protected static final LogHandler logger=LogHandler.getInstance(InputScoreAction.class);
 	public InputScoreAction() {
 		super();
 	}
+	static {
+        HashMap<String,String> hm_env=CachedItem.getEnv();
+        RS_TEMP_PATH=hm_env.get("RS_TEMP_PATH").trim();
 
+        UPLOAD_FILE_MAX_SIZE=Integer.parseInt(hm_env.get("UPLOAD_FILE_MAX_SIZE"));
+	}
 	protected void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String xslScore, zhkzh, xslKmName;
+		Score score;
+		Kemu km;
+		Bmxx bmxx;
+		BmxxList bl;
+		KemuList kl;
+		int kmid = 0, bmxxid = 0;
+		InputStream is = null;
+		ArrayList al;
+        boolean isMultipart=false;
+        if(request != null){
+            isMultipart = ServletFileUpload.isMultipartContent(request);
+        }
+        if(!isMultipart){
+            logger.error("No input data!");
+            response.sendRedirect("error.jsp?error=0788");
+            return;
+        }
         try{
     		if(null == USERID){
                 logger.error("没有登录!");
@@ -41,40 +75,46 @@ public class InputScoreAction extends BaseAction
                 response.sendRedirect("/error.jsp?error=" + new UTF8String("请先以管理员登录!").toUTF8String());
     			return;
     		}
-			String[] sa_bmxx={""};
-			if(null!=request.getParameterValues("chk_bmxx_cj")) sa_bmxx=request.getParameterValues("chk_bmxx_cj");
-			else {
-                response.sendRedirect("/error.jsp?error=" + new UTF8String("请选择对象!").toUTF8String());
-    			return;
-			}
-			String currentPage = BaseFunction.null2value(request.getParameter("i_CurrPage"));
-			String startNum = BaseFunction.null2value(request.getParameter("i_start"));
-			String lpp = BaseFunction.null2value(request.getParameter("lpp"));
-			String filter = BaseFunction.null2value(request.getParameter("qname"));
-			String order = BaseFunction.null2value(request.getParameter("order"));
-			StringBuffer param = new StringBuffer("i_start=");
-			param.append(startNum);
-			param.append("&i_CurrPage=");
-			param.append(currentPage);
-			param.append("&lpp=");
-			param.append(lpp);
-			param.append("&order=");
-			param.append(order);
-			param.append("&qname=");
-			param.append(new UTF8String(filter).toUTF8String());
+			
+			
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+
+            File tmpDir = new File(RS_TEMP_PATH);
+            if (tmpDir.exists() && tmpDir.isDirectory() && tmpDir.canWrite()) {
+                factory.setRepository(tmpDir);
+            }
+
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            upload.setSizeMax(UPLOAD_FILE_MAX_SIZE);
+
+            logger.info("Begin to parse request.");
+            List items = upload.parseRequest(request);
+
+            Iterator iter = items.iterator();
+			String fieldName;
+			String s_FileName;
+			File uploadedFile = new File(RS_TEMP_PATH + File.separator +  UUID.randomUUID().toString());
+            while (iter.hasNext()) {
+                FileItem item = (FileItem) iter.next();
+                fieldName = item.getFieldName();
+                if("scorefile".equals(fieldName)){
+					s_FileName = item.getName();
+					if(null == s_FileName) throw new Exception("附件数据错误！");
+                    if(s_FileName.indexOf("\\")>-1) s_FileName=s_FileName.substring(s_FileName.lastIndexOf("\\")+1);
+                    long sizeInBytes = item.getSize();
+                    logger.info(fieldName+":"+s_FileName+":"+sizeInBytes);
+                    if(s_FileName.length()>3) {
+						try{
+							item.write(uploadedFile);
+						}catch(Exception e){
+							throw e;
+						}
+					}
+                    break;
+                }
+            }
 			
             DBOperator dbo=new DBOperator();
-            ScoreList sl;
-			Score score;
-			SystemSettingsList ssl;
-			SystemSettings ss;
-			//TODO: dynamic Course
-			String cj_1; // id:1
-			String cj_2; // id:2
-			float i_cj_1, i_cj_2;
-			ArrayList al;
-			float rate = 0.7f;
-			BmxxList bl = new BmxxList();
             try {
                 dbo.init(false);
             } catch (Exception e2) {
@@ -83,35 +123,56 @@ public class InputScoreAction extends BaseAction
                 return;
             }
 
-            try {
-				ssl = new SystemSettingsList();
-				ssl.setItem("rate");
-				al = dbo.getList(ssl);
-				if(1 == al.size()) {
-					ss = (SystemSettings)al.get(0);
-					rate = Float.parseFloat(ss.getValue());
-				}
-				sl = new ScoreList();
-				score = new Score();
+			try {
 
-				for(int i=0;i<sa_bmxx.length;i++)
-				{
-					score.setBmxxid(Integer.parseInt(sa_bmxx[i]));
-					cj_1 = (null == request.getParameter("cj1_"+sa_bmxx[i]))?"0":request.getParameter("cj1_"+sa_bmxx[i]);
-					cj_2 = (null == request.getParameter("cj2_"+sa_bmxx[i]))?"0":request.getParameter("cj2_"+sa_bmxx[i]);
-					score.setKmid(1);
-					i_cj_1 = Float.parseFloat(cj_1);
-					i_cj_2 = Float.parseFloat(cj_2);
-					logger.debug(""+i_cj_1);
-					logger.debug(""+i_cj_2);
-					score.setFenshu(i_cj_1);
-					dbo.delete(sl.delete(score));
-					dbo.insert(sl.insert(score));
-					score.setKmid(2);
-					score.setFenshu(i_cj_2);
-					//dbo.update(bl.setSumScore(sa_bmxx[i], i_cj_1*rate+i_cj_2*(1.0f-rate)));
-					dbo.update(bl.setSumScore(sa_bmxx[i], i_cj_1+i_cj_2));
-					dbo.insert(sl.insert(score));
+				is = new FileInputStream(uploadedFile); 
+				Workbook rwb = Workbook.getWorkbook(is); 
+				Sheet sheet = rwb.getSheet(0);
+
+				int all_cells = sheet.getColumns();
+				HashMap<String, String> hmKm = new HashMap<String, String>();
+
+				for(int j=8; j<all_cells; j++) {
+					xslKmName = sheet.getCell(j, 1).getContents().trim();
+					
+					//get kmid by kemu
+					kl = new KemuList();
+					al = dbo.getQueryList(kl.getByKemuName(xslKmName), kl);
+					if(al.size() == 1) {
+						km = (Kemu) al.get(0);
+						kmid = km.getKmid();
+						hmKm.put(j + "", kmid + "");
+					} else {
+						logger.error("Can not find:" + kmid);
+						response.sendRedirect("/error.jsp?error=" + new UTF8String("没有该考生或数据发生错误！").toUTF8String());
+						return;
+					}
+				}
+				ScoreList sl = new ScoreList();
+				dbo.delete(sl.deleteAll());
+				for (int i = 2; i < sheet.getRows(); i++) {
+					zhkzh = sheet.getCell(1, i).getContents().trim();
+					//get bmxxid by zhkzh
+					bl = new BmxxList();
+					al = dbo.getQueryList(bl.getByZhkzh(zhkzh), bl);
+					if(al.size() == 1) {
+						bmxx = (Bmxx) al.get(0);
+						bmxxid = bmxx.getBmxxid();
+					} else {
+						logger.error("Can not find:" + zhkzh);
+						response.sendRedirect("/error.jsp?error=" + new UTF8String("没有该考生或数据发生错误！").toUTF8String());
+						return;
+					}
+					for(int j=8; j<all_cells; j++) {
+						xslScore = sheet.getCell(j, i).getContents().trim();
+
+						score = new Score();
+						score.setKmid(Integer.parseInt(((String)hmKm.get(j+""))));
+						score.setBmxxid(bmxxid);
+						score.setFenshu(xslScore);
+						score.setLrcjsj(new Date());
+						dbo.insert(sl.insert(score));
+					}
 				}
 				ICommonList logslist;
 				Log log = new Log();
@@ -127,16 +188,16 @@ public class InputScoreAction extends BaseAction
             }
             finally{
                 if(null!=dbo) dbo.dispose();
+				try{if(null != is) is.close();}
+				catch(Exception e) {logger.error(e.getStackTrace()[0].toString());}
             }
-            response.sendRedirect("admin/lrlq.jsp?"+param.toString());
+            response.sendRedirect("admin/lrlq.jsp");
             return;
         }
-        catch(Exception e)
-        {
+        catch(Exception e) {
             logger.error(e.getMessage());
             response.sendRedirect("error.jsp?error=" + new UTF8String("发生错误！").toUTF8String());
             return;
         }
-
     }
  }

@@ -122,10 +122,10 @@ body{
 	String isPrint = BaseFunction.null2value(request.getParameter("print"));
 	String adminFlag = (String)session.getAttribute("admin");
 	String bmxxIdSesn = (String)session.getAttribute("bmxxid");
-	if(!bmxxId.equals(bmxxIdSesn)) {
+	if(bmxxId == null || bmxxIdSesn ==null || !bmxxId.equals(bmxxIdSesn)) {
 		if(null == adminFlag || 0 == adminFlag.length() || !"1".equals(adminFlag)) {
-			logger.error("无权访问此数据！");
-			response.sendRedirect("/error.jsp?error=" + new UTF8String("无权访问此数据！").toUTF8String());
+			logger.error("没有报名信息！");
+			response.sendRedirect("/error.jsp?error=" + new UTF8String("没有报名信息！").toUTF8String());
 			return;
 		}
 	}

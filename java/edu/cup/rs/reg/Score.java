@@ -50,7 +50,7 @@ public class Score implements Serializable {
 	/**
 	* fenshu
 	*/
-	private float fenshu;
+	private String fenshu;
 
 	/**
 	* lrcjsj
@@ -98,7 +98,7 @@ public class Score implements Serializable {
 	* @return fenshu : fenshu
 	* @author tangkf
 	*/
-	public float getFenshu(){
+	public String getFenshu(){
 		return this.fenshu;
 	}
 
@@ -107,7 +107,7 @@ public class Score implements Serializable {
 	* @param fenshu : fenshu
 	* @author tangkf
 	*/
-	public void setFenshu(float fenshu){
+	public void setFenshu(String fenshu){
 		this.fenshu	= fenshu;
 	}
 

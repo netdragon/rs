@@ -24,7 +24,7 @@ body{
 
 }
 .doccontainer{
-	width:994px;
+	width:1008px;
 	margin-right: auto;
 	margin-left: auto;
     border: 1px solid #8080FF;
@@ -32,7 +32,7 @@ body{
 
 }
 .doccontainerw{
-	width:994px;
+	width:1010px;
 	margin-right: auto;
 	margin-left: auto;
     
@@ -45,7 +45,7 @@ body{
 }
 
 .doccontainerm{
-	width:994px;
+	width:1010px;
 	margin-right: auto;
 	margin-left: auto;
     border: 1px solid #8080FF;
@@ -167,18 +167,12 @@ long timestamp = c.getTimeInMillis();
 		<span id="floatleft"><span class="STYLE6">今天是：<%=year%>年<%=month%>月<%=day%>日&nbsp;&nbsp;&nbsp;</span></td>
    </tr>
  </table>
- <table width="100%"  border="0" align="center" cellpadding="0" cellspacing="0"> 
+<table width="100%" height="133" border="0" align="center" cellpadding="0" cellspacing="0" background="../images/adlogo.gif">
   <tr>
-    <td width="100%" height="136" background="../images/systupian.gif"></td>
-  </tr> 
- </table>
-</div>
-<!-- <table width="989" border="0" cellspacing="0" cellpadding="0" align="center">
-  <tr>
-    <td height="133" background="../images/systupian.gif"></td>
+    <td height="35">&nbsp;</td>
   </tr>
 </table>
--->
+</div>
 </div>
 
 
@@ -213,7 +207,7 @@ long timestamp = c.getTimeInMillis();
 </div>
 <div class="doccontainerm">
 
-<iframe src="welcome.html" name="ifr" id="ifr" scrolling="auto" width="100%"  height="1108" marginwidth="1" marginheight="0" frameborder="0" align="center">
+<iframe src="welcome.html" name="ifr" id="ifr" scrolling="auto" width="100%"  height="482" marginwidth="0" marginheight="0" frameborder="0" align="center">
 </iframe>
 </div>
 </body>

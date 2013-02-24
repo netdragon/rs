@@ -101,7 +101,7 @@
 
 
 
-		if(fm.pzhiyuan1.value =="0") {
+		if(fm.pzhiyuan1.value =="1") {
 			alert("第一志愿不能为空！");
 			fm.pzhiyuan1.focus();
 			return false;

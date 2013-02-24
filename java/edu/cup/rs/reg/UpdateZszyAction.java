@@ -15,10 +15,10 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import edu.cup.rs.common.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.io.File;
-import java.util.List;
+import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -62,6 +62,35 @@ public class UpdateZszyAction extends BaseAction
             }
 
             try {
+				ArrayList al;
+				SystemSettingsList ssl;
+				SystemSettings ss;
+				Calendar c_curr = Calendar.getInstance();
+				Calendar cl = Calendar.getInstance();
+				Calendar c2 = Calendar.getInstance();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+						
+
+				ssl = new SystemSettingsList();
+				ssl.setItem("regStartDate");
+				al = dbo.getList(ssl);
+				if(1 == al.size()) {
+					ss = (SystemSettings)al.get(0);
+					if(null != ss.getValue())
+						cl.setTime(sdf.parse(ss.getValue()));
+				}
+
+				ssl.setItem("regEndDate");
+				al = dbo.getList(ssl);
+				if(1 == al.size()) {
+					ss = (SystemSettings)al.get(0);
+					if(null != ss.getValue())
+						c2.setTime(sdf.parse(ss.getValue()));
+				}
+				if(c_curr.after(cl) && c_curr.before(c2)) {
+					response.sendRedirect("/error.jsp?error=" + new UTF8String("在本期报名时间内不能修改专业设置，否则会引起数据不一致!").toUTF8String());
+					return;
+				}
 				Zhshzy zy = new Zhshzy();
 				zy.setZyid(Integer.parseInt(zyid));
 				zy.setZymc(zymc);

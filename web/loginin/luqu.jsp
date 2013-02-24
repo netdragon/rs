@@ -138,10 +138,6 @@ p {
     <td bgcolor="#FFFFFF"   colspan="2"  valign="middle"><p style="color: #FF0000;font-weight: bold;font-size:20px">抱歉，你未通过中国石油大学（北京）自主选拔录取，但我们仍然认为你很优秀，希望你再接再厉，继续关注中国石油大学（北京）。顺祝高考顺利！</p></td>
   </tr>
 <% } %>
-<!--  <tr>
-    <td height="32"  bgcolor="#FFFFFF" class="STYLE3">录取专业:</td>
-    <td bgcolor="#FFFFFF" ><%=bmxx.getLqzy()%>&nbsp;</td>
-  </tr>-->
 </table>
 
 </body>

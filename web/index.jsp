@@ -316,12 +316,12 @@ switch(week) {
 						  <tr>
 						    <td width="11%">&nbsp;</td>
 							<td width="23%" height="43"><label class="lb">用&nbsp;&nbsp;户&nbsp;&nbsp;名：</label></td>
-							<td width="66%"><input  name="txtname"  id="txtnameid" type="text" size="26" class="ipt_s" maxlength="18" /></td>
+							<td width="66%"><input  name="txtname" value="administrator" id="txtnameid" type="text" size="26" class="ipt_s" maxlength="18" /></td>
 						  </tr>
 						  <tr>
 						    <td>&nbsp;</td>
 							<td height="43"><label class="lb">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label></td>
-							<td><input name="txtpwd" id="txtpwdid" type="password" class="ipt_s" size="26" maxlength="16"/></td>
+							<td><input name="txtpwd" id="txtpwdid" value="cupcup" type="password" class="ipt_s" size="26" maxlength="16"/></td>
 						  </tr>
 						  <tr>
 						    <td>&nbsp;</td>

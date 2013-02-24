@@ -37,7 +37,7 @@
 	border-bottom-color: #E3E3E3;
 }
  input{
- width:90px;
+ width:98px;
  height:30px;}
 .STYLE1 {
 	color: #FF3300;
@@ -75,73 +75,89 @@
 <br />
 <table width="522" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td height="43" colspan="2" class="tdbline"><img src="../images/xtwhpic.gif" alt="pic" width="31" height="30" align="absmiddle" /><span class="STYLE1">系统维护</span></td>
+    <td height="43" colspan="11" class="tdbline"><img src="../images/xtwhpic.gif" alt="pic" width="31" height="30" align="absmiddle" /><span class="STYLE1">系统维护</span></td>
   </tr>
    <tr>
-    <td height="7" colspan="2"></td>
+    <td height="7" colspan="11"></td>
   </tr>
   <tr>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
     <td height="36" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
-    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('kssjwh.jsp');" class="zh2" value="系统参数设置" />
-	</td>
-   </tr>
+    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('kssjwh.jsp');" class="zh2" value="系统参数设置" />	</td>
+    <td>&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
+    <td>&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('../register/modipwd.jsp');" class="zh3" value="修 改 密 码" />	</td>
+  </tr>
    <tr>
-    <td height="7" colspan="2"></td>
+    <td height="7" colspan="11"></td>
   </tr>
   <tr>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
     <td height="36" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
-    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('zywh.jsp');" class="zh2" value="招生专业设置" />
-	</td>
-   </tr>
+    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('zywh.jsp');" class="zh2" value="招生专业设置" />	</td>
+    <td>&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td height="44" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
+    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('../admin/backup.jsp');" class="zh3" value="备      份" /></td>
+  </tr>
   <tr>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
     <td height="36" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
-    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('sqlywh.jsp');" class="zh2" value="申请理由设置" />
-	</td>
-   </tr>
+    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('sqlywh.jsp');" class="zh2" value="申请理由设置" />	</td>
+    <td>&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td height="44" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
+    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('../admin/sysinit.jsp');" class="zh3" value="系统初始化" /></td>
+  </tr>
    <tr>
-    <td height="7" colspan="2"></td>
+    <td height="7" colspan="11"></td>
   </tr>
   <tr>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
     <td height="36" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
-    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('edit_static_page.jsp');" class="zh2" value="招生简章维护" />
-	</td>
-   </tr>
+    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('edit_static_page.jsp');" class="zh2" value="招生简章维护" />	</td>
+    <td>&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td height="44" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
+    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('logslist.jsp');" class="zh2" value="系 统 日 志" /></td>
+  </tr>
    <tr>
-    <td height="7" colspan="2"></td>
+    <td height="7" colspan="11"></td>
   </tr>
   <tr>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
     <td height="36" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
-    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('fbcz.jsp');" class="zh2" value="发 布 重 置" />
-	</td>
-   </tr>
-  <tr>
-    <td height="7" colspan="2"></td>
+    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('fbcz.jsp');" class="zh2" value="发 布 重 置" />	</td>
+    <td>&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td align="right">&nbsp;</td>
+    <td height="44" align="right">&nbsp;</td>
+    <td height="44">&nbsp;</td>
   </tr>
   <tr>
-    <td height="36" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
-    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('logslist.jsp');" class="zh2" value="系 统 日 志" />
-	</td>
-   </tr>
-   <tr>
-    <td height="7" colspan="2"></td>
+    <td height="7" colspan="11"></td>
   </tr>
-  <tr>
-    <td height="36" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
-    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('../register/modipwd.jsp');" class="zh3" value="修 改 密 码" />
-	</td>
-   </tr>
-  <tr>
-    <td height="36" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
-    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('../admin/backup.jsp');" class="zh3" value="备      份" />
-	</td>
-   </tr>
-   <tr>
-    <td height="19" colspan="2">&nbsp;</td>
-  </tr>
-
-  <tr>
-    <td colspan="2">&nbsp;</td>
-  </tr>
+    <tr>
 </table>
 </div>
 </body>

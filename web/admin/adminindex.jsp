@@ -24,7 +24,7 @@ LogHandler logger=LogHandler.getInstance("adminindex.jsp");
       text-decoration:underline;
 }
 .con{	
-	width:986px;
+	width:1010px;
 	border: 1px solid #FFFFFF;
 	margin-right: auto;
 	margin-bottom: 0px;
@@ -73,14 +73,14 @@ text-decoration:none;
 </td>
   </tr>
  </table>
-<table width="980" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+<table width="1010" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
   <tr>
     <td height="2"></td>
   </tr>
 </table>
  <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
   <tr>
-    <td align="center"><iframe src="welcome.html" name="ifrm" id="ifrm" scrolling="auto" width="100%" height="1000"  align="center"    marginwidth="0" marginheight="0" frameborder="0"></iframe></td>
+    <td align="center"><iframe src="welcome.html" name="ifrm" id="ifrm" scrolling="auto" width="100%" height="482"  align="center"    marginwidth="0" marginheight="0" frameborder="0"></iframe></td>
   </tr>
   <tr>
     <td>&nbsp;</td>

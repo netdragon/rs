@@ -3,6 +3,8 @@
 <%@ page import="edu.cup.rs.log.*"%>
 <%@ page import="java.util.*" %>
 <%@ page import="edu.cup.rs.reg.*"%>
+<%@ page import="edu.cup.rs.reg.sys.*"%>
+
 <%@include file="../common/access_control.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -36,13 +38,11 @@ table {
 
 </head>
 <%
-
-	if(true) {
-		response.sendRedirect("/error.jsp?error=" + new UTF8String("考试成绩未发布！").toUTF8String());
+	if(true){
+        response.sendRedirect("/error.jsp?error=" + new UTF8String("考试成绩未发布！").toUTF8String());
 		return;
 	}
-
-	LogHandler logger=LogHandler.getInstance("browseinfo.jsp");
+	LogHandler logger=LogHandler.getInstance("chengji.jsp");
 	ArrayList al;
 	ICommonList icl;
 	Bmxx bmxx;
@@ -56,12 +56,23 @@ table {
 		return;
 	}
 	String s_isPublic = "";
-	float cj_1 = 0, cj_2 = 0;
+	String cj = "", cjName = "";
 	SystemSettingsList ssl;
 	ArrayList al_settings;
 	ArrayList al_score;
-	
+	Kemu km;
+	KemuList kl = new KemuList(); 
+	HashMap<String, String> hmScore = null;
+
 	try {
+		hmScore = new HashMap<String, String>();
+		ArrayList alKm = dbo.getList(kl);
+		int kmLen = alKm.size();
+		for(int i=0; i<kmLen; i++) {
+			km = (Kemu) alKm.get(i);
+			hmScore.put(km.getKmid() +"",km.getKmmc());
+		}
+
 		ssl = new SystemSettingsList("isPublic_Score");
 		al_settings = dbo.getList(ssl);
 		if(al_settings.size() > 0) s_isPublic = ((SystemSettings)(al_settings.get(0))).getValue();
@@ -89,24 +100,8 @@ table {
             response.sendRedirect("/error.jsp?error=" + new UTF8String("未通过初审，没有成绩信息！").toUTF8String());
 			return;
 		} 
-		ScoreList sl = new ScoreList();
-		
-		sl.setBmxxid(bmxxid);
 
-		al_score = dbo.getList(sl);
-		if(al_score.size() == 2) {
-			cj_1 = ((Score)al_score.get(0)).getFenshu();
-			cj_2 = ((Score)al_score.get(1)).getFenshu();
-		}
-		else{
-			response.sendRedirect("/error.jsp?error=" + new UTF8String("数据发生错误！").toUTF8String());
-			return;
-		}
-		if(bmxx.getZongfen() != (cj_1+cj_2)){
-			logger.fatal("考生成绩需要再检查，核对！！！");
-			response.sendRedirect("/error.jsp?error=" + new UTF8String("数据发生错误！").toUTF8String());
-			return;
-		}
+		
 %>
 <body>
 <br /><br />
@@ -131,18 +126,25 @@ table {
     <td width="162" height="40" bgcolor="#3777BC"  class="STYLE3">课程名称</td>
     <td width="160" align="right" bgcolor="#3777BC" class="STYLE3">成&nbsp;&nbsp;&nbsp;&nbsp;绩</td>
   </tr>
+<%
+ScoreList sl = new ScoreList();
+
+sl.setBmxxid(bmxxid);
+
+al_score = dbo.getList(sl);
+for(int i=0; i< al_score.size(); i++) {
+	Score sc = (Score)al_score.get(i);
+	cj = sc.getFenshu();
+	cjName = hmScore.get(sc.getKmid()+"");
+	
+%>
   <tr height="30">
-    <td height="32"  bgcolor="#FFFFFF">笔试</td>
-    <td bgcolor="#FFFFFF" align="right"><%=cj_1%></td>
+    <td height="32"  bgcolor="#FFFFFF"><%=cjName %></td>
+    <td bgcolor="#FFFFFF" align="right"><%=cj%></td>
   </tr>
-  <tr height="30">
-    <td height="32"  bgcolor="#FFFFFF">面试</td>
-    <td bgcolor="#FFFFFF" align="right"><%=cj_2%></td>
-  </tr>
-  <tr height="30">
-    <td height="34" align="right" bgcolor="#FFFFFF" class="STYLE4">总成绩</td>
-    <td  align="right" bgcolor="#FFFFFF" class="STYLE5"><%=bmxx.getZongfen()%></td>
-  </tr>
+<%
+}
+%>
 </table>
 
 </body>

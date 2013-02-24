@@ -1,1 +1,1 @@
-create database cup_20121128404694; 
+drop database cup;create database cup; 

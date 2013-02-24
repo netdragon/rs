@@ -74,8 +74,7 @@ int year = c.get(Calendar.YEAR);
 <%
 	LogHandler logger=LogHandler.getInstance("lq.jsp");
 	ArrayList al;
-	KemuList kl;
-	Kemu kemu;
+
 	DBOperator dbo = new DBOperator();
 	try{
 		dbo.init(false);
@@ -136,19 +135,19 @@ int year = c.get(Calendar.YEAR);
   </table>
   <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#999999">
       <tr>
-        <td width="33%" height="33" bgcolor="#FFFFFF" class="km_bt">取消审核结果发布：</td>
+        <td width="33%" height="33" bgcolor="#FFFFFF" class="km_bt">审核结果发布：</td>
         <td width="67%" bgcolor="#FFFFFF"><input type="checkbox" <%=(isPublic_Audit?"checked":"")%> name="radiobutton_Audit" value="1" /></td>
       </tr>
 	  <tr>
-        <td width="33%" height="33" bgcolor="#FFFFFF" class="km_bt">取消准考证发布：</td>
+        <td width="33%" height="33" bgcolor="#FFFFFF" class="km_bt">准考证发布：</td>
         <td width="67%" bgcolor="#FFFFFF"><input type="checkbox" <%=(isPublic_Admission?"checked":"")%> name="radiobutton_Admission" value="1" /></td>
       </tr>
 	  <tr>
-        <td width="33%" height="33" bgcolor="#FFFFFF" class="km_bt">取消成绩发布：</td>
+        <td width="33%" height="33" bgcolor="#FFFFFF" class="km_bt">成绩发布：</td>
         <td width="67%" bgcolor="#FFFFFF"><input type="checkbox" <%=(isPublic_Score?"checked":"")%> name="radiobutton_Score" value="1" /></td>
       </tr>
 	  <tr>
-        <td width="33%" height="33" bgcolor="#FFFFFF" class="km_bt">取消录取结果发布：</td>
+        <td width="33%" height="33" bgcolor="#FFFFFF" class="km_bt">录取结果发布：</td>
         <td width="67%" bgcolor="#FFFFFF"><input type="checkbox" <%=(isPublic_Admit?"checked":"")%> name="radiobutton_Admit" value="1" /></td>
       </tr>
    </table>

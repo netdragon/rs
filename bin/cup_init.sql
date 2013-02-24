@@ -256,7 +256,7 @@ CREATE TABLE `system_settings` (
 
 
 LOCK TABLES `system_settings` WRITE;
-INSERT INTO `system_settings` VALUES ('isPublic_Admission','0'),('isPublic_Admit','0'),('isPublic_Audit','0'),('isPublic_Score','0'),('regEndDate','2012-1-1'),('regStartDate','2011-10-10');
+INSERT INTO `system_settings` VALUES ('isPublic_Admission','0'),('isPublic_Admit','0'),('isPublic_Audit','0'),('isPublic_Score','0'),('regEndDate','2017-1-1'),('regStartDate','2016-10-10');
 UNLOCK TABLES;
 
 
@@ -273,5 +273,5 @@ LOCK TABLES `zhshzy` WRITE;
 INSERT INTO `zhshzy`(zymc, type) VALUES ('',-1),('地质工程',0),('勘查技术与工程',0),('石油工程',0),('油气储运工程',0),('船舶与海洋工程',0),('化学工程与工艺',0),('环境工程',0),('过程装备与控制工程',0),('机械设计制造及其自动化',0),('材料科学与工程',0),('自动化',0),('安全工程',0),('测控技术与仪器',0),('计算机科学与技术',0),('环境科学',0),('应用化学',0),('数学与应用数学',0),('信息管理与信息系统',0),('市场营销',0),('会计学',0),('财务管理',0),('国际经济与贸易',0),('市场营销',1),('会计学',1),('财务管理',1),('国际经济与贸易',1),('英语',1),('热能',0);
 UNLOCK TABLES;
 LOCK TABLES `sqbkly` WRITE;
-INSERT INTO `sqbkly`(mc) VALUES ('数学特长'),('外语特长'),('物理特长'),('化学特长'),('文艺特长');
+INSERT INTO `sqbkly`(mc) VALUES ('数学特长'),('外语特长'),('物理特长'),('化学特长'),('艺术特长');
 UNLOCK TABLES;

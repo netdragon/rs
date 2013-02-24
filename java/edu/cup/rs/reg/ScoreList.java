@@ -1,7 +1,5 @@
 package edu.cup.rs.reg;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import edu.cup.rs.common.ICommonList;
 
@@ -42,11 +40,7 @@ public class ScoreList implements ICommonList{
 		return "delete from score where bmxxid=" + score.getBmxxid();	
 	}
 	public String update(Object obj) {
-		Score score = (Score)obj;
-
-		StringBuffer sql = new StringBuffer("");	
-
-		return sql.toString();
+		return null;
 	}
 	public String insert(Object obj) {
 		Score score = (Score)obj;
@@ -55,9 +49,12 @@ public class ScoreList implements ICommonList{
 		sql.append(score.getBmxxid());
 		sql.append(",");
 		sql.append(score.getKmid());
-		sql.append(",");
+		sql.append(",'");
 		sql.append(score.getFenshu());
-		sql.append(",now())");
+		sql.append("',now())");
 		return sql.toString();
+	}
+	public String deleteAll() {
+		return "delete from score";
 	}
 }

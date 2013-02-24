@@ -79,18 +79,6 @@ body {
 					</tr>
 				  <tr>
 					<td height="50" colspan="3" align="center">&nbsp;
-<%
-	if("1".equals(op)) {
-%>
-					<input type="button" name="Submit" onClick="window.history.back();" value="返 回" />
-<%
-	}
-	else{
-%>
-					<input type="button" name="Submit" onClick="window.close();" value="关 闭" />
-<%
-	}
-%>
 					</td>
 					</tr>
 				</table>

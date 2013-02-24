@@ -66,7 +66,7 @@ body {
 					<td height="1" colspan="3"></td>
 					</tr>
 				  <tr>
-					<td height="50" colspan="3" align="center">&nbsp;<input type="button" name="Submit" onClick="window.history.back();" value="返 回" /></td>
+					<td height="50" colspan="3" align="center">&nbsp;</td>
 					</tr>
 				</table>
          </div></div>

@@ -1,7 +1,7 @@
-package edu.cup.rs.reg;
+package edu.cup.rs.reg.sys;
 
 import java.io.IOException;
-
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +14,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import edu.cup.rs.common.*;
-import java.text.*;
-import java.util.Date;
+import edu.cup.rs.reg.*;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.io.File;
@@ -23,11 +23,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class DeleteZszyAction extends BaseAction
+public class UpdateKmAction extends BaseAction
 {
 
-	protected static final LogHandler logger=LogHandler.getInstance(DeleteZszyAction.class);
-	public DeleteZszyAction() {
+	protected static final LogHandler logger=LogHandler.getInstance(UpdateKmAction.class);
+	public UpdateKmAction() {
 		super();
 	}
 
@@ -43,16 +43,18 @@ public class DeleteZszyAction extends BaseAction
                 response.sendRedirect("/error.jsp?error=" + new UTF8String("请先以管理员登录!").toUTF8String());
     			return;
     		}
-			String zyid = BaseFunction.null2value(request.getParameter("zyid"));
-			if(zyid.length() == 0) {
-                response.sendRedirect("/error.jsp?error=" + new UTF8String("请选择对象!").toUTF8String());
-    			return;
-			}
+			
+			String kmid = BaseFunction.null2value(request.getParameter("kmidkey"));
+			String kmlxid = BaseFunction.null2value(request.getParameter("kmlxidkey"));
+			String kmmc = BaseFunction.null2value(request.getParameter("kmmc"));
 
             DBOperator dbo=new DBOperator();
-            ZhshzyList zl;
-			ArrayList al;
-
+            KemuList zl;
+            if(0==kmmc.length())
+            {
+                response.sendRedirect("error.jsp?error="+new UTF8String("请输入科目名称！").toUTF8String());
+                return;
+            }
             try {
                 dbo.init(false);
             } catch (Exception e2) {
@@ -62,6 +64,7 @@ public class DeleteZszyAction extends BaseAction
             }
 
             try {
+				ArrayList al;
 				SystemSettingsList ssl;
 				SystemSettings ss;
 				Calendar c_curr = Calendar.getInstance();
@@ -87,16 +90,20 @@ public class DeleteZszyAction extends BaseAction
 						c2.setTime(sdf.parse(ss.getValue()));
 				}
 				if(c_curr.after(cl) && c_curr.before(c2)) {
-					response.sendRedirect("/error.jsp?error=" + new UTF8String("在本期报名时间内不能修改专业设置，否则会引起数据不一致!").toUTF8String());
+					response.sendRedirect("/error.jsp?error=" + new UTF8String("在本期报名时间内不能修改考试科目设置，否则会引起数据不一致!").toUTF8String());
 					return;
 				}
-				zl = new ZhshzyList();
-				dbo.update(zl.delete(zyid));
+				Kemu ly = new Kemu();
+				ly.setKmid(Integer.parseInt(kmid));
+				ly.setKmmc(kmmc);
+				zl = new KemuList();
+				
+				dbo.update(zl.update(ly));
 				
 				ICommonList logslist;
 				Log log = new Log();
 				logslist = new LogsList();
-				log.setContent(USERNAME + " 删除了招生专业。");
+				log.setContent(USERNAME + " 修改了考试科目。");
 				dbo.insert(logslist.insert(log));
                 dbo.commit();
 
@@ -109,7 +116,8 @@ public class DeleteZszyAction extends BaseAction
             finally{
                 if(null!=dbo) dbo.dispose();
             }
-            response.sendRedirect("admin/zywh.jsp?info=" + new UTF8String("删除成功！").toUTF8String());
+			response.sendRedirect("admin/kemulist.jsp?kmlxid=" + kmlxid + "&info=" + new UTF8String("添加成功！").toUTF8String());
+            
             return;
         }
         catch(Exception e)

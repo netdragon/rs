@@ -4,8 +4,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.io.*" %>
 <%@ page import="edu.cup.rs.reg.*"%>
-<%@ page import="jxl.*"%>
-<%@ page import="jxl.write.*"%>
+<%@ page import="edu.cup.rs.reg.sys.*"%>
 
 <%@include file="../common/admin_control.jsp"%>
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -110,10 +109,8 @@ table a:hover{
         document.forms[0].submit();
     }
 
-	function save(){
-		document.forms[0].method = "post";
-		document.forms[0].action = "/input_score";
-		document.forms[0].submit();
+	function reimport(){
+		window.location.assign("/admin/importScore.jsp");
 	}
 
   function setCause(){
@@ -182,7 +179,9 @@ table a:hover{
 	Bmxx bmxx;
 	DBOperator dbo = new DBOperator();
 	String isDesc="";
-
+	Kemu km;
+	KemuList kl = new KemuList();
+	
 	try{
 		dbo.init(false);
 	}catch(Exception e){
@@ -198,16 +197,8 @@ table a:hover{
 	int i_AllPage=0;
 	String s_operate="";
 	String s_isPublic = "";
+	
 	try {
-		HashMap<String,String> hm_env=CachedItem.getEnv();
-		String filePath = hm_env.get("RS_HOME").trim() + "\\data\\temp\\cj_1.xls";
-		String bs;
-		String ms;
-		
-		InputStream is = new FileInputStream(filePath); 
-		Workbook rwb = Workbook.getWorkbook(is); 
-		Sheet sheet = rwb.getSheet(0);
-
 		SystemSettingsList ssl;
 		ArrayList al_settings;
 		ssl = new SystemSettingsList("isPublic_Score");
@@ -294,22 +285,8 @@ table a:hover{
     <td background="../images/zyhd_bottom.gif" height="1"></td>
   </tr>
 </table><br />
+
 <table width="98%" border="0" cellspacing="0" cellpadding="0"  align="center">
-  <tr>
-    <td colspan="2" height="6">数据来自：
-	<%=filePath%><br>
-<%
-	for (int i = 2; i < sheet.getRows(); i++) {
-		bs = sheet.getCell(59, i).getContents().trim(); 
-		ms = sheet.getCell(60, i).getContents().trim();
-%>
-<%=bs%>&nbsp;::<%=ms%>
-<br>
-<%
-	} 
-%>
-	</td>
-  </tr>
   <tr>
   <td>
             <span class="tdfont">考生共有<%=i_total%>人，分<%=i_AllPage%>页，</span><a class="page" href="#" onclick="doSearch('first');">First</a>&nbsp;
@@ -340,11 +317,12 @@ table a:hover{
                 <option value="50" <%=s_50%>>50</option>
                 <option value="100" <%=s_100%>>100</option>
             </select>
-			&nbsp;<input name="Submit2" type="button"  onclick="window.open('/export_exam');"  value="导出考生成绩" class="fbsty"/>
+			
 <%
 	if(!("1".equals(s_isPublic))) {
 %>
 			&nbsp;&nbsp;<input name="fabucj" type="button" onclick="setPublic();"  value="发布考生成绩" class="fbsty"/>
+			&nbsp;&nbsp;<input name="fabucj" type="button" onclick="reimport();"  value="导入考生成绩" class="fbsty"/>
 <%
 	}
 %>
@@ -365,9 +343,16 @@ table a:hover{
     <td width="9%"  align="center"><span class="tbl_bt">性别</span></td>
     <td width="13%"  align="center"><span class="tbl_bt">考生科类</span></td>
     <td width="18%"  align="center"><span class="tbl_bt">身份证号</span></td>
-    <td width="10%"  align="center"><span class="tbl_bt">笔试</span></td>
-	<td width="10%"  align="center"><span class="tbl_bt">面试</span></td>
-    <td width="13%"  align="center"><span class="tbl_bt">总成绩</span></td>
+<%
+		ArrayList alKm = dbo.getList(kl);
+		int kmLen = alKm.size();
+		for(int i=0; i<kmLen; i++) {
+			km = (Kemu) alKm.get(i);
+%>
+    <td width="10%"  align="center"><span class="tbl_bt"><%=km.getKmmc() %></span></td>
+<%
+		}
+%>
   </tr>
 <%
 		if(orderColName.length() > 0) icl.setOrder(orderColName);
@@ -379,18 +364,13 @@ table a:hover{
 		String btn_yj = "";
 		ScoreList sl = new ScoreList();
 		ArrayList al_score;
-		float cj_1 = 0, cj_2 = 0;
+		String cj="";
 		for(int i = 0; i < al.size(); i++) {
 			bmxx = (Bmxx) al.get(i);
 			sl.setBmxxid(bmxx.getBmxxid());
 			al_score = dbo.getList(sl);
-			if(al_score.size() == 2) {
-				cj_1 = ((Score)al_score.get(0)).getFenshu();
-				cj_2 = ((Score)al_score.get(1)).getFenshu();
-			}else{
-				cj_1 = 0;
-				cj_2 = 0;
-			}
+
+			
 %>
    <tr bgcolor="#FFFFFF" onMouseOut="this.style.backgroundColor='#FFFFFF'" onMouseOver="this.style.backgroundColor='#FFFFCC'">
    <input type="checkbox" name="chk_bmxx_cj" checked style="display:none;" value="<%=bmxx.getBmxxid()%>" />
@@ -400,21 +380,14 @@ table a:hover{
      <td  class="tdfont" align="center"><%=bmxx.getKskl()%></td>
      <td  class="tdfont"><%=bmxx.getShfzh()%></td>
 <%
-		if(1 == 0) {
+			for(int j=0; j<kmLen; j++) {
+				if(j < al_score.size()) cj = ((Score)al_score.get(j)).getFenshu();
+				else cj = "";
 %>
-     <td  class="tdfont" align="center"><input type="text" size="4"  name="cj1_<%=bmxx.getBmxxid()%>" value="<%=cj_1%>"></td>
-	 <td  class="tdfont" align="center"><input type="text" size="4"  name="cj2_<%=bmxx.getBmxxid()%>" value="<%=cj_2%>"></td>
+     <td  class="tdfont" align="center"><%=cj%></td>
 <%
-		}
-		else {
+			}
 %>
-     <td  class="tdfont" align="center"><%=cj_1%></td>
-	 <td width="2%" align="center"  class="tdfont"><%=cj_2%></td>
-
-<%
-		}
-%>
-     <td width="16%" align="center"  class="tdfont"><%=bmxx.getZongfen()%>&nbsp;</td>
    </tr>
 <%
 		}
@@ -429,7 +402,7 @@ table a:hover{
 <%
 	if(!("1".equals(s_isPublic))) {
 %>
-	  <input type="button" value="保 存" onclick="save();" style="width:74px; height:28px;"/>
+	  <input type="button" value="重新导入" onclick="reimport();" style="width:74px; height:28px;"/>
 <%
 	}
 %>
@@ -439,11 +412,11 @@ table a:hover{
   </table></td>
      </tr>
 </table>
-<input id="i_CurrPage" name="i_CurrPage" type="hidden" value="<%=i_CurrPage%>">
-<input id="oper" name="operate" type="hidden" value="<%=s_operate%>">
-<input id="order" name="order" type="hidden" value="">
-<input id="op" name="op" type="hidden" value="">
-<input id="bmxxid" name="bmxxid" type="hidden" value="-1">
+<input id="i_CurrPage" name="i_CurrPage" type="hidden" value="<%=i_CurrPage%>"/>
+<input id="oper" name="operate" type="hidden" value="<%=s_operate%>"/>
+<input id="order" name="order" type="hidden" value=""/>
+<input id="op" name="op" type="hidden" value=""/>
+<input id="bmxxid" name="bmxxid" type="hidden" value="-1"/>
 </form>
 </div>
 <%
@@ -457,5 +430,3 @@ table a:hover{
 %>
 </body>
 </html>
-
-

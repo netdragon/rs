@@ -41,9 +41,9 @@ public class UpdateCourseScheduleAction extends BaseAction
     			return;
     		}
             DBOperator dbo=new DBOperator();
-            KemuList kl = new KemuList();
-			Kemu kemu;
-			int kmid;
+            KemulxList kl = new KemulxList();
+			Kemulx kemu;
+			int lxid;
 			ArrayList al;
 
 			String sj_s;
@@ -62,15 +62,15 @@ public class UpdateCourseScheduleAction extends BaseAction
 				al = dbo.getList(kl);
 				for(int i=0;i<al.size();i++)
 				{
-					kemu = (Kemu)(al.get(i));
-					kmid = kemu.getKmid();
+					kemu = (Kemulx)(al.get(i));
+					lxid = kemu.getLxid();
 					
-					kemu.setKsrq(sdf.parse(request.getParameter("ksnian_"+kmid) + "-" + request.getParameter("ksyue_"+kmid) + "-" +request.getParameter("ksri_"+kmid)));
-					sj_s = (null == request.getParameter("ksdian_"+kmid))?"8":request.getParameter("ksdian_"+kmid);
-					sj_f = (null == request.getParameter("ksfen_"+kmid))?"0":request.getParameter("ksfen_"+kmid);
+					kemu.setKsrq(sdf.parse(request.getParameter("ksnian_"+lxid) + "-" + request.getParameter("ksyue_"+lxid) + "-" +request.getParameter("ksri_"+lxid)));
+					sj_s = (null == request.getParameter("ksdian_"+lxid))?"8":request.getParameter("ksdian_"+lxid);
+					sj_f = (null == request.getParameter("ksfen_"+lxid))?"0":request.getParameter("ksfen_"+lxid);
 					kemu.setKssj(sj_s+":"+sj_f);
-					sj_s = (null == request.getParameter("jsdian_"+kmid))?"8":request.getParameter("jsdian_"+kmid);
-					sj_f = (null == request.getParameter("jsfen_"+kmid))?"0":request.getParameter("jsfen_"+kmid);
+					sj_s = (null == request.getParameter("jsdian_"+lxid))?"8":request.getParameter("jsdian_"+lxid);
+					sj_f = (null == request.getParameter("jsfen_"+lxid))?"0":request.getParameter("jsfen_"+lxid);
 					kemu.setJssj(sj_s+":"+sj_f);
 					dbo.update(kl.update(kemu));
 				}

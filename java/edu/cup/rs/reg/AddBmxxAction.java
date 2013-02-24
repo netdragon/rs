@@ -1,27 +1,29 @@
 package edu.cup.rs.reg;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import edu.cup.rs.log.LogHandler;
-import edu.cup.rs.reg.Bkzy;
-import edu.cup.rs.reg.Bmxx;
-import edu.cup.rs.reg.Hjqk;
-import edu.cup.rs.reg.Hdqk;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import edu.cup.rs.common.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.io.File;
-import java.util.List;
-import java.util.Iterator;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import edu.cup.rs.common.AttachFile;
+import edu.cup.rs.common.AttachFileService;
+import edu.cup.rs.common.BaseAction;
+import edu.cup.rs.common.CachedItem;
+import edu.cup.rs.common.DBOperator;
+import edu.cup.rs.common.ICommonList;
+import edu.cup.rs.common.UTF8String;
+import edu.cup.rs.log.LogHandler;
 
 public class AddBmxxAction extends BaseAction
 {

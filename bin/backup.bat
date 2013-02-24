@@ -10,7 +10,7 @@ mkdir "%RS_HOME%\data\temp\%temp_name%"
 
 echo "1 of 4. Backup database ... ..."
 
-"%RS_HOME%\system\mysql\bin\mysqldump.exe" -uroot -pdingdongtu --all-databases --default-character-set=GB2312 -R --triggers > "%RS_HOME%\data\temp\%temp_name%\db.sql"
+"%RS_HOME%\system\mysql\bin\mysqldump.exe" -uroot -pdingdongtu --default-character-set=GB2312 -R --triggers cup > "%RS_HOME%\data\temp\%temp_name%\db.sql"
 
 echo "2 of 4. Backup files ... ..."
 
@@ -30,3 +30,5 @@ cd "%RS_HOME%\data\temp\"
 REM %RAR_Dir% a -df -IBCK "%temp_name%.rar" "%temp_name%"
 
 cd "%RS_HOME%\bin"
+
+exit 0

@@ -36,7 +36,8 @@ table {
 
 </head>
 <%
-	LogHandler logger=LogHandler.getInstance("browseinfo.jsp");
+
+	LogHandler logger=LogHandler.getInstance("chengji_lq.jsp");
 	ArrayList al;
 	ICommonList icl;
 	Bmxx bmxx;
@@ -83,24 +84,6 @@ table {
 		if(bmxx.getShhqk() != 1) {
             response.sendRedirect("/error.jsp?error=" + new UTF8String("未通过初审，没有成绩信息！").toUTF8String());
 			return;
-		} 
-		ScoreList sl = new ScoreList();
-		
-		sl.setBmxxid(bmxxid);
-
-		al_score = dbo.getList(sl);
-		if(al_score.size() == 2) {
-			cj_1 = ((Score)al_score.get(0)).getFenshu();
-			cj_2 = ((Score)al_score.get(1)).getFenshu();
-		}
-		else{
-			response.sendRedirect("/error.jsp?error=" + new UTF8String("数据发生错误！").toUTF8String());
-			return;
-		}
-		if(bmxx.getZongfen() != (cj_1+cj_2)){
-			logger.fatal("考生成绩需要再检查，核对！！！");
-			response.sendRedirect("/error.jsp?error=" + new UTF8String("数据发生错误！").toUTF8String());
-			return;
 		}
 %>
 <body>
@@ -146,28 +129,7 @@ table {
   </tr>
 <% } %>
 </table>
-<br />
-<table width="520" border="0" cellspacing="2" cellpadding="0" align="center" bgcolor="#EEEEEE">
-  <caption align="top">
-    <span class="STYLE6">考试成绩</span>
-  </caption>
-</table>
-<table width="520" border="0" cellspacing="2" cellpadding="0" align="center" bgcolor="#EEEEEE">
-
-  <tr bgcolor="#3E3EFF">
-    <td width="162" height="40" bgcolor="#3777BC"  class="STYLE3">课程名称</td>
-    <td width="160" align="right" bgcolor="#3777BC" class="STYLE3">成&nbsp;&nbsp;&nbsp;&nbsp;绩</td>
-  </tr>
-  <tr height="30">
-    <td height="32"  bgcolor="#FFFFFF">笔试</td>
-    <td bgcolor="#FFFFFF" align="right"><%=cj_1%></td>
-  </tr>
-  <tr height="30">
-    <td height="32"  bgcolor="#FFFFFF">面试</td>
-    <td bgcolor="#FFFFFF" align="right"><%=cj_2%></td>
-  </tr>
-
-</table>
+<!-- input name="fabucj" type="button" onclick="window.location.assign('/loginin/chengji.jsp');"  value="查看成绩" class="fbsty"/-->
 </body>
 <%
 	}catch(Exception e) {

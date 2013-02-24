@@ -3,6 +3,8 @@
 <%@ page import="edu.cup.rs.log.*"%>
 <%@ page import="java.util.*" %>
 <%@ page import="edu.cup.rs.reg.*"%>
+<%@ page import="edu.cup.rs.reg.sys.*"%>
+
 <%@include file="../common/admin_control.jsp"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 
@@ -185,6 +187,8 @@ table a:hover{
 	Bmxx bmxx;
 	DBOperator dbo = new DBOperator();
 	String isDesc="";
+	Kemu km;
+	KemuList kl = new KemuList();
 
 	try{
 		dbo.init(false);
@@ -337,9 +341,11 @@ table a:hover{
   
   <td width="30%" align="right"><table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td height="23" align="right"> <span class="prtersty">输入录取基准总分</span></td>
-    <td><input name="jzfs" type="text" id="jzfs" value="<%=((0 == score)?"":score)%>" class="iptprnt"/></td>
-    <td rowspan="2" align="center" valign="middle"><img src="../images/chaxun.gif" width="45" height="20" align="absbottom" onclick="search_xm();" /></td>
+    <td height="23" align="right"> <span class="prtersty"></span></td>
+    <td><input name="jzfs" type="hidden" id="jzfs" value="<%=((0 == score)?"":score)%>" class="iptprnt"/></td>
+    <td rowspan="2" align="center" valign="middle">
+    <img src="../images/chaxun.gif" width="45" height="20" align="absbottom" onclick="search_xm();" />
+    </td>
   </tr>
   <tr>
     <td height="23" align="right"><span class="prtersty">输入考生姓名</span></td>
@@ -365,10 +371,17 @@ table a:hover{
     <td width="10%"  align="center"><span class="tbl_bt">姓名</span></td>
     <td width="5%"  align="center"><span class="tbl_bt">性别</span></td>
     <td width="8%"  align="center"><span class="tbl_bt">考生科类</span></td>
-    <td width="6%"  align="center"><span class="tbl_bt">笔试</span></td>
-	<td width="6%"  align="center"><span class="tbl_bt">面试</span></td>
-    <td width="9%"  align="center"><span class="tbl_bt"><a href="lq.jsp?order=zongfen<%=isDesc%>">总成绩</a></span></td>
-    <td width="12%"  align="center"><span class="tbl_bt">是否调剂</span></td>
+<%
+		ArrayList alKm = dbo.getList(kl);
+		int kmLen = alKm.size();
+		for(int i=0; i<kmLen; i++) {
+			km = (Kemu) alKm.get(i);
+%>
+    <td width="6%"  align="center"><span class="tbl_bt"><%=km.getKmmc() %></span></td>
+<%
+		}
+%>
+    <td width="10%"  align="center"><span class="tbl_bt">录取操作</span></td>
 	<td width="19%"  align="center"><span class="tbl_bt">录取专业</span></td>
 <!--	<td width="9%"  align="center"><span class="tbl_bt"><a href="lq.jsp?order=sflq<%=isDesc%>">是否录取</a></span></td>-->
 	<td width="8%"  align="center"><span class="tbl_bt">是否录取</span></td>
@@ -385,7 +398,7 @@ table a:hover{
 		ScoreList sl = new ScoreList();
 		BkzyList zyl = new BkzyList();
 		ArrayList al_score,al_zy;
-		float cj_1 = 0, cj_2 = 0;
+		String cj_1 = "", cj_2 = "";
 		Bkzy bkzy;
 		String zy1 = "", zy2 = "", sfty = "", btn_tj="&nbsp;";
 		for(int i = 0; i < al.size(); i++) {
@@ -416,10 +429,15 @@ table a:hover{
      <td  class="tdfont"><%=bmxx.getKsxm()%></td>
      <td  class="tdfont"><%=((1 == bmxx.getKsxb()) ? "男":"女")%></td>
      <td  class="tdfont"><%=bmxx.getKskl() %></td>
+<%
+			for(int j=0; j<kmLen; j++) {
+			cj_1 = ((Score)al_score.get(j)).getFenshu();
+%>
      <td  class="tdfont" align="center"><%=cj_1%></td>
-	 <td  class="tdfont" align="center"><%=cj_2%></td>
-     <td  class="tdfont" align="center"><%=bmxx.getZongfen()%></td>
-	 <td  class="tdfont" align="left"><%=sfty%><%=btn_tj%></td>
+<%
+			}
+%>
+	 <td  class="tdfont" align="left"><%=btn_tj%></td>
      <td  class="tdfont" align="left"><%=bmxx.getLqzy()%>&nbsp;</td>
 	 <td  class="tdfont" align="left"><%=((1 == bmxx.getSflq())?"已录取":"未录取")%>&nbsp;</td>
    </tr>
@@ -493,7 +511,7 @@ table a:hover{
 <%
 			}
 %>
-	</select>  
+</select>  
 </td></tr>
 <tr>
 <td align="center"><input type="button" onClick="adjust_admit(<%=bmxx.getBmxxid()%>);" value="提交">&nbsp;<input type="button" onClick="close_admit(<%=bmxx.getBmxxid()%>);" value="取消">

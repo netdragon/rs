@@ -55,6 +55,16 @@
 	font-size: 12px;
 }
 .p1{font-size:12px;color:black}
+
+.con .km_bt a {
+	color: #0066FF;
+	text-decoration: none;
+}
+.con .km_bt a:hover {
+	color: #990000;
+	text-decoration: none;
+}
+-->
 -->
 </style>
 <script>
@@ -90,8 +100,7 @@
 	ArrayList al;
 	ZhshzyList zyList;
 	Zhshzy zy;
-	SystemSettingsList ssl;
-	SystemSettings ss;
+
 	int i = 0;
 	DBOperator dbo = new DBOperator();
 	
@@ -111,32 +120,7 @@
 	}
 
 	try {
-		Calendar c_curr = Calendar.getInstance();
-		Calendar cl = Calendar.getInstance();
-		Calendar c2 = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				
-
-		ssl = new SystemSettingsList();
-		ssl.setItem("regStartDate");
-		al = dbo.getList(ssl);
-		if(1 == al.size()) {
-			ss = (SystemSettings)al.get(0);
-			if(null != ss.getValue())
-				cl.setTime(sdf.parse(ss.getValue()));
-		}
-
-		ssl.setItem("regEndDate");
-		al = dbo.getList(ssl);
-		if(1 == al.size()) {
-			ss = (SystemSettings)al.get(0);
-			if(null != ss.getValue())
-				c2.setTime(sdf.parse(ss.getValue()));
-		}
-		if(c_curr.after(cl) && c_curr.before(c2)) {
-			response.sendRedirect("/error.jsp?error=" + new UTF8String("在本期报名时间内不能修改专业设置，否则会引起数据不一致!").toUTF8String());
-			return;
-		}
+		
 		zyList = new ZhshzyList();
 		al = dbo.getList(zyList);
 %>

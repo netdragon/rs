@@ -390,4 +390,7 @@ public class BmxxList implements ICommonList{
 */
 		return sql.toString();
 	}
+	public String getByZhkzh(String zhkzh) {
+		return "select * from bmxx where zhkzhid='" + zhkzh + "'";
+	}
 }

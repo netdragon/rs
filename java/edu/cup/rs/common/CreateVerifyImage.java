@@ -19,7 +19,7 @@ public class CreateVerifyImage extends HttpServlet {
         response.setHeader("Pragma","No-cache");
         response.setHeader("Cache-Control","no-cache");
         response.setDateHeader("Expires", 0);
-        HttpSession session=request.getSession();
+        HttpSession session=request.getSession(true);
 
         int width=110, height=40;
         String base = "234567890abcdefghijkmnopqrstuvwxyz";

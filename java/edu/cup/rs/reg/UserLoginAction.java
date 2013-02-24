@@ -114,9 +114,9 @@ public class UserLoginAction extends javax.servlet.http.HttpServlet implements j
 			}
 			else{
 				if(isAdmin == 1)
-					response.sendRedirect("admin/adminindex.jsp?"+timestamp);
+					response.sendRedirect(response.encodeRedirectURL("admin/adminindex.jsp?"+timestamp));
 				else
-					response.sendRedirect("loginin/stumain.jsp?"+timestamp);
+					response.sendRedirect(response.encodeRedirectURL("loginin/stumain.jsp?"+timestamp));
 			}
             return;
         }
