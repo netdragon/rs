@@ -38,14 +38,13 @@ table {
 
 </head>
 <%
-	if(true){
-        response.sendRedirect("/error.jsp?error=" + new UTF8String("考试成绩未发布！").toUTF8String());
-		return;
-	}
+
 	LogHandler logger=LogHandler.getInstance("chengji.jsp");
 	ArrayList al;
 	ICommonList icl;
 	Bmxx bmxx;
+	boolean isPublicScoreExtra = false;
+	boolean isPublicScore = false;
 
 	DBOperator dbo = new DBOperator();
 	try{
@@ -72,14 +71,6 @@ table {
 			km = (Kemu) alKm.get(i);
 			hmScore.put(km.getKmid() +"",km.getKmmc());
 		}
-
-		ssl = new SystemSettingsList("isPublic_Score");
-		al_settings = dbo.getList(ssl);
-		if(al_settings.size() > 0) s_isPublic = ((SystemSettings)(al_settings.get(0))).getValue();
-		if(!("1".equals(s_isPublic))) {
-            response.sendRedirect("/error.jsp?error=" + new UTF8String("考试成绩未发布！").toUTF8String());
-			return;
-		}
 		String bmxxId = (String)session.getAttribute("bmxxid");
 		if(null == bmxxId){
             logger.error("没有报名信息！");
@@ -93,6 +84,30 @@ table {
 		if(al.size() == 0){
             logger.error("数据错误！");
             response.sendRedirect("/error.jsp?error=" + new UTF8String("数据错误！").toUTF8String());
+			return;
+		}
+		ssl = new SystemSettingsList("isPublic_ScoreExtra");
+		al_settings = dbo.getList(ssl);
+		if(al_settings.size() > 0) 
+			s_isPublic = ((SystemSettings)(al_settings.get(0))).getValue();
+		else 
+			s_isPublic = "";
+
+		if("1".equals(s_isPublic)) {
+			isPublicScoreExtra = true;
+		}
+		ssl = new SystemSettingsList("isPublic_Score");
+		al_settings = dbo.getList(ssl);
+		if(al_settings.size() > 0) 
+			s_isPublic = ((SystemSettings)(al_settings.get(0))).getValue();
+		else 
+			s_isPublic = "";
+
+		if("1".equals(s_isPublic)) {
+			isPublicScore = true;
+		}
+		if(!isPublicScore && !isPublicScoreExtra) {
+            response.sendRedirect("/error.jsp?error=" + new UTF8String("考试成绩未发布！").toUTF8String());
 			return;
 		}
 		bmxx = (Bmxx) al.get(0);
@@ -123,7 +138,7 @@ table {
 </table>
 <table width="478" border="0" cellspacing="2" cellpadding="0" align="center" bgcolor="#EEEEEE">
   <tr bgcolor="#3E3EFF">
-    <td width="162" height="40" bgcolor="#3777BC"  class="STYLE3">课程名称</td>
+    <td width="162" height="40" bgcolor="#3777BC"  class="STYLE3">课&nbsp;&nbsp;程</td>
     <td width="160" align="right" bgcolor="#3777BC" class="STYLE3">成&nbsp;&nbsp;&nbsp;&nbsp;绩</td>
   </tr>
 <%
@@ -136,10 +151,11 @@ for(int i=0; i< al_score.size(); i++) {
 	Score sc = (Score)al_score.get(i);
 	cj = sc.getFenshu();
 	cjName = hmScore.get(sc.getKmid()+"");
-	
+	if(!isPublicScore && cjName.indexOf("笔试") > -1) continue;
+	if(!isPublicScoreExtra && "面试".equals(cjName)) continue;
 %>
   <tr height="30">
-    <td height="32"  bgcolor="#FFFFFF"><%=cjName %></td>
+    <td height="32" bgcolor="#FFFFFF"><%=cjName %></td>
     <td bgcolor="#FFFFFF" align="right"><%=cj%></td>
   </tr>
 <%

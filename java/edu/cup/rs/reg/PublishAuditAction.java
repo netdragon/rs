@@ -47,6 +47,7 @@ public class PublishAuditAction extends BaseAction
 			String lpp = BaseFunction.null2value(request.getParameter("lpp"));
 			String filter = BaseFunction.null2value(request.getParameter("qname"));
 			String order = BaseFunction.null2value(request.getParameter("order"));
+			String publicFlag = BaseFunction.null2value(request.getParameter("publicFlag"));
 			StringBuffer param = new StringBuffer("i_start=");
 			param.append(startNum);
 			param.append("&i_CurrPage=");
@@ -78,7 +79,7 @@ public class PublishAuditAction extends BaseAction
 					req = "chushen.jsp";
 				}
 				else if(req.indexOf("lrlq.jsp") > -1) {
-					dbo.update(ssl.publishScore());
+					dbo.update(ssl.publishScore(publicFlag));
 					req = "lrlq.jsp";
 				}
 				else if(req.indexOf("sczkzh.jsp") > -1) {

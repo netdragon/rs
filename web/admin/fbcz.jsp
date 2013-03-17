@@ -72,7 +72,7 @@ int year = c.get(Calendar.YEAR);
    <tr>
     <td height="19">
 <%
-	LogHandler logger=LogHandler.getInstance("lq.jsp");
+	LogHandler logger=LogHandler.getInstance("fbcz.jsp");
 	ArrayList al;
 
 	DBOperator dbo = new DBOperator();
@@ -95,6 +95,7 @@ int year = c.get(Calendar.YEAR);
 	boolean isPublic_Admit = false;
 	boolean isPublic_Audit = false;
 	boolean isPublic_Score = false;
+	boolean isPublic_ScoreExtra = false;
 	try {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -126,6 +127,13 @@ int year = c.get(Calendar.YEAR);
 			ss = (SystemSettings)al.get(0);
 			isPublic_Score = ("1".equals(ss.getValue()));
 		}
+		ssl = new SystemSettingsList();
+		ssl.setItem("isPublic_ScoreExtra");
+		al = dbo.getList(ssl);
+		if(1 == al.size()) {
+			ss = (SystemSettings)al.get(0);
+			isPublic_ScoreExtra = ("1".equals(ss.getValue()));
+		}
 %>
 	<br>
 <table width="522" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -143,8 +151,12 @@ int year = c.get(Calendar.YEAR);
         <td width="67%" bgcolor="#FFFFFF"><input type="checkbox" <%=(isPublic_Admission?"checked":"")%> name="radiobutton_Admission" value="1" /></td>
       </tr>
 	  <tr>
-        <td width="33%" height="33" bgcolor="#FFFFFF" class="km_bt">成绩发布：</td>
+        <td width="33%" height="33" bgcolor="#FFFFFF" class="km_bt">笔试成绩发布：</td>
         <td width="67%" bgcolor="#FFFFFF"><input type="checkbox" <%=(isPublic_Score?"checked":"")%> name="radiobutton_Score" value="1" /></td>
+      </tr>
+	  <tr>
+        <td width="33%" height="33" bgcolor="#FFFFFF" class="km_bt">面试成绩发布：</td>
+        <td width="67%" bgcolor="#FFFFFF"><input type="checkbox" <%=(isPublic_ScoreExtra?"checked":"")%> name="radiobutton_ScoreExtra" value="1" /></td>
       </tr>
 	  <tr>
         <td width="33%" height="33" bgcolor="#FFFFFF" class="km_bt">录取结果发布：</td>

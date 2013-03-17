@@ -1,12 +1,10 @@
-<%@ page contentType="text/html; charset=utf-8"%>
+﻿<%@page contentType="text/html; charset=utf-8"%>
 <%@page import="edu.cup.rs.common.*"%>
 <%@page import="edu.cup.rs.log.*"%>
 <%@page import="edu.cup.rs.util.HttpHelper"%>
-
 <%
 	LogHandler loggerBase=LogHandler.getInstance("access_control.jsp");
     String USERID=(String)session.getAttribute("user_id");
-
     String s_QueryString = BaseFunction.null2value(request.getQueryString());
     StringBuffer s_URL=request.getRequestURL();
     if(s_URL.length()>0){
@@ -17,9 +15,11 @@
     {
 		if(s_URL.indexOf("adminindex") > -1 || s_URL.indexOf("stumain") > -1) {
 			response.sendRedirect("../index.jsp");
+			return;
 		}
 		else{
 			response.sendRedirect("../reindex.jsp?url="+s_URL);
+			return;
         }
     } else {
 		String ipSesn = (String)session.getAttribute("clientip");

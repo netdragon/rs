@@ -256,7 +256,7 @@ CREATE TABLE `system_settings` (
 
 
 LOCK TABLES `system_settings` WRITE;
-INSERT INTO `system_settings` VALUES ('isPublic_Admission','0'),('isPublic_Admit','0'),('isPublic_Audit','0'),('isPublic_Score','0'),('regEndDate','2017-1-1'),('regStartDate','2016-10-10');
+INSERT INTO `system_settings`(item, value) VALUES ('isPublic_Admission','0'),('isPublic_Admit','0'),('isPublic_Audit','0'),('isPublic_ScoreExtra','0'),('isPublic_Score','0'),('regEndDate','2017-1-1'),('regStartDate','2016-10-10');
 UNLOCK TABLES;
 
 

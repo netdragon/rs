@@ -63,6 +63,9 @@ public class UpdateResetSettingAction extends BaseAction
 				ss.setItem("isPublic_Score");
 				ss.setValue(request.getParameter("radiobutton_Score"));
 				dbo.update(ssl.update(ss));
+				ss.setItem("isPublic_ScoreExtra");
+				ss.setValue(request.getParameter("radiobutton_ScoreExtra"));
+				dbo.update(ssl.update(ss));
 				ss.setItem("isPublic_Admit");
 				ss.setValue(request.getParameter("radiobutton_Admit"));
 				dbo.update(ssl.update(ss));

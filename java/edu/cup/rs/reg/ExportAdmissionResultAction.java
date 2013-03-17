@@ -189,12 +189,6 @@ public class ExportAdmissionResultAction extends BaseAction{
 				else
 					columnValue = "否";
 				*/
-				label = new Label(k, j, "", border); 
-				sheet.addCell(label);
-				k++;
-				label = new Label(k, j, "", border); 
-				sheet.addCell(label);
-				k++;
             }
 			copy.write(); 
         }

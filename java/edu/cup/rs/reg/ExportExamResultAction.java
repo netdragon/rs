@@ -104,8 +104,8 @@ public class ExportExamResultAction extends BaseAction{
 			while(rs.next()) {
 				hm.put(rs.getString("zyid"), rs.getString("zymc")+" ");
 			}
-			rs = dbo.query("select a.bmxxid,zhkzhid,ksxm,ksxb,shfzh,wyyz,jg,mz,zzmm,kskl,txdz,shxr,yzbm,ksshji,zxmc,b.zxtxdz,b.zxybm,b.zxlxdh,fmxm,fmgzdw,fmyddh, " +
-			"mmxm,mmgzdw,mmyddh,ksah,sqly,bmsj,zongfen from bmxx a left join cjjd b on a.bmxxid=b.bmxxid where zhkzhid is not null and zhkzhid != 0 order by a.bmxxid");
+			rs = dbo.query("select bmxxid,zhkzhid,ksxm,ksxb,shfzh,jg,kskl,zxmc " +
+			" from bmxx where zhkzhid is not null and zhkzhid != 0 order by zhkzhid");
 			rsmd_bmxx = rs.getMetaData();
 			colCount_bmxx = rsmd_bmxx.getColumnCount();
 			int j = 1;
@@ -140,76 +140,13 @@ public class ExportExamResultAction extends BaseAction{
 					else {
 						columnValue = rs.getString(i);
 					}
-					if(!"zongfen".equals(rsmd_bmxx.getColumnName(i))) {
-						columnValue = ((null == columnValue) || (columnValue.length() == 0)) ? " " : columnValue;
-						label = new Label(k, j, columnValue, border); 
-						sheet.addCell(label);
-						k++;
-					} else {
-						zongfen = rs.getString(i);
-					}
-                }
-				
-				bmxxid = rs.getString("bmxxid");
-				rs_grjl = dbo.query("select hjsj,hjmc,jsjb,hjdj,sjbm from hjqk where bmxxid="+bmxxid);
-				if(null == rsmd_grjl) {
-					rsmd_grjl = rs_grjl.getMetaData();
-					colCount_grjl = rsmd_grjl.getColumnCount();
-				}
-                while (rs_grjl.next()){
-					for (int i = 1; i <= colCount_grjl; i++){
-						columnValue = rs_grjl.getString(i);
-						columnValue = ((null == columnValue) || (columnValue.length() == 0)) ? " " : columnValue;
-						label = new Label(k, j, columnValue, border); 
-						sheet.addCell(label);
-						k++;
-					}
-                }
 
-				rs_hdqk = dbo.query("select hdsj,hdmc,brjsgx from hdqk where bmxxid="+bmxxid);//参加社会活动情况
-				if(null == rsmd_hdqk) {
-					rsmd_hdqk = rs_hdqk.getMetaData();
-					colCount_hdqk = rsmd_hdqk.getColumnCount();
-				}
-                while (rs_hdqk.next()){
-					for (int i = 1; i <= colCount_hdqk; i++){
-						columnValue = rs_hdqk.getString(i);
-						columnValue = ((null == columnValue) || (columnValue.length() == 0)) ? " " : columnValue;
-						label = new Label(k, j, columnValue, border); 
-						sheet.addCell(label);
-						k++;
-					}
-                }				
-				
-				rs_bkzy = dbo.query("select zyid,tjf from bkzy where bmxxid="+bmxxid+" order by xh");
-                while (rs_bkzy.next()){
-					columnValue = rs_bkzy.getString("zyid");
-					label = new Label(k, j, hm.get(columnValue), border); 
-					sheet.addCell(label);
-					k++;
-					tjf = rs_bkzy.getInt("tjf");
-                }
-				if(tjf == 1)
-					columnValue = "是";
-				else
-					columnValue = "否";
-				columnValue = ((null == columnValue) || (columnValue.length() == 0)) ? " " : columnValue;
-				label = new Label(k, j, columnValue, border); 
-				sheet.addCell(label);
-				k++;
-
-				rs_cj = dbo.query("select fenshu,kmid from score where bmxxid="+bmxxid + " order by kmid");
-                while (rs_cj.next()){
-					
-					columnValue = rs_cj.getString("fenshu");
 					columnValue = ((null == columnValue) || (columnValue.length() == 0)) ? " " : columnValue;
 					label = new Label(k, j, columnValue, border); 
 					sheet.addCell(label);
 					k++;
+
                 }
-				label = new Label(k, j, "" + zongfen, border); 
-				sheet.addCell(label);
-				k++;
             }
 			copy.write(); 
         }

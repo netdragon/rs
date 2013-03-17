@@ -202,6 +202,14 @@ body{
             response.sendRedirect("/error.jsp?error=" + new UTF8String("审核结果已发布，不能修改报名信息！").toUTF8String());
 			return;
 		}
+		ssl = new SystemSettingsList("isPublic_Admission");
+		al_settings = dbo.getList(ssl);
+		s_isPublic = "";
+		if(al_settings.size() > 0) s_isPublic = ((SystemSettings)(al_settings.get(0))).getValue();
+		if(("1".equals(s_isPublic))) {
+            response.sendRedirect("/error.jsp?error=" + new UTF8String("准考证已发布，不能修改报名信息！").toUTF8String());
+			return;
+		}
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
 			int month = c.get(Calendar.MONTH)+1;

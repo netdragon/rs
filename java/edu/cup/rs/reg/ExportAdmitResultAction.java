@@ -79,7 +79,7 @@ public class ExportAdmitResultAction extends BaseAction{
 		ResultSet rs_hdqk=null;		
 		ResultSet rs_bkzy=null,rs_lq=null, rs_cj=null;
 		String bmxxid;
-        String zongfen;
+
 		int colCount_bmxx = 0, colCount_hdqk = 0, colCount_grjl = 0, tjf = 0;
 		String columnName, columnValue;
 		HashMap<String, String> hm = new HashMap<String, String>();
@@ -96,7 +96,7 @@ public class ExportAdmitResultAction extends BaseAction{
 
        try{
 			Label label;
-			zongfen = "0";
+
 			workbook = Workbook.getWorkbook(new File(template)); 
 			copy = Workbook.createWorkbook(new File(fName), workbook); 
 			WritableSheet sheet = copy.getSheet(0);
@@ -105,7 +105,7 @@ public class ExportAdmitResultAction extends BaseAction{
 				hm.put(rs.getString("zyid"), rs.getString("zymc")+" ");
 			}
 			rs = dbo.query("select a.bmxxid,zhkzhid,ksxm,ksxb,shfzh,wyyz,jg,mz,zzmm,kskl,txdz,shxr,yzbm,ksshji,ksah,sqly,zxmc,b.zxtxdz,b.zxybm,b.zxlxdh,fmxm,fmgzdw,fmyddh," +
-			"mmxm,mmgzdw,mmyddh,bmsj,zongfen from bmxx a left join cjjd b on a.bmxxid=b.bmxxid where zhkzhid is not null and zhkzhid != 0 order by a.bmxxid");
+			"mmxm,mmgzdw,mmyddh,bmsj from bmxx a left join cjjd b on a.bmxxid=b.bmxxid where zhkzhid is not null and zhkzhid != 0 order by a.bmxxid");
 			rsmd_bmxx = rs.getMetaData();
 			colCount_bmxx = rsmd_bmxx.getColumnCount();
 			int j = 1;
@@ -140,14 +140,10 @@ public class ExportAdmitResultAction extends BaseAction{
 					else {
 						columnValue = rs.getString(i);
 					}
-					if(!"zongfen".equals(rsmd_bmxx.getColumnName(i))) {
-						columnValue = ((null == columnValue) || (columnValue.length() == 0)) ? " " : columnValue;
-						label = new Label(k, j, columnValue, border); 
-						sheet.addCell(label);
-						k++;
-					} else {
-						zongfen = rs.getString(i);
-					}
+					columnValue = ((null == columnValue) || (columnValue.length() == 0)) ? " " : columnValue;
+					label = new Label(k, j, columnValue, border); 
+					sheet.addCell(label);
+					k++;
                 }
 				
 				bmxxid = rs.getString("bmxxid");
@@ -204,10 +200,7 @@ public class ExportAdmitResultAction extends BaseAction{
 					label = new Label(k, j, columnValue, border); 
 					sheet.addCell(label);
 					k++;
-                }
-				label = new Label(k, j, "" + zongfen, border); 
-				sheet.addCell(label);
-				k++;				
+                }				
 				
 				rs_lq = dbo.query("select sflq,lqzy from bmxx where bmxxid="+bmxxid);
                 while (rs_lq.next()){

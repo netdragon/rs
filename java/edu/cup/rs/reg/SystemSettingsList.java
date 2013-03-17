@@ -22,8 +22,11 @@ public class SystemSettingsList implements ICommonList{
 	public String publishAudit() {
 		return "update system_settings set value='1' where item='isPublic_Audit'";
 	}
-	public String publishScore() {
-		return "update system_settings set value='1' where item='isPublic_Score'";
+	public String publishScore(String publicFlag) {
+		if("2".equals(publicFlag))
+			return "update system_settings set value='1' where item='isPublic_ScoreExtra'";
+		else
+			return "update system_settings set value='1' where item='isPublic_Score'";
 	}
 	public String publishAdmit() {
 		return "update system_settings set value='1' where item='isPublic_Admit'";

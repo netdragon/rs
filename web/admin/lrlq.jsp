@@ -73,11 +73,23 @@ table a:hover{
 	color: #FFFFFF;
 	padding-top: 1px;
 }
+.fbstyW{
+	background-color:#3777BC;
+	color: #FFFFFF;
+	padding-top: 1px;
+	width:110px;
+    }
 .fbsty{
 	background-color:#3777BC;
 	color: #FFFFFF;
 	padding-top: 1px;
-	width:90px;
+	width:94px;
+    }
+.fbstys{
+	background-color:#3777BC;
+	color: #FFFFFF;
+	padding-top: 1px;
+	width:88px;
     }
 -->
 </style>
@@ -124,7 +136,16 @@ table a:hover{
 	document.forms[0].submit();
   }
 	function setPublic(){
-		if(window.confirm("发布后考生马上就可以查阅到考试成绩，并且将锁定成绩，是否确定现在将考生成绩发布？")){
+		if(window.confirm("发布后考生马上就可以查阅到笔试考试成绩，并且将锁定成绩修改，是否确定现在将考生笔试成绩发布？")){
+			document.getElementById("publicFlag").value = "1";
+			document.forms[0].method = "post";
+			document.forms[0].action = "/public_info";
+			document.forms[0].submit();
+		}
+	}
+	function setPublicExtra(){
+		if(window.confirm("发布后考生马上就可以查阅到面试考试成绩，是否确定现在将考生面试成绩发布？")){
+			document.getElementById("publicFlag").value = "2";
 			document.forms[0].method = "post";
 			document.forms[0].action = "/public_info";
 			document.forms[0].submit();
@@ -197,6 +218,7 @@ table a:hover{
 	int i_AllPage=0;
 	String s_operate="";
 	String s_isPublic = "";
+	String s_isPublicExtra = "";
 	
 	try {
 		SystemSettingsList ssl;
@@ -204,6 +226,9 @@ table a:hover{
 		ssl = new SystemSettingsList("isPublic_Score");
 		al_settings = dbo.getList(ssl);
 		if(al_settings.size() > 0) s_isPublic = ((SystemSettings)(al_settings.get(0))).getValue();
+		ssl = new SystemSettingsList("isPublic_ScoreExtra");
+		al_settings = dbo.getList(ssl);
+		if(al_settings.size() > 0) s_isPublicExtra = ((SystemSettings)(al_settings.get(0))).getValue();
 		
 		s_operate = BaseFunction.null2value(request.getParameter("operate"));
 		icl = new BmxxList();
@@ -289,7 +314,7 @@ table a:hover{
 <table width="98%" border="0" cellspacing="0" cellpadding="0"  align="center">
   <tr>
   <td>
-            <span class="tdfont">考生共有<%=i_total%>人，分<%=i_AllPage%>页，</span><a class="page" href="#" onclick="doSearch('first');">First</a>&nbsp;
+            <span class="tdfont">共<%=i_total%>人，分<%=i_AllPage%>页，</span><a class="page" href="#" onclick="doSearch('first');">First</a>&nbsp;
             <a class="page" href="#" onclick="doSearch('pre');">Pre</a>&nbsp;
            <span class="tdfont"> [<%=i_Start%>-<%=i_End%>]/<%=i_total%></span>
             <a class="page" href="#" onclick="doSearch('next');">Next</a>&nbsp;
@@ -317,18 +342,17 @@ table a:hover{
                 <option value="50" <%=s_50%>>50</option>
                 <option value="100" <%=s_100%>>100</option>
             </select>
-			
 <%
-	if(!("1".equals(s_isPublic))) {
+	if(!("1".equals(s_isPublic)) && !("1".equals(s_isPublicExtra))) {
 %>
-			&nbsp;&nbsp;<input name="fabucj" type="button" onclick="setPublic();"  value="发布考生成绩" class="fbsty"/>
+			&nbsp;&nbsp;<input name="fabucj" type="button" onclick="window.open('/export_exam');""  value="导出空白成绩表" class="fbstyW"/>
 			&nbsp;&nbsp;<input name="fabucj" type="button" onclick="reimport();"  value="导入考生成绩" class="fbsty"/>
 <%
 	}
 %>
   </td>
   
-  <td align="right"><span class="prtersty">输入考生姓名</span><input name="qname" type="text" id="qname" value="<%=ksxm_filter%>" class="iptprnt"/>&nbsp;<img src="../images/chaxun.gif" width="45" height="20" align="absbottom" onclick="search_xm();" /><!--<input type="button" onclick="search_xm();" value="查询" />--></td>
+  <td align="right"><span class="prtersty">输入姓名</span><input name="qname" type="text" id="qname" value="<%=ksxm_filter%>" class="iptprnt"/>&nbsp;<img src="../images/chaxun.gif" width="45" height="20" align="absbottom" onclick="search_xm();" /><!--<input type="button" onclick="search_xm();" value="查询" />--></td>
   </tr>
 </table><br />
 <table width="86%" border="1" cellspacing="0" cellpadding="0" align="center">
@@ -384,7 +408,7 @@ table a:hover{
 				if(j < al_score.size()) cj = ((Score)al_score.get(j)).getFenshu();
 				else cj = "";
 %>
-     <td  class="tdfont" align="center"><%=cj%></td>
+     <td  class="tdfont" align="center"><%=cj%>&nbsp;</td>
 <%
 			}
 %>
@@ -393,23 +417,25 @@ table a:hover{
 		}
 %>
 </table>
-<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#999999">
-<tr>
-  <td height="49" colspan="8" align="left" bgcolor="#FFFFFF" class="tdfont"><table width="85%" border="0" align="center" cellpadding="0" cellspacing="0">
-    <tr>
-      <td width="2%" height="45">&nbsp;</td>
-      <td width="90%" align="center">
+</td></tr>
+</table>
+<table width="86%" border="0" cellspacing="0" cellpadding="0" align="center">
+	 <tr>
+	 <td align="center">
 <%
 	if(!("1".equals(s_isPublic))) {
 %>
-	  <input type="button" value="重新导入" onclick="reimport();" style="width:74px; height:28px;"/>
+			&nbsp;&nbsp;<input name="fabucj" type="button" onclick="setPublic();"  value="发布笔试成绩" class="fbstys"/>
+
+<%
+	} 
+	if(!("1".equals(s_isPublicExtra))) {
+%>
+			&nbsp;&nbsp;<input name="fabucj" type="button" onclick="setPublicExtra();"  value="发布面试成绩" class="fbstys"/>
 <%
 	}
 %>
-	  &nbsp;</td>
-      <td width="8%">&nbsp;</td>
-    </tr>
-  </table></td>
+	 </td>
      </tr>
 </table>
 <input id="i_CurrPage" name="i_CurrPage" type="hidden" value="<%=i_CurrPage%>"/>
@@ -417,6 +443,7 @@ table a:hover{
 <input id="order" name="order" type="hidden" value=""/>
 <input id="op" name="op" type="hidden" value=""/>
 <input id="bmxxid" name="bmxxid" type="hidden" value="-1"/>
+<input id="publicFlag" name="publicFlag" type="hidden" value=""/>
 </form>
 </div>
 <%

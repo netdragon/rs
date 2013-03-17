@@ -54,6 +54,7 @@ public class SysInitializeAction extends BaseAction
 				dbo.execute("update system_settings set value='0' where item='isPublic_Admit'");
 				dbo.execute("update system_settings set value='0' where item='isPublic_Audit'");
 				dbo.execute("update system_settings set value='0' where item='isPublic_Score'");
+				dbo.execute("update system_settings set value='0' where item='isPublic_ScoreExtra'");
 				
 				ICommonList logslist;
 				Log log = new Log();
