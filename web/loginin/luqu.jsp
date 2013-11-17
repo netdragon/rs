@@ -55,9 +55,14 @@ p {
 		return;
 	}
 	String s_isPublic = "";
+	SystemSettingsList ssl;
+	ArrayList al_settings;
+	SystemSettings ss;
+	String admitResultYes="&nbsp;";
+	String admitResultNo="&nbsp;";
+
 	try {
-		SystemSettingsList ssl;
-		ArrayList al_settings;
+
 		ssl = new SystemSettingsList("isPublic_Admit");
 		al_settings = dbo.getList(ssl);
 		if(al_settings.size() > 0) s_isPublic = ((SystemSettings)(al_settings.get(0))).getValue();
@@ -85,6 +90,24 @@ p {
             response.sendRedirect("/error.jsp?error=" + new UTF8String("未通过初审，没有录取信息！").toUTF8String());
 			return;
 		} 
+		
+
+		ssl = new SystemSettingsList();
+		ssl.setItem("admit_result_yes");
+		al = dbo.getList(ssl);
+		if(1 == al.size()) {
+			ss = (SystemSettings)al.get(0);
+			if(null != ss.getValue() && ss.getValue().length() > 0)
+				admitResultYes=ss.getValue();
+		}
+		ssl = new SystemSettingsList();
+		ssl.setItem("admit_result_no");
+		al = dbo.getList(ssl);
+		if(1 == al.size()) {
+			ss = (SystemSettings)al.get(0);
+			if(null != ss.getValue() && ss.getValue().length() > 0)
+				admitResultNo=ss.getValue();
+		}
 	}catch(Exception e) {
 		logger.error(e.getMessage());
 		response.sendRedirect("/error.jsp?error=" + new UTF8String("没有该考生或数据发生错误！").toUTF8String());
@@ -100,19 +123,18 @@ p {
 	try{
 %>
 <%	
-		String shqk = "";
-		switch(bmxx.getSflq()) {
-		case 1:
-			shqk = "已录取";
-			break;
-		default:
-			shqk = "未录取";
-		}
-%>
-<%
+	String shqk = "";
+	switch(bmxx.getSflq()) {
+	case 1:
+		shqk = "已录取";
+		break;
+	default:
+		shqk = "未录取";
+	}
+
 	Calendar c = Calendar.getInstance();
 	int year = c.get(Calendar.YEAR);
-		int month = c.get(Calendar.MONTH)+1;
+	int month = c.get(Calendar.MONTH)+1;
 	year = (11 > month) ? year : (year + 1);
 %>
 
@@ -127,7 +149,7 @@ p {
   </tr>
  <%if (shqk=="已录取"){ %>
   <tr>
-    <td bgcolor="#FFFFFF"   colspan="2" valign="middle"><p style="color: #FF0000;font-weight: bold;font-size:20px">祝贺你！你已经通过中国石油大学（北京）自主选拔录取，可享受相关优惠政策。学校会尽快将预录取通知书（含专业）寄给你，祝你高考顺利！</p></td>
+    <td bgcolor="#FFFFFF"   colspan="2" valign="middle"><p style="color: #FF0000;font-weight: bold;font-size:20px"><%=admitResultYes%></p></td>
   </tr>
   <tr>
     <td height="40"  colspan="2" bgcolor="#FFFFFF" class="STYLE3">&nbsp;录取专业:&nbsp;&nbsp;&nbsp;&nbsp;<%=bmxx.getLqzy()%>&nbsp;</td>
@@ -135,7 +157,7 @@ p {
 <% } %>
 <%if (shqk=="未录取"){ %>
   <tr>
-    <td bgcolor="#FFFFFF"   colspan="2"  valign="middle"><p style="color: #FF0000;font-weight: bold;font-size:20px">抱歉，你未通过中国石油大学（北京）自主选拔录取，但我们仍然认为你很优秀，希望你再接再厉，继续关注中国石油大学（北京）。顺祝高考顺利！</p></td>
+    <td bgcolor="#FFFFFF"   colspan="2"  valign="middle"><p style="color: #FF0000;font-weight: bold;font-size:20px"><%=admitResultNo%></p></td>
   </tr>
 <% } %>
 </table>

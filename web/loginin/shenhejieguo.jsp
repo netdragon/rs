@@ -60,6 +60,9 @@ p {
 		return;
 	}
 	String s_isPublic = "";
+	String auditResultYes="&nbsp;";
+	String auditResultNo="&nbsp;";
+		
 	try {
 		SystemSettingsList ssl;
 		ArrayList al_settings;
@@ -86,7 +89,25 @@ p {
 			return;
 		}
 		bmxx = (Bmxx) al.get(0);
-		
+
+		SystemSettings ss;
+
+		ssl = new SystemSettingsList();
+		ssl.setItem("audit_result_yes");
+		al = dbo.getList(ssl);
+		if(1 == al.size()) {
+			ss = (SystemSettings)al.get(0);
+			if(null != ss.getValue() && ss.getValue().length() > 0)
+				auditResultYes=ss.getValue();
+		}
+		ssl = new SystemSettingsList();
+		ssl.setItem("audit_result_no");
+		al = dbo.getList(ssl);
+		if(1 == al.size()) {
+			ss = (SystemSettings)al.get(0);
+			if(null != ss.getValue() && ss.getValue().length() > 0)
+				auditResultNo=ss.getValue();
+		}	
 	}catch(Exception e) {
 		logger.error(e.getMessage());
 		response.sendRedirect("/error.jsp?error=" + new UTF8String("没有该考生或数据发生错误！").toUTF8String());
@@ -125,7 +146,6 @@ p {
 			break;
 		}
 
-		
 %>
 <table width="486" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
  <caption align="top">
@@ -139,33 +159,38 @@ p {
   <td height="1" colspan="2" bgcolor="#FFFFFF"></td>
 </tr>
  <%if (shqk=="通过"){ %><tr>
-  <td colspan="2" bgcolor="#FFFFFF" valign="middle"><p style="color: #FF0000;font-weight: bold;font-size:20px">祝贺你！你通过了中国石油大学（北京）自主选拔录取的初审！请按要求汇报名费，交过报名费的可在本报名系统打印准考证。详情请查看<a href="http://jwc.cup.edu.cn/public/zsb/tongzhi/2011/zzzskaoshitongzhi.mht">考试通知</a>。</p></td>  
+  <td colspan="2" bgcolor="#FFFFFF" valign="middle"><p style="color: #FF0000;font-weight: bold;font-size:20px"><%=auditResultYes%></p></td>  
   </tr>
 
-<% if (bmxx.getSfjbmf()==1) {%><tr>
+<% if (bmxx.getSfjbmf()==1) {
+%>
+<tr>
   <td height="1" colspan="2" bgcolor="#FFFFFF"></td>
 </tr>
 <tr>
-  <td colspan="2" height="50" bgcolor="#FFFFFF" class="STYLE1a"><span style="font-weight: bold;font-size:18px">您的报名费已经收到！&nbsp;&nbsp;请按规定时间打印准考证。</span>&nbsp;</td>
- </tr><% } %>
-
- <% if (bmxx.getSfjbmf()==0) {%><tr>
+  <td colspan="2" height="1" bgcolor="#FFFFFF" class="STYLE1a"></td>
+ </tr>
+<%
+ } 
+ if (bmxx.getSfjbmf()==0) {%><tr>
   <td height="1" colspan="2" bgcolor="#FFFFFF"></td>
 </tr>
 <tr>
-  <td colspan="2" height="50" bgcolor="#FFFFFF" class="STYLE1a"><span style="font-weight: bold;font-size:18px">您的交费还未确认！&nbsp;&nbsp;请稍候查询。</span>&nbsp;</td>
+  <td colspan="2" height="1" bgcolor="#FFFFFF" class="STYLE1a"></td>
  </tr><% } %>
  <% } %>
 <%if (shqk=="未通过"){ %><tr>
-  <td colspan="2" bgcolor="#FFFFFF" valign="middle"> <p style="color: #FF0000;font-weight: bold;font-size:20px">抱歉，你没有通过自主选拔录取的初审，希望你再接再厉，并继续关注中国石油大学（北京）。</p></td>  
+  <td colspan="2" bgcolor="#FFFFFF" valign="middle"> <p style="color: #FF0000;font-weight: bold;font-size:20px"><%=auditResultNo%></p></td>  
   </tr>
 
-<% if (shyj.length()>0) {%><tr>
+<% if (shyj.length()>0) {%>
+<tr>
   <td colspan="2" bgcolor="#FFFFFF" class="STYLE1a">意见：<span style="font-weight: bold;font-size:18px"><%=bmxx.getShhyj()%></span>&nbsp;</td>
-  </tr><% } %>
-<% } %>
+  </tr>
+<%
+   } 
+} %>
 </table>
-
 </body>
 <%
 	}catch(Exception e) {

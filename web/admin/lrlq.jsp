@@ -83,7 +83,7 @@ table a:hover{
 	background-color:#3777BC;
 	color: #FFFFFF;
 	padding-top: 1px;
-	width:94px;
+	width:100px;
     }
 .fbstys{
 	background-color:#3777BC;
@@ -311,9 +311,9 @@ table a:hover{
   </tr>
 </table><br />
 
-<table width="98%" border="0" cellspacing="0" cellpadding="0"  align="center">
+<table width="90%" border="0" cellspacing="0" cellpadding="0"  align="center">
   <tr>
-  <td>
+  <td>&nbsp;
             <span class="tdfont">共<%=i_total%>人，分<%=i_AllPage%>页，</span><a class="page" href="#" onclick="doSearch('first');">First</a>&nbsp;
             <a class="page" href="#" onclick="doSearch('pre');">Pre</a>&nbsp;
            <span class="tdfont"> [<%=i_Start%>-<%=i_End%>]/<%=i_total%></span>
@@ -342,6 +342,16 @@ table a:hover{
                 <option value="50" <%=s_50%>>50</option>
                 <option value="100" <%=s_100%>>100</option>
             </select>
+
+  </td>
+  
+  <td align="right"><span class="prtersty">输入姓名</span><input name="qname" type="text" id="qname" value="<%=ksxm_filter%>" class="iptprnt"/>&nbsp;<img src="../images/chaxun.gif" width="45" height="20" align="absbottom" onclick="search_xm();" /><!--<input type="button" onclick="search_xm();" value="查询" />--></td>
+  </tr>
+</table>
+<table width="90%" border="0" cellspacing="0" cellpadding="0" align="center">
+	 <tr>
+	 <td align="right">&nbsp;
+
 <%
 	if(!("1".equals(s_isPublic)) && !("1".equals(s_isPublicExtra))) {
 %>
@@ -350,11 +360,23 @@ table a:hover{
 <%
 	}
 %>
-  </td>
-  
-  <td align="right"><span class="prtersty">输入姓名</span><input name="qname" type="text" id="qname" value="<%=ksxm_filter%>" class="iptprnt"/>&nbsp;<img src="../images/chaxun.gif" width="45" height="20" align="absbottom" onclick="search_xm();" /><!--<input type="button" onclick="search_xm();" value="查询" />--></td>
-  </tr>
-</table><br />
+<%
+	if(!("1".equals(s_isPublic))) {
+%>
+			&nbsp;&nbsp;<input name="fabucj" type="button" onclick="setPublic();"  value="发布笔试成绩" class="fbsty"/>
+
+<%
+	} 
+	if(!("1".equals(s_isPublicExtra))) {
+%>
+			&nbsp;&nbsp;<input name="fabucj" type="button" onclick="setPublicExtra();"  value="发布面试成绩" class="fbsty"/>
+<%
+	}
+%>
+	 </td>
+     </tr>
+</table>
+<br />
 <table width="86%" border="1" cellspacing="0" cellpadding="0" align="center">
   <tr>
     <td height="20" width="15%"  align="center"><span class="tbl_bt">准考证号</span></td>
@@ -419,25 +441,7 @@ table a:hover{
 </table>
 </td></tr>
 </table>
-<table width="86%" border="0" cellspacing="0" cellpadding="0" align="center">
-	 <tr>
-	 <td align="center">
-<%
-	if(!("1".equals(s_isPublic))) {
-%>
-			&nbsp;&nbsp;<input name="fabucj" type="button" onclick="setPublic();"  value="发布笔试成绩" class="fbstys"/>
 
-<%
-	} 
-	if(!("1".equals(s_isPublicExtra))) {
-%>
-			&nbsp;&nbsp;<input name="fabucj" type="button" onclick="setPublicExtra();"  value="发布面试成绩" class="fbstys"/>
-<%
-	}
-%>
-	 </td>
-     </tr>
-</table>
 <input id="i_CurrPage" name="i_CurrPage" type="hidden" value="<%=i_CurrPage%>"/>
 <input id="oper" name="operate" type="hidden" value="<%=s_operate%>"/>
 <input id="order" name="order" type="hidden" value=""/>

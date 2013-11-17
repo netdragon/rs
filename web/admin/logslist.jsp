@@ -244,7 +244,7 @@ font-size:12px;
             </select>
   </td>
   
-  <td align="right"><span class="prtersty">日志内容</span><input name="qname" type="text" id="qname" value="<%=ksxm_filter%>" class="iptprnt"/>&nbsp;<img src="../images/chaxun.gif" width="45" height="20" align="absbottom"  onClick="search_xm();" /><!--<input type="button" onclick="search_xm();" value="查询" />--></td>
+  <td align="right"><input name="export" type="button" onclick="window.open('/export_log');""  value="导出系统日志" class="fbstyW"/><span class="prtersty">日志内容</span><input name="qname" type="text" id="qname" value="<%=ksxm_filter%>" class="iptprnt"/>&nbsp;<img src="../images/chaxun.gif" width="45" height="20" align="absbottom"  onClick="search_xm();" /><!--<input type="button" onclick="search_xm();" value="查询" />--></td>
   </tr>
 </table><br />
 <table width="96%" border="1" cellspacing="0" cellpadding="0" align="center">

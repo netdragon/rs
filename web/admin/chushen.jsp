@@ -76,7 +76,7 @@
 	background-color:#3777BC;
 	color: #FFFFFF;
 	padding-top: 1px;
-	width:88px;
+	width:96px;
     }
 .tdinpt {font-size: 10px;}
 #ejiaA1 {

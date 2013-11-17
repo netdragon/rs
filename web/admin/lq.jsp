@@ -75,7 +75,7 @@ table a:hover{
 	background-color:#3777BC;
 	color: #FFFFFF;
 	padding-top: 1px;
-	width:90px;
+	width:102px;
     }
 -->
 </style>
@@ -296,12 +296,12 @@ table a:hover{
     <td background="../images/zyhd_bottom.gif" height="1"></td>
   </tr>
 </table><br />
-<table width="100%" border="0" cellspacing="0" cellpadding="0"  align="center">
+<table width="90%" border="0" cellspacing="0" cellpadding="0"  align="center">
    <tr>
     <td colspan="2" height="2"></td>
   </tr>
   <tr>
-  <td width="70%">
+  <td >
             <span class="tdfont">共有<%=i_total%>人，分<%=i_AllPage%>页。已录取<%=i_lq%>人。</span><a class="page" href="#" onclick="doSearch('first');">First</a>&nbsp;
             <a class="page" href="#" onclick="doSearch('pre');">Pre</a>&nbsp;
            <span class="tdfont"> [<%=i_Start%>-<%=i_End%>]/<%=i_total%></span>
@@ -329,34 +329,32 @@ table a:hover{
                 <option value="20" <%=s_20%>>20</option>
                 <option value="50" <%=s_50%>>50</option>
                 <option value="100" <%=s_100%>>100</option>
-            </select>&nbsp;<input name="Submit2" type="button"  onclick="window.open('/export_admit');"  value="导出录取结果" class="fbsty"/>
+            </select>&nbsp;&nbsp;&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.open('/export_admit');"  value="导出录取结果" class="fbsty"/>
 <%
 	if(!("1".equals(s_isPublic))) {
 %>
-			<input name="fabucj" type="button" onclick="setPublic();"  value="发布录取结果" class="fbsty"/>
+			&nbsp;&nbsp;<input name="fabucj" type="button" onclick="setPublic();"  value="发布录取结果" class="fbsty"/>
 <%
 	}
 %>
   </td>
   
-  <td width="30%" align="right"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <td  align="right"></td>
+  </tr>
+</table>
+<table width="50%" border="0" cellspacing="0" cellpadding="0" align="right">
   <tr>
-    <td height="23" align="right"> <span class="prtersty"></span></td>
+    <td align="right"> </td>
     <td><input name="jzfs" type="hidden" id="jzfs" value="<%=((0 == score)?"":score)%>" class="iptprnt"/></td>
-    <td rowspan="2" align="center" valign="middle">
-    <img src="../images/chaxun.gif" width="45" height="20" align="absbottom" onclick="search_xm();" />
-    </td>
   </tr>
   <tr>
-    <td height="23" align="right"><span class="prtersty">输入考生姓名</span></td>
-    <td height="23"><input name="qname" type="text" id="qname" value="<%=ksxm_filter%>" class="iptprnt"/></td>
-  </tr>
-</table></td>
+    <td height="23" ></td>
+    <td height="23" align="right"><span class="prtersty">输入姓名</span>&nbsp;&nbsp;<input name="qname" type="text" id="qname" value="<%=ksxm_filter%>" class="iptprnt"/>&nbsp;&nbsp;&nbsp;&nbsp;<img src="../images/chaxun.gif" width="45" height="20" onclick="search_xm();" /></td>
   </tr>
 </table>
 <table width="100" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td height="2"></td>
+    <td height="6"></td>
   </tr>
 </table>
 <table width="97%" border="1" cellspacing="0" cellpadding="0" align="center">
@@ -454,8 +452,8 @@ table a:hover{
 <%
 		if(!("1".equals(s_isPublic))) {
 %>
-	  <input type="button" name="Submit2" value="第一志愿录取" onclick="setPass(true);" style="width:88px; height:28px;"/>
-	  <input type="button" name="Submit2" value="不 录 取" onclick="setPass(false);" style="width:74px; height:28px;"/>
+	  <input type="button" name="Submit2" value="第一志愿录取" onclick="setPass(true);" style="width:102px; height:28px;"/>
+	  <input type="button" name="Submit2" value="不 录 取" onclick="setPass(false);" style="width:78px; height:28px;"/>
 <%
 		}
 %>

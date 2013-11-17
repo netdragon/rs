@@ -72,6 +72,12 @@ table a:hover{
 #form1 select {
 	font-size: 12px;
 }
+.fbstyW{
+	background-color:#3777BC;
+	color: #FFFFFF;
+	padding-top: 1px;
+	width:100px;
+    }
 .fbsty{
 	background-color:#3777BC;
 	color: #FFFFFF;
@@ -260,12 +266,12 @@ table a:hover{
 <%
 	if(!("1".equals(s_isPublic))) {
 %>
-	<input type="button" value="生成准考证号" onclick="create_adm();" class="fbsty"/>&nbsp;&nbsp;
+	<input type="button" value="生成准考证号" onclick="create_adm();" class="fbstyW"/>&nbsp;&nbsp;
 	<input type="button" value="发布准考证" onclick="setPublic();" class="fbsty"/>
 <%
 	}
 %>
-  <input type="button" value="导出准考证号"  onClick="window.open('/export_adm');"   class="fbsty"/>&nbsp;&nbsp;
+  <input type="button" value="导出准考证号"  onClick="window.open('/export_adm');"   class="fbstyW"/>&nbsp;&nbsp;
   </td>
   </tr>
 </table>

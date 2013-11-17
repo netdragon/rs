@@ -378,26 +378,26 @@ public class AddBmxxAction extends BaseAction
 
 
                 bmxx.setUserid(Integer.parseInt(userId));
-                bmxx.setKsxm(ksName);
+                bmxx.setKsxm(ksName.trim());
                 bmxx.setKsxb(Integer.parseInt(ksXb));
                 bmxx.setWyyz(ksWyyz);
-                bmxx.setJg(ksJg);
+                bmxx.setJg(ksJg.trim());
                 bmxx.setZzmm(zzmm);
                 bmxx.setMz(mz); 
-                bmxx.setZxmc(ksZxmc);
+                bmxx.setZxmc(ksZxmc.trim());
                 bmxx.setKskl(ksKl);
                 bmxx.setShfzh(ksShfzh);
-                bmxx.setTxdz(ksTxdzh);
+                bmxx.setTxdz(ksTxdzh.trim());
                 bmxx.setYzbm(ksYzbm);
                 bmxx.setShxr(ksShxr); 
                 bmxx.setKsshji(ksYddh);
 
 			    bmxx.setFmxm(ksFmname);
-                bmxx.setFmgzdw(ksFmdw);
+                bmxx.setFmgzdw(ksFmdw.trim());
                 bmxx.setFmyddh(ksFmShji);
                 bmxx.setFmzw(ksFmzw);				
 				bmxx.setMmxm(ksMmname);
-                bmxx.setMmgzdw(ksMmdw);
+                bmxx.setMmgzdw(ksMmdw.trim());
                 bmxx.setMmyddh(ksMmShji);
                 bmxx.setMmzw(ksMmzw);
                 bmxx.setKsah(ksAhtc);

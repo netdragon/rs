@@ -37,7 +37,7 @@
 	border-bottom-color: #E3E3E3;
 }
  input{
- width:90px;
+ width:100px;
  height:30px;}
 .STYLE1 {
 	color: #FF3300;

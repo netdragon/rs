@@ -256,7 +256,27 @@
 		<servlet-name>update_kemu</servlet-name>
 		<servlet-class>edu.cup.rs.reg.sys.UpdateKmAction</servlet-class>
 	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>update_tishiyu</display-name>
+		<servlet-name>update_tishiyu</servlet-name>
+		<servlet-class>edu.cup.rs.reg.sys.UpdateTishiyuAction</servlet-class>
+	</servlet>
+	<servlet>
+		<description></description>
+		<display-name>export_log</display-name>
+		<servlet-name>export_log</servlet-name>
+		<servlet-class>edu.cup.rs.reg.sys.ExportSystemLogAction</servlet-class>
+	</servlet>
 
+	<servlet-mapping>
+		<servlet-name>export_log</servlet-name>
+		<url-pattern>/export_log</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>update_tishiyu</servlet-name>
+		<url-pattern>/update_tishiyu</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>update_kemu</servlet-name>
 		<url-pattern>/update_kemu</url-pattern>
@@ -682,7 +702,15 @@
 		<servlet-name>org.apache.jsp.admin.importScore_jsp</servlet-name>
 		<servlet-class>org.apache.jsp.admin.importScore_jsp</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>org.apache.jsp.admin.tishiyushzh_jsp</servlet-name>
+		<servlet-class>org.apache.jsp.admin.tishiyushzh_jsp</servlet-class>
+	</servlet>
 
+	<servlet-mapping>
+		<servlet-name>org.apache.jsp.admin.tishiyushzh_jsp</servlet-name>
+		<url-pattern>/admin/tishiyushzh.jsp</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>org.apache.jsp.admin.importScore_jsp</servlet-name>
 		<url-pattern>/admin/importScore.jsp</url-pattern>

@@ -55,7 +55,10 @@ table {
 	SystemSettingsList ssl;
 	ArrayList al_settings;
 	ArrayList al_score;
-	
+	SystemSettings ss;
+	String admitResultYes="&nbsp;";
+	String admitResultNo="&nbsp;";
+
 	try {
 		ssl = new SystemSettingsList("isPublic_Admit");
 		al_settings = dbo.getList(ssl);
@@ -84,6 +87,22 @@ table {
 		if(bmxx.getShhqk() != 1) {
             response.sendRedirect("/error.jsp?error=" + new UTF8String("未通过初审，没有成绩信息！").toUTF8String());
 			return;
+		}
+		ssl = new SystemSettingsList();
+		ssl.setItem("admit_result_yes");
+		al = dbo.getList(ssl);
+		if(1 == al.size()) {
+			ss = (SystemSettings)al.get(0);
+			if(null != ss.getValue() && ss.getValue().length() > 0)
+				admitResultYes=ss.getValue();
+		}
+		ssl = new SystemSettingsList();
+		ssl.setItem("admit_result_no");
+		al = dbo.getList(ssl);
+		if(1 == al.size()) {
+			ss = (SystemSettings)al.get(0);
+			if(null != ss.getValue() && ss.getValue().length() > 0)
+				admitResultNo=ss.getValue();
 		}
 %>
 <body>
@@ -117,7 +136,7 @@ table {
   </tr>
  <%if (shqk=="已录取"){ %>
   <tr>
-    <td bgcolor="#FFFFFF"   colspan="2" valign="middle"><p style="color: #FF0000;font-weight: bold;font-size:20px">祝贺你！你已经通过中国石油大学（北京）自主选拔录取，可享受相关优惠政策。学校会尽快将预录取通知书（含专业）寄给你，祝你高考顺利！</p></td>
+    <td bgcolor="#FFFFFF"   colspan="2" valign="middle"><p style="color: #FF0000;font-weight: bold;font-size:20px"><%=admitResultYes%></p></td>
   </tr>
   <tr>
     <td height="40"  colspan="2" >&nbsp;录取专业:&nbsp;&nbsp;&nbsp;&nbsp;<%=bmxx.getLqzy()%>&nbsp;</td>
@@ -125,11 +144,10 @@ table {
 <% } %>
 <%if (shqk=="未录取"){ %>
   <tr>
-    <td bgcolor="#FFFFFF"   colspan="2"  valign="middle"><p style="color: #FF0000;font-weight: bold;font-size:20px">抱歉，你未通过中国石油大学（北京）自主选拔录取，但我们仍然认为你很优秀，希望你再接再厉，继续关注中国石油大学（北京）。顺祝高考顺利！</p></td>
+    <td bgcolor="#FFFFFF"   colspan="2"  valign="middle"><p style="color: #FF0000;font-weight: bold;font-size:20px"><%=admitResultNo%></p></td>
   </tr>
 <% } %>
 </table>
-<!-- input name="fabucj" type="button" onclick="window.location.assign('/loginin/chengji.jsp');"  value="查看成绩" class="fbsty"/-->
 </body>
 <%
 	}catch(Exception e) {

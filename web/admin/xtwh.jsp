@@ -37,7 +37,7 @@
 	border-bottom-color: #E3E3E3;
 }
  input{
- width:98px;
+ width:112px;
  height:30px;}
 .STYLE1 {
 	color: #FF3300;
@@ -151,8 +151,8 @@
     <td align="right">&nbsp;</td>
     <td align="right">&nbsp;</td>
     <td align="right">&nbsp;</td>
-    <td height="44" align="right">&nbsp;</td>
-    <td height="44">&nbsp;</td>
+    <td height="44" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
+    <td height="44">&nbsp;&nbsp;<input name="Submit22" type="button"  onclick="window.location.assign('tishiyushzh.jsp');" class="zh2" value="提示语设置" /></td>
   </tr>
   <tr>
     <td height="7" colspan="11"></td>

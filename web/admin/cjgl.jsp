@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>自主选拔录取成绩管理</title>
+<title>成绩管理</title>
 <style type="text/css">
 <!--
 .con{
