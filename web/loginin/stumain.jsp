@@ -162,7 +162,11 @@ Calendar c = Calendar.getInstance();
 int year = c.get(Calendar.YEAR);
 int month = c.get(Calendar.MONTH) +1;
 int day = c.get(Calendar.DAY_OF_MONTH);
-long timestamp = c.getTimeInMillis();
+
+long time = c.getTimeInMillis();
+
+String uuid = UUID.randomUUID().toString();
+String timestamp = time + uuid;
 %>
 		<span id="floatleft"><span class="STYLE6">今天是：<%=year%>年<%=month%>月<%=day%>日&nbsp;&nbsp;&nbsp;</span></td>
    </tr>

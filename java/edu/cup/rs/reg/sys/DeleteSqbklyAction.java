@@ -87,7 +87,7 @@ public class DeleteSqbklyAction extends BaseAction
 						c2.setTime(sdf.parse(ss.getValue()));
 				}
 				if(c_curr.after(cl) && c_curr.before(c2)) {
-					response.sendRedirect("/error.jsp?error=" + new UTF8String("在本期报名时间内不能修改申请理由设置，否则会引起数据不一致!").toUTF8String());
+					response.sendRedirect("/error.jsp?error=" + new UTF8String("在本期报名时间内不能修改面试分组设置，否则会引起数据不一致!").toUTF8String());
 					return;
 				}
 				zl = new SqbklyList();

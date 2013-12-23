@@ -4,6 +4,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <%@ page import="edu.cup.rs.reg.*"%>
+<%@ page import="edu.cup.rs.reg.sys.*" %>
 <%@include file="../common/access_control.jsp"%>
 <html>
 <head>
@@ -116,7 +117,13 @@ function printIt(n){
 	Bmxx bmxx;
 	Hjqk gzhj1,gzhj2,gzhj3;
 	Hdqk shgz1,shgz2,shgz3;
-	Bkzy bkzy1,bkzy2,bkzy3,bkzy4,bkzy5,bkzy6,bkzy7,bkzy8;
+	
+	int bkzy1 = 0;
+	int bkzy2 = 0;
+	int bkzy3 = 0;
+	int bkzy4 = 0;
+	int bkzy5 = 0;
+	String sqly = "";
 	Calendar cl = Calendar.getInstance();
 	DBOperator dbo = new DBOperator();
 	try{
@@ -172,21 +179,22 @@ function printIt(n){
 		gzhj1 = (Hjqk)al.get(0);
 		gzhj2 = (Hjqk)al.get(1);
 		gzhj3 = (Hjqk)al.get(2);
+      	SqbklyList bklyList = new SqbklyList(bmxx.getSqly());
+		ArrayList al_bkly = dbo.getList(bklyList);
+
+		if(al_bkly != null && al_bkly.size() == 1)
+		    sqly = ((Sqbkly)al_bkly.get(0)).getMc();
+
 		icl = new BkzyList(bmxx.getBmxxid());
 		al = dbo.getList(icl);
-		if(al.size() < 2){
-            logger.error("数据错误！");
-            response.sendRedirect("/error.jsp?error=" + new UTF8String("数据错误！").toUTF8String());
-			return;
-		}
-		bkzy1 = (Bkzy)al.get(0);
-		bkzy2 = (Bkzy)al.get(1);
-		bkzy3 = (Bkzy)al.get(2);
-		bkzy4 = (Bkzy)al.get(3);
-		bkzy5 = (Bkzy)al.get(4);
-		bkzy6 = (Bkzy)al.get(5);
-		bkzy7 = (Bkzy)al.get(6);
-		bkzy8 = (Bkzy)al.get(7);
+		int len_zy = al.size();
+
+		if(len_zy > 0) bkzy1 = ((Bkzy)al.get(0)).getZyid();
+		if(len_zy > 1) bkzy2 = ((Bkzy)al.get(1)).getZyid();
+		if(len_zy > 2) bkzy3 = ((Bkzy)al.get(2)).getZyid();
+		if(len_zy > 3) bkzy4 = ((Bkzy)al.get(3)).getZyid();
+		if(len_zy > 4) bkzy5 = ((Bkzy)al.get(4)).getZyid();
+
 		icl = new HdqkList(bmxx.getBmxxid());
 		al = dbo.getList(icl);
 		if(al.size() < 3){
@@ -317,24 +325,31 @@ function printIt(n){
 
     </table></td>
   </tr>
+   <tr>
+          <td height="9" align="center"  class="td2 td5 cuti">面试分组</td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+ 
+      <tr>
+        <td width="20%" align="left"  class="td2 cuti">申请理由(面试分组)</td>
+        <td width="80%"  class="td2"><%=sqly %>&nbsp;</td>
+        </tr>
+    </table></td>
+  </tr>
   <tr>
     <td align="center"  class="td2 td5 cuti">专业志愿</td>
   </tr>
   <tr>
     <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td  width="34%"  class="td2"><strong>第一志愿</strong>：<%=hm.get(""+bkzy1.getZyid()) %>&nbsp;</td>
-        <td  width="33%"  class="td2"><strong>第二志愿</strong>：<%=hm.get(""+bkzy2.getZyid()) %>&nbsp;</td>
-        <td  width="33%" class="td2"><strong>第三志愿</strong>：<%=hm.get(""+bkzy3.getZyid()) %>&nbsp;</td>
+        <td  width="34%" class="td2"><strong>第一志愿</strong>：<%=((null == hm.get(""+bkzy1))?"":hm.get(""+bkzy1))%>&nbsp;</td>
+        <td  width="33%" class="td2"><strong>第二志愿</strong>：<%=((null == hm.get(""+bkzy2))?"":hm.get(""+bkzy2))%>&nbsp;</td>
+        <td  width="33%" class="td2"><strong>第三志愿</strong>：<%=((null == hm.get(""+bkzy3))?"":hm.get(""+bkzy3))%>&nbsp;</td>
       </tr>
       <tr>
-        <td class="td2"><strong>第四志愿</strong>：<%=hm.get(""+bkzy4.getZyid()) %>&nbsp;</td>
-        <td class="td2"><strong>第五志愿</strong>：<%=hm.get(""+bkzy5.getZyid()) %>&nbsp;</td>
-        <td class="td2"><strong>第六志愿</strong>：<%=hm.get(""+bkzy6.getZyid()) %>&nbsp;</td>
-      </tr>
-      <tr>
-        <td class="td2"><strong>第七志愿</strong>：<%=hm.get(""+bkzy7.getZyid()) %>&nbsp;</td>
-        <td class="td2"><strong>第八志愿</strong>：<%=hm.get(""+bkzy8.getZyid()) %>&nbsp;</td>
+        <td class="td2"><strong>第四志愿</strong>：<%=((null == hm.get(""+bkzy4))?"":hm.get(""+bkzy4))%>&nbsp;</td>
+        <td class="td2"><strong>第五志愿</strong>：<%=((null == hm.get(""+bkzy5))?"":hm.get(""+bkzy5))%>&nbsp;</td>
         <td class="td2">&nbsp;</td>
       </tr>
 
@@ -456,20 +471,12 @@ function printIt(n){
         </tr>
       </table></td>
   </tr>
+ 
   <tr>
     <td>
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="10%" align="center" class="td2  cuti">申请理由(面试分组)</td>
-          <td width="90%" class="td2"><%=bmxx.getSqly() %>&nbsp;</td>
-        </tr>
-      </table></td>
-  </tr>
-  <tr>
-    <td>
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="64%" class="td2 cuti tdpdi tdhj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本人本着诚实、严谨的态度郑重递交以上材料，如有与事实不符，一切后果自己承担。</td>
+          <td width="64%" height="38" class="td2 cuti tdpdi tdhj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本人本着诚实、严谨的态度郑重递交以上材料，如有与事实不符，一切后果自己承担。</td>
           <td width="36%" class="td2">&nbsp;&nbsp;申请人签字：</td>
         </tr>
       </table></td>

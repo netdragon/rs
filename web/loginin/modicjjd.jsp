@@ -64,13 +64,15 @@ body{
 	margin-right: 0px;
 	margin-bottom:0px;
 }
-.STYLE7 {font-size: 12px;color:#000000;}
 
 .p1{font-size:12px;color:black}
 .iptbox{
 	font-size:12px;
 	color:black;
 	height: 24px;
+}
+#textaream {
+	border: 1px solid #000000;
 }
 .STYLE8 {
 	font-family: "宋体";
@@ -206,25 +208,25 @@ body{
     <span class="STYLE3">修改自主选拔录取高中成绩鉴定表</span>
     </caption>
   <tr>
-    <td align="center" width="106" class="td1 STYLE6">考生姓名</td>
+    <td width="106" align="center" class="td1 STYLE6 STYLE9">考生姓名</td>
     <td colspan="2" class="td1 STYLE6"><%=bmxx.getKsxm() %></td>
-    <td width="234" align="center" class="td1 STYLE6">中学名称</td>
+    <td width="234" align="center" class="td1 STYLE6 STYLE9">中学名称</td>
     <td colspan="2" class="tda2 STYLE6"><%=bmxx.getZxmc() %></td>
   </tr>
   <tr>
-    <td align="center" class="td1 STYLE6">中学通信地址</td>
+    <td align="center" class="td1 STYLE6 STYLE9">中学通信地址</td>
     <td colspan="3" class="td1"><input name="pzxdz" type="text" size="70" value="<%=gzcjjd.getZxtxdz() %>" class="STYLE6"/></td>
-    <td width="119" align="center" class="td1 STYLE6">中学级别</td>
+    <td width="119" align="center" class="td1 STYLE6 STYLE9">中学级别</td>
     <td width="216" class="tda2 STYLE6"><input type="radio" name="pzxjb" <%=("省级示范性高中".equals(gzcjjd.getZxjb())) ? "checked":""%> value="省级示范性高中">省级示范性高中<br />
                     <input type="radio" name="pzxjb" <%=("市级示范性高中".equals(gzcjjd.getZxjb())) ? "checked":""%> value="市级示范性高中">市级示范性高中<br />
 	  <input type="radio" name="pzxjb" <%=("其它".equals(gzcjjd.getZxjb())) ? "checked":""%> value="其它">其它</td>
   </tr>
   <tr>
-    <td align="center" class="td1 STYLE6">邮政编码</td>
+    <td align="center" class="td1 STYLE6 STYLE9">邮政编码</td>
     <td width="209" class="td1 STYLE6"><input name="pzxyb" type="text" size="12" value="<%=gzcjjd.getZxybm() %>"/></td>
-    <td width="104" align="center" class="td1 STYLE6">联系电话</td>
+    <td width="104" align="center" class="td1 STYLE6 STYLE9">联系电话</td>
     <td class="td1 STYLE6"><input name="pzxdh" type="text" size="30" value="<%=gzcjjd.getZxlxdh() %>"/></td>
-    <td align="center" class="td1 STYLE6">年级负责人</td>
+    <td align="center" class="td1 STYLE6 STYLE9">年级负责人</td>
     <td class="tda2 STYLE6"><input name="pzxfzr" type="text" size="14" value="<%=gzcjjd.getNjfzr() %>"/></td>
   </tr>
   
@@ -378,13 +380,13 @@ body{
     </tr>
   
   <tr>
-    <td align="center" class="td1 STYLE6">班主任<br />综合评价</td>
+    <td align="center" class="td1 STYLE6 STYLE9">班主任<br />综合评价</td>
     <td class="tda2" colspan="5" align="left" valign="top"><p class="STYLE9">(此栏可打印后手写)</p>
-	<textarea name="bzrpj" style="width=100%;height=80"><%=gzcjjd.getBzrpj()%></textarea>
+	<textarea name="bzrpj" cols="70" rows="6"  id="textaream" style="width=90%;height=80"><%=gzcjjd.getBzrpj()%></textarea>
 	<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;班主任（签章）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日 </td>
     </tr>
   <tr>
-    <td align="center" class="tda1 STYLE6">中学审查<br />意见</td>
+    <td align="center" class="tda1 STYLE6 STYLE9">中学审查<br />意见</td>
     <td colspan="5" class="STYLE6"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td><p>&nbsp;</p>

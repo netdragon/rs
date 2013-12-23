@@ -177,9 +177,9 @@ public class BmxxList implements ICommonList{
 	}
 	public String getAdmitResult(int score) {
 		if(xmFilter.length() > 0)
-			return "select bmxxid,ksxm,ksxb,shfzh,zhkzhid,zongfen,zxmc,kskl,sfjbmf,sflq,lqzy from bmxx where shhqk=1 and zhkzhid is not null and zongfen>=" + score +" and ksxm like '%" + this.xmFilter + "%' order by " + this.orderColName + " limit "+this.count + " offset "+this.start;
+			return "select bmxxid,ksxm,ksxb,shfzh,zhkzhid,zongfen,zxmc,kskl,sfjbmf,sflq,lqzy,sqly from bmxx where shhqk=1 and zhkzhid is not null and zongfen>=" + score +" and ksxm like '%" + this.xmFilter + "%' order by " + this.orderColName + " limit "+this.count + " offset "+this.start;
 		else
-			return "select bmxxid,ksxm,ksxb,shfzh,zhkzhid,zongfen,zxmc,kskl,sfjbmf,sflq,lqzy from bmxx where shhqk=1 and zhkzhid is not null and zongfen>=" + score +" order by " + this.orderColName + " limit "+this.count + " offset "+this.start;
+			return "select bmxxid,ksxm,ksxb,shfzh,zhkzhid,zongfen,zxmc,kskl,sfjbmf,sflq,lqzy,sqly from bmxx where shhqk=1 and zhkzhid is not null and zongfen>=" + score +" order by " + this.orderColName + " limit "+this.count + " offset "+this.start;
 	}
 	public String getAuditCount(){
 		return "SELECT count(bmxxid) as count FROM bmxx where shhqk=1";

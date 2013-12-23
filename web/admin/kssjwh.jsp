@@ -123,7 +123,7 @@ int year = c.get(Calendar.YEAR);
         <td bgcolor="#FFFFFF">
 		<select name="ksnian_<%=kemu.getLxid()%>" >
 <%
-			for(int j = 2013; j < 2030; j++) {
+			for(int j = 2014; j < 2020; j++) {
 %>
             <option value="<%=j%>" <%=((j == ks_n) ? "selected":"")%>><%=j%></option>
 <%
@@ -250,7 +250,7 @@ int year = c.get(Calendar.YEAR);
         <td width="78%" bgcolor="#FFFFFF">
 		<select name="ksnian" >
 <%
-			for(int j = 2012; j < 2030; j++) {
+			for(int j = 2013; j < 2020; j++) {
 %>
             <option value="<%=j%>" <%=((j == bm_n) ? "selected":"")%>><%=j%></option>
 <%
@@ -297,7 +297,7 @@ int year = c.get(Calendar.YEAR);
         <td bgcolor="#FFFFFF">
 		<select name="jsnian" >
 <%
-			for(int j = 2012; j < 2030; j++) {
+			for(int j = 2014; j < 2020; j++) {
 %>
             <option value="<%=j%>" <%=((j == bm_n) ? "selected":"")%>><%=j%></option>
 <%

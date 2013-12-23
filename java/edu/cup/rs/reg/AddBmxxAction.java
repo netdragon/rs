@@ -95,9 +95,6 @@ public class AddBmxxAction extends BaseAction
             String pzhiyuan3 = "";
             String pzhiyuan4 = "";
             String pzhiyuan5 = "";
-            String pzhiyuan6 = "";
-            String pzhiyuan7 = "";
-            String pzhiyuan8 = "";
             String ksSftj= "";
             String ksAhtc= "";  //    考生爱好特长			
             String ksSqly= "";  //   申请理由
@@ -199,9 +196,7 @@ public class AddBmxxAction extends BaseAction
                 	if("pzhiyuan3".equals(item.getFieldName())) pzhiyuan3 = item.getString("UTF-8");
                 	if("pzhiyuan4".equals(item.getFieldName())) pzhiyuan4 = item.getString("UTF-8");
                 	if("pzhiyuan5".equals(item.getFieldName())) pzhiyuan5 = item.getString("UTF-8");
-                	if("pzhiyuan6".equals(item.getFieldName())) pzhiyuan6 = item.getString("UTF-8");
-                	if("pzhiyuan7".equals(item.getFieldName())) pzhiyuan7 = item.getString("UTF-8");
-                	if("pzhiyuan8".equals(item.getFieldName())) pzhiyuan8 = item.getString("UTF-8");
+
                 	if("psftj".equals(item.getFieldName())) ksSftj = item.getString("UTF-8");
 					
                 	if("pksah".equals(item.getFieldName())) ksAhtc = item.getString("UTF-8");
@@ -317,7 +312,12 @@ public class AddBmxxAction extends BaseAction
             Hjqk hjqk1,hjqk2,hjqk3;
 			Hdqk grhd1, grhd2, grhd3;
             Date zhs1,zhs2,zhs3, hds1, hds2, hds3;
-            Bkzy bkzy1, bkzy2, bkzy3, bkzy4, bkzy5, bkzy6, bkzy7, bkzy8;
+            Bkzy bkzy1 = null;
+			Bkzy bkzy2 = null;
+			Bkzy bkzy3 = null;
+			Bkzy bkzy4 = null;
+			Bkzy bkzy5 = null;
+			
             int seqKey=0;
             try {
                 dbo.init(false);
@@ -459,47 +459,41 @@ public class AddBmxxAction extends BaseAction
             	grhd3.setHdmc(ksShmc3);
             	grhd3.setBrjsgx(ksShjs3);
 	
-            	bkzy1 = new Bkzy();
-                bkzy1.setBmxxid(seqKey);
-                bkzy1.setZyid(Integer.parseInt(pzhiyuan1));
-                bkzy1.setTjf(1);
-				bkzy1.setXh(1);
-                bkzy2 = new Bkzy();
-                bkzy2.setBmxxid(seqKey);
-                bkzy2.setZyid(Integer.parseInt(pzhiyuan2));
-                bkzy2.setTjf(1);
-				bkzy2.setXh(2);
-
-            	bkzy3 = new Bkzy();   //报考专业志愿3
-                bkzy3.setBmxxid(seqKey);
-                bkzy3.setZyid(Integer.parseInt(pzhiyuan3));
-                bkzy3.setTjf(1);
-				bkzy3.setXh(3);
-            	bkzy4 = new Bkzy();
-                bkzy4.setBmxxid(seqKey);
-                bkzy4.setZyid(Integer.parseInt(pzhiyuan4));
-                bkzy4.setTjf(1);
-				bkzy4.setXh(4);
-            	bkzy5 = new Bkzy();
-                bkzy5.setBmxxid(seqKey);
-                bkzy5.setZyid(Integer.parseInt(pzhiyuan5));
-                bkzy5.setTjf(1);
-				bkzy5.setXh(5);
-            	bkzy6 = new Bkzy();
-                bkzy6.setBmxxid(seqKey);
-                bkzy6.setZyid(Integer.parseInt(pzhiyuan6));
-                bkzy6.setTjf(1);
-				bkzy6.setXh(6);
-            	bkzy7 = new Bkzy();
-                bkzy7.setBmxxid(seqKey);
-                bkzy7.setZyid(Integer.parseInt(pzhiyuan7));
-                bkzy7.setTjf(1);
-				bkzy7.setXh(7);
-            	bkzy8 = new Bkzy();
-                bkzy8.setBmxxid(seqKey);
-                bkzy8.setZyid(Integer.parseInt(pzhiyuan8));
-                bkzy8.setTjf(1);
-				bkzy8.setXh(8);
+				if(!"0".equals(pzhiyuan1)) {
+					bkzy1 = new Bkzy();
+					bkzy1.setBmxxid(seqKey);
+					bkzy1.setZyid(Integer.parseInt(pzhiyuan1));
+					bkzy1.setTjf(1);
+					bkzy1.setXh(1);
+				}
+				if(!"0".equals(pzhiyuan2)) {
+					bkzy2 = new Bkzy();
+					bkzy2.setBmxxid(seqKey);
+					bkzy2.setZyid(Integer.parseInt(pzhiyuan2));
+					bkzy2.setTjf(1);
+					bkzy2.setXh(2);
+				}
+				if(!"0".equals(pzhiyuan3)) {
+					bkzy3 = new Bkzy();   //报考专业志愿3
+					bkzy3.setBmxxid(seqKey);
+					bkzy3.setZyid(Integer.parseInt(pzhiyuan3));
+					bkzy3.setTjf(1);
+					bkzy3.setXh(3);
+				}
+				if(!"0".equals(pzhiyuan4)) {
+					bkzy4 = new Bkzy();
+					bkzy4.setBmxxid(seqKey);
+					bkzy4.setZyid(Integer.parseInt(pzhiyuan4));
+					bkzy4.setTjf(1);
+					bkzy4.setXh(4);
+				}
+				if(!"0".equals(pzhiyuan5)) {
+					bkzy5 = new Bkzy();
+					bkzy5.setBmxxid(seqKey);
+					bkzy5.setZyid(Integer.parseInt(pzhiyuan5));
+					bkzy5.setTjf(1);
+					bkzy5.setXh(5);
+				}
 
 				
                 icl = new HjqkList(seqKey);
@@ -524,20 +518,18 @@ public class AddBmxxAction extends BaseAction
 				if(null != bmxxId){
 					dbo.delete(icl.delete(null));
 				}
-				dbo.insert(icl.insert(bkzy1));
-				dbo.insert(icl.insert(bkzy2));
-				dbo.insert(icl.insert(bkzy3));
-				dbo.insert(icl.insert(bkzy4));
-				dbo.insert(icl.insert(bkzy5));
-				dbo.insert(icl.insert(bkzy6));
-				dbo.insert(icl.insert(bkzy7));
-				dbo.insert(icl.insert(bkzy8));
+				if(null != bkzy1) dbo.insert(icl.insert(bkzy1));
+				if(null != bkzy2) dbo.insert(icl.insert(bkzy2));
+				if(null != bkzy3) dbo.insert(icl.insert(bkzy3));
+				if(null != bkzy4) dbo.insert(icl.insert(bkzy4));
+				if(null != bkzy5) dbo.insert(icl.insert(bkzy5));
+
 				
 				Log log = new Log();
 				icl = new LogsList();
 				log.setContent(USERNAME + " 填写报名表。");
 				dbo.insert(icl.insert(log));
-                
+
 				dbo.commit();
 				
 				session.setAttribute("bmxxid" , ""+seqKey);

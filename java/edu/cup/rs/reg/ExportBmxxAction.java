@@ -85,7 +85,7 @@ public class ExportBmxxAction extends BaseAction{
 		int colCount_bmxx = 0, colCount_grjl = 0,  colCount_hdqk = 0, tjf = 0;
 		String columnName, columnValue;
 		HashMap<String, String> hm = new HashMap<String, String>();
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		ResultSetMetaData rsmd_bmxx = null,rsmd_grjl = null,rsmd_hdqk = null;
 		Workbook workbook = null;
 		WritableWorkbook copy = null;
@@ -109,7 +109,7 @@ public class ExportBmxxAction extends BaseAction{
 				hm.put(""+zszy.getZyid(), zszy.getZymc()+" ");
 			}
 			rs = dbo.query("select a.bmxxid,ksxm,ksxb,wyyz,jg,mz,zzmm,kskl,shfzh,txdz,shxr,yzbm,ksshji,zxmc,b.zxtxdz,b.zxybm,b.zxlxdh,fmxm,fmgzdw,fmyddh," +
-			"mmxm,mmgzdw,mmyddh,ksah,sqly,bmsj from bmxx a left join cjjd b on a.bmxxid=b.bmxxid order by a.bmxxid");
+			"mmxm,mmgzdw,mmyddh,ksah,c.mc as sqly,bmsj from bmxx a left join cjjd b on a.bmxxid=b.bmxxid left join sqbkly c on a.sqly=c.id order by a.bmxxid");
 			rsmd_bmxx = rs.getMetaData();
 			colCount_bmxx = rsmd_bmxx.getColumnCount();
 			int j = 1;
@@ -170,13 +170,20 @@ public class ExportBmxxAction extends BaseAction{
                 }
 				
 				rs_bkzy = dbo.query("select zyid,tjf from bkzy where bmxxid="+bmxxid+" order by xh");
+				int zy_i = 0;
                 while (rs_bkzy.next()){
 					columnValue = rs_bkzy.getString("zyid");
 					label = new Label(k, j, hm.get(columnValue), border); 
 					sheet.addCell(label);
 					k++;
 					tjf = rs_bkzy.getInt("tjf");
+					zy_i++;
                 }
+				for(int zy_index=zy_i; zy_index<5; zy_index++) {
+					label = new Label(k, j, "", border); 
+					sheet.addCell(label);
+					k++;
+				}
 				if(tjf == 1)
 					columnValue = "是";
 				else

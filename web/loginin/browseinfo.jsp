@@ -4,6 +4,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <%@ page import="edu.cup.rs.reg.*"%>
+<%@ page import="edu.cup.rs.reg.sys.*" %>
 <%@include file="../common/access_control.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -104,7 +105,12 @@ a:hover{
 	Hjqk gzhj1,gzhj2,gzhj3;
 	Hdqk shgz1,shgz2,shgz3;
 	Calendar cl = Calendar.getInstance();
-	Bkzy bkzy1,bkzy2,bkzy3,bkzy4,bkzy5,bkzy6,bkzy7,bkzy8;
+	int bkzy1 = 0;
+	int bkzy2 = 0;
+	int bkzy3 = 0;
+	int bkzy4 = 0;
+	int bkzy5 = 0;
+	String sqly = "";
 	DBOperator dbo = new DBOperator();
 	try{
 		dbo.init(false);
@@ -138,7 +144,6 @@ a:hover{
 		al = dbo.getList(zl);
 		for(int i = 0; i < al.size(); i++) {
 			zszy = (Zhshzy)al.get(i);
-			
 			hm.put(""+zszy.getZyid(), zszy.getZymc());
 		}
 		bmxxId = (bmxxId.length() == 0) ? "-1":bmxxId;
@@ -162,21 +167,23 @@ a:hover{
 		gzhj1 = (Hjqk)al.get(0);
 		gzhj2 = (Hjqk)al.get(1);
 		gzhj3 = (Hjqk)al.get(2);
+
+      	SqbklyList bklyList = new SqbklyList(bmxx.getSqly());
+		ArrayList al_bkly = dbo.getList(bklyList);
+
+		if(al_bkly != null && al_bkly.size() == 1)
+		    sqly = ((Sqbkly)al_bkly.get(0)).getMc();
+
 		icl = new BkzyList(bmxx.getBmxxid());
 		al = dbo.getList(icl);
-		if(al.size() < 2){
-            logger.error("数据错误！");
-            response.sendRedirect("/error.jsp?error=" + new UTF8String("数据错误！").toUTF8String());
-			return;
-		}
-		bkzy1 = (Bkzy)al.get(0);
-		bkzy2 = (Bkzy)al.get(1);
-		bkzy3 = (Bkzy)al.get(2);
-		bkzy4 = (Bkzy)al.get(3);
-		bkzy5 = (Bkzy)al.get(4);
-		bkzy6 = (Bkzy)al.get(5);
-		bkzy7 = (Bkzy)al.get(6);
-		bkzy8 = (Bkzy)al.get(7);
+		int len_zy = al.size();
+
+		if(len_zy > 0) bkzy1 = ((Bkzy)al.get(0)).getZyid();
+		if(len_zy > 1) bkzy2 = ((Bkzy)al.get(1)).getZyid();
+		if(len_zy > 2) bkzy3 = ((Bkzy)al.get(2)).getZyid();
+		if(len_zy > 3) bkzy4 = ((Bkzy)al.get(3)).getZyid();
+		if(len_zy > 4) bkzy5 = ((Bkzy)al.get(4)).getZyid();
+
 		icl = new HdqkList(bmxx.getBmxxid());
 		al = dbo.getList(icl);
 		if(al.size() < 3){
@@ -206,21 +213,21 @@ int year = c.get(Calendar.YEAR);
 <%
 	try{
 %>
-<table width="651" border="0" align="center" cellpadding="0" cellspacing="0">
+<table width="654" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td align="right">
 	<input type="button" id="print1"  value="打印" onclick="window.open('../admin/ksxx_prt.jsp?bmxxid=<%=bmxx.getBmxxid()%>&print=0&hide_pic=1');" />
 	</td>
   </tr>
 </table>
-<table width="650" border="0" align="center" cellpadding="0" cellspacing="1">
+<table width="654" border="0" align="center" cellpadding="0" cellspacing="1">
 <tr>
   <td>&nbsp;</td>  
   <td class="STYLE3" align="center">中国石油大学（北京）<%=year%>年自主选拔录取报名表 </td>
   <td align="right">&nbsp;</td>
 </tr>
 </table>
-<table width="649" border="0" align="center" cellpadding="0" cellspacing="0" class="table_w">
+<table width="656" border="0" align="center" cellpadding="0" cellspacing="0" class="table_w">
   <tr>
     <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
@@ -254,7 +261,7 @@ int year = c.get(Calendar.YEAR);
           <tr>
             <td colspan="6"><table width="100%"  border="0" cellpadding="0" cellspacing="0">
               <tr>
-                <td width="18%" align="center" class="td1 cuti">通知书邮寄地址 </td>
+                <td width="20%" align="center" class="td1 cuti">通知书邮寄地址 </td>
                 <td width="82%" class="td2"><%=bmxx.getTxdz() %></td>
               </tr>
             </table></td>
@@ -302,27 +309,33 @@ int year = c.get(Calendar.YEAR);
 
     </table></td>
   </tr>
+ <tr>
+          <td align="center"  class="td2 td5 cuti">面试分组</td>
+  </tr>
   <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="24%" align="center" nowrap="nowrap"  class="td2 cuti">申请理由(面试分组)</td>
+
+        <td width="74%"  class="td2"><%=sqly%>&nbsp;</td>
+        </tr>
+
+    </table></td>
+  </tr>  <tr>
     <td align="center"  class="td2 td5 cuti">专业志愿</td>
   </tr>
   <tr>
     <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td class="td2"><strong>第一志愿</strong>：<%=hm.get(""+bkzy1.getZyid()) %>&nbsp;</td>
-        <td class="td2"><strong>第二志愿</strong>：<%=hm.get(""+bkzy2.getZyid()) %>&nbsp;</td>
-        <td class="td2"><strong>第三志愿</strong>：<%=hm.get(""+bkzy3.getZyid()) %>&nbsp;</td>
+        <td class="td2"><strong>第一志愿</strong>：<%=((null == hm.get(""+bkzy1))?"":hm.get(""+bkzy1))%>&nbsp;</td>
+        <td class="td2"><strong>第二志愿</strong>：<%=((null == hm.get(""+bkzy2))?"":hm.get(""+bkzy2))%>&nbsp;</td>
+        <td class="td2"><strong>第三志愿</strong>：<%=((null == hm.get(""+bkzy3))?"":hm.get(""+bkzy3))%>&nbsp;</td>
       </tr>
       <tr>
-        <td class="td2"><strong>第四志愿</strong>：<%=hm.get(""+bkzy4.getZyid()) %>&nbsp;</td>
-        <td class="td2"><strong>第五志愿</strong>：<%=hm.get(""+bkzy5.getZyid()) %>&nbsp;</td>
-        <td class="td2"><strong>第六志愿</strong>：<%=hm.get(""+bkzy6.getZyid()) %>&nbsp;</td>
-      </tr>
-      <tr>
-        <td class="td2"><strong>第七志愿</strong>：<%=hm.get(""+bkzy7.getZyid()) %>&nbsp;</td>
-        <td class="td2"><strong>第八志愿</strong>：<%=hm.get(""+bkzy8.getZyid()) %>&nbsp;</td>
+        <td class="td2"><strong>第四志愿</strong>：<%=((null == hm.get(""+bkzy4))?"":hm.get(""+bkzy4))%>&nbsp;</td>
+        <td class="td2"><strong>第五志愿</strong>：<%=((null == hm.get(""+bkzy5))?"":hm.get(""+bkzy5))%>&nbsp;</td>
         <td class="td2">&nbsp;</td>
       </tr>
-
     </table></td>
   </tr>
   <tr>
@@ -436,8 +449,8 @@ int year = c.get(Calendar.YEAR);
     <td>
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="10%" align="center" class="td2 td5 cuti">爱好特长</td>
-          <td width="90%" class="td2 td5 tdhj"><%=bmxx.getKsah() %>&nbsp;</td>
+          <td width="11%" align="center" class="td2 td5 cuti">爱好特长</td>
+          <td width="89%" class="td2 td5 tdhj"><%=bmxx.getKsah() %>&nbsp;</td>
         </tr>
       </table></td>
   </tr>
@@ -445,17 +458,8 @@ int year = c.get(Calendar.YEAR);
     <td>
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td width="10%" align="center" class="td2  cuti">申请理由(面试分组)</td>
-          <td width="90%" class="td2"><%=bmxx.getSqly() %>&nbsp;</td>
-        </tr>
-      </table></td>
-  </tr>
-  <tr>
-    <td>
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td width="63%" class="td2 cuti tdpdi tdhj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本人本着诚实、严谨的态度郑重递交以上材料，如有与事实不符，一切后果自己承担。</td>
-          <td width="37%" class="td2">&nbsp;&nbsp;申请人签字：&nbsp;</td>
+          <td width="64%" class="td2 cuti tdpdi tdhj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本人本着诚实、严谨的态度郑重递交以上材料，如有与事实不符，一切后果自己承担。</td>
+          <td width="36%" class="td2">&nbsp;&nbsp;申请人签字：&nbsp;</td>
         </tr>
       </table></td>
   </tr>

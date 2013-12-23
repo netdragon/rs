@@ -1,5 +1,5 @@
 ﻿<%@ page contentType="text/html; charset=utf-8"%>
-<%@ page import="java.util.Calendar" %>
+<%@ page import="java.util.*" %>
 <%@include file="../common/access_control.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -41,7 +41,11 @@ a:hover{
 <body>
 <%
 	Calendar c = Calendar.getInstance();
-	long timestamp = c.getTimeInMillis();
+
+	long time = c.getTimeInMillis();
+
+	String uuid = UUID.randomUUID().toString();
+	String timestamp = time + uuid;
 %>
 <table width="560" border="0" align="center" cellpadding="0" cellspacing="0">
  <tr>

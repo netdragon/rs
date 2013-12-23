@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>申请理由</title>
+<title>面试分组</title>
 <style type="text/css">
 <!--
 .con{
@@ -60,8 +60,8 @@
 </style>
 <script>
 	function addLy(){
-	    var mc = document.getElementById("original").value;
-		if(mc == null || mc.length == 0){
+	    var id = document.getElementById("original_id").value;
+		if(id == null || id.length == 0){
 			document.forms[0].action = "/add_sqbkly";
 		} else {
 			document.forms[0].action = "/update_sqbkly";
@@ -84,22 +84,30 @@
     <td height="19">
 <%
 	LogHandler logger=LogHandler.getInstance("sqly.jsp");
+	String id_para = BaseFunction.null2value(request.getParameter("id"));
 	String mc_para = BaseFunction.null2value(request.getParameter("mc"));
+	String type_para = BaseFunction.null2value(request.getParameter("type"));
 	String mc = new String(mc_para.getBytes("iso8859-1"), "utf-8");
 	try {
 %>
 	<br>
 <table width="522" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td width="600" height="43" class="tdbline"><img src="../images/zkzpic01.gif" alt="pic" width="40" height="42" align="absmiddle" /><span class="STYLE1">申请理由</span></td>
+    <td width="600" height="43" class="tdbline"><img src="../images/zkzpic01.gif" alt="pic" width="40" height="42" align="absmiddle" /><span class="STYLE1">面试分组</span></td>
   </tr>
   </table>
 
   <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#999999">
-
       <tr>
-        <td width="30%" bgcolor="#FFFFFF" class="km_bt">申请理由</td>
-        <td width="70%" bgcolor="#FFFFFF" class="km_bt"><input size="20" maxlength="20" id="mc" name="mc" value="<%=mc%>"></td>
+        <td width="28%" height="40" bgcolor="#FFFFFF" class="km_bt">科&nbsp;类</td>
+        <td width="72%" bgcolor="#FFFFFF" class="km_bt">
+		<input type="radio" id="zytype" name="zytype"  <%=("0".equals(type_para)) ? "checked":""%> value="0" />文史&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="zytype" type="radio" id="zytype" value="1"  <%=("1".equals(type_para)) ? "checked":""%> />
+		理工
+		</td>
+      </tr> 
+      <tr>
+        <td width="28%" height="40" bgcolor="#FFFFFF" class="km_bt">面试分组</td>
+        <td width="72%" bgcolor="#FFFFFF" class="km_bt"><input size="20" maxlength="20" id="mc" name="mc" value="<%=mc%>"></td>
       </tr>  
    </table>
 <%
@@ -115,7 +123,7 @@
     <td height="36" align="center"><input type="button" name="add" onclick="addLy()" value="确  定" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="Subkssj" value="取 消"  onclick="window.history.back();"/></td>
   </tr>
 </table>
-<input id="original" name="original" type="hidden" value="<%=mc%>">
+<input id="original_id" name="original_id" type="hidden" value="<%=id_para%>">
 </form>
 </div>
 </body>

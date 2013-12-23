@@ -101,7 +101,7 @@ public class UpdateZszyAction extends BaseAction
 				ICommonList logslist;
 				Log log = new Log();
 				logslist = new LogsList();
-				log.setContent(USERNAME + " 删除了招生专业。");
+				log.setContent(USERNAME + " 修改了招生专业。");
 				dbo.insert(logslist.insert(log));
                 dbo.commit();
 

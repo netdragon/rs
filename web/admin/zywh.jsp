@@ -4,6 +4,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <%@ page import="edu.cup.rs.reg.*"%>
+<%@ page import="edu.cup.rs.reg.sys.*" %>
 <%@include file="../common/admin_control.jsp"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -92,7 +93,7 @@
 <div class="con">
 <br />
 <form action="" method="post">
-  <table width="522" border="0" align="center" cellpadding="0" cellspacing="0">
+  <table width="534" border="0" align="center" cellpadding="0" cellspacing="0">
    <tr>
     <td height="19">
 <%
@@ -100,8 +101,11 @@
 	ArrayList al;
 	ZhshzyList zyList;
 	Zhshzy zy;
-
+	Sqbkly bkly;
+	SqbklyList bklyList;
+	ArrayList al_bkly;
 	int i = 0;
+	HashMap hm_sqly= new HashMap();
 	DBOperator dbo = new DBOperator();
 	
 	String userId = (String)session.getAttribute("user_id");
@@ -120,7 +124,12 @@
 	}
 
 	try {
-		
+		bklyList = new SqbklyList();
+		al_bkly = dbo.getList(bklyList);
+		for(i=0; i<al_bkly.size(); i++) {
+		    bkly = (Sqbkly) al_bkly.get(i);
+		    hm_sqly.put(bkly.getId()+ "", bkly.getMc());
+		}
 		zyList = new ZhshzyList();
 		al = dbo.getList(zyList);
 %>
@@ -136,7 +145,7 @@
 
   <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#999999">
       <tr>
-        <td width="20%" align="center" bgcolor="#FFFFFF" class="km_bt">类&nbsp;&nbsp;别</td>
+        <td width="20%" align="center" nowrap="nowrap" bgcolor="#FFFFFF" class="km_bt">类&nbsp;&nbsp;别</td>
         <td width="60%" align="center" bgcolor="#FFFFFF" class="km_bt">名&nbsp;&nbsp;称</td>
 		<td width="20%" bgcolor="#FFFFFF">&nbsp;</td>
       </tr>  
@@ -146,7 +155,7 @@
 			if(null == zy.getZymc() || 0 == zy.getZymc().length()) continue;
   %>
       <tr>
-        <td width="20%" bgcolor="#FFFFFF" class="km_bt"><%=(zy.getType() == 1)?"文科":"理科"%></td>
+        <td width="20%" nowrap="nowrap" bgcolor="#FFFFFF" class="km_bt"><%=hm_sqly.get(zy.getType()+"")%></td>
         <td width="60%" bgcolor="#FFFFFF" class="km_bt"><a href="zy.jsp?zyid=<%=zy.getZyid()%>"><%=zy.getZymc()%></a> </td>
 		<td width="20%" bgcolor="#FFFFFF">&nbsp;&nbsp;<input type="button" onclick="deleteZy('<%=zy.getZyid()%>', '<%=zy.getZymc()%>')" value="删除"></td>
       </tr>

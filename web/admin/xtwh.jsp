@@ -114,7 +114,7 @@
     <td align="right">&nbsp;</td>
     <td align="right">&nbsp;</td>
     <td height="36" align="right"><img src="../images/zkzpic2.gif" width="15" height="10" /></td>
-    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('sqlywh.jsp');" class="zh2" value="申请理由设置" />	</td>
+    <td height="44">&nbsp;&nbsp;<input name="Submit2" type="button"  onclick="window.location.assign('sqlywh.jsp');" class="zh2" value="面试分组设置" />	</td>
     <td>&nbsp;</td>
     <td align="right">&nbsp;</td>
     <td align="right">&nbsp;</td>

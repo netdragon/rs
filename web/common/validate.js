@@ -101,7 +101,7 @@
 
 
 
-		if(fm.pzhiyuan1.value =="1") {
+		if(fm.pzhiyuan1.value =="0") {
 			alert("第一志愿不能为空！");
 			fm.pzhiyuan1.focus();
 			return false;
@@ -113,62 +113,40 @@
 		var bk_obj3=document.getElementById("pzhiyuan3");	
 		var bk_obj4=document.getElementById("pzhiyuan4");
 		var bk_obj5=document.getElementById("pzhiyuan5");	
-		var bk_obj6=document.getElementById("pzhiyuan6");
-		var bk_obj7=document.getElementById("pzhiyuan7");	
-		var bk_obj8=document.getElementById("pzhiyuan8");
+
 		
 		var bk1 = (null == bk_obj1) ? "" : bk_obj1.value;
 		var bk2 = (null == bk_obj2) ? "" : bk_obj2.value;
 		var bk3 = (null == bk_obj3) ? "" : bk_obj3.value;
 		var bk4 = (null == bk_obj4) ? "" : bk_obj4.value;
 		var bk5 = (null == bk_obj5) ? "" : bk_obj5.value;
-		var bk6 = (null == bk_obj6) ? "" : bk_obj6.value;
-		var bk7 = (null == bk_obj7) ? "" : bk_obj7.value;
-		var bk8 = (null == bk_obj8) ? "" : bk_obj8.value;
-		
-		if(bk1 == bk2 || bk1==bk3 || bk1==bk4 || bk1==bk5 || bk1==bk6 
-			|| bk1==bk7 || bk1==bk8) {
-			if(bk1!="1") {
-				alert("报考志愿中不能选择相同专业。请确认！");
-				return false;
-			}
-		}
-		if(bk2==bk3 || bk2==bk4 || bk2==bk5 ||
-			bk2==bk6 || bk2==bk7 || bk2==bk8 ) {
-			if(bk2!="1") {
-				alert("报考志愿中不能选择相同专业。请确认！");
-				return false;
-			}
-		}
-		if(bk3==bk4 || bk3==bk5 || bk3==bk6 || bk3==bk7 || bk3==bk8) {
-			if(bk3!="1") {
-				alert("报考志愿中不能选择相同专业。请确认！");
-				return false;
-			}
-		}
-		if(bk4==bk5 || bk4==bk6 || bk4==bk7 || bk4==bk8) {
-			if(bk4!="1") {
-				alert("报考志愿中不能选择相同专业。请确认！");
-				return false;
-			}
-		}
-		if(bk5==bk6 || bk5==bk7 || bk5==bk8) {
-			if(bk5!="1") {
-				alert("报考志愿中不能选择相同专业。请确认！");
-				return false;
-			}
-		}
-		if(bk6==bk7 || bk6==bk8) {
-			if(bk6!="1") {
-				alert("报考志愿中不能选择相同专业。请确认！");
-				return false;
-			}
-		}
-		if( bk7!="1" && bk7==bk8) {
-			alert("报考志愿中不能选择相同专业。请确认！");
-			return false;
-		}
 
+		if(bk1 == bk2 || bk1==bk3 || bk1==bk4 || bk1==bk5 ) {
+			if(bk1!="0") {
+				alert("报考志愿中不能选择相同专业。请确认！");
+				return false;
+			}
+		}
+		if(bk2==bk3 || bk2==bk4 || bk2==bk5  ) {
+			if(bk2!="0") {
+				alert("报考志愿中不能选择相同专业。请确认！");
+				return false;
+			}
+		}
+		if(bk3==bk4 || bk3==bk5) {
+			if(bk3!="0") {
+				alert("报考志愿中不能选择相同专业。请确认！");
+				return false;
+			}
+		}
+		if(bk4==bk5) {
+			if(bk4!="0") {
+				alert("报考志愿中不能选择相同专业。请确认！");
+				return false;
+			}
+		}
+		
+		
 		document.forms[0].submit();
 		return true;
 	}
@@ -195,50 +173,81 @@
 			return false;
 		}
 	}
+
 	function kskl_change(obj) {
+        var len = 1;
+        var opt;
+		var saved_sqly;
+		var saved_sqly_value = "";
+        if((saved_sqly = document.getElementById("saved_sqly")) != null){
+			saved_sqly_value=saved_sqly.value;
+		}
+		
+		var selObj=document.getElementById("psqly");
+		if(selObj != null) {
+			if(obj.value=="文史") {
+				len = selObj.options.length;
+				for(var j=1; j<len; j++){
+					selObj.remove(1);
+				}
+				for(var j=0; j<lyList_0.length; j++){
+					opt = new Option();
+					opt.text = lyList_0[j].mc;
+					opt.value = lyList_0[j].id;
+					//alert(saved_sqly_value + ":" + opt.value);
+					if(saved_sqly_value==opt.value)
+							opt.selected=true;
+					selObj.options.add(opt);
+				}
+			} else {
+				len = selObj.options.length;
+				for(var j=1; j<len; j++){
+					selObj.remove(1);
+				}
+				for(var j=0; j<lyList_1.length; j++){
+					opt = new Option();
+					opt.text = lyList_1[j].mc;
+					opt.value = lyList_1[j].id;
+					//alert(saved_sqly_value + ":" + opt.value);
+					if(saved_sqly_value==opt.value)
+							opt.selected=true;
+					selObj.options.add(opt);
+				}
+			}
+			leiBie_change(selObj);
+		} else {
+		    alert("页面错误！请与系统管理员联系，谢谢！");
+		}
+	}
+	function leiBie_change(obj) {
 		var selObj = null;
 		var len = 1;
 		var opt;
-		var saved_zyid_value="0";
 		var saved_zy;
+		var saved_zy_value = "";
 
-		for(var i=1; i<=8; i++) {
-			if(obj.value=="文史") {
-				if((selObj=document.getElementById("pzhiyuan"+i)) != null) {
-					len = selObj.options.length;
-					for(var j=1; j<len; j++){
-						selObj.remove(1);
-					}
-					if((saved_zy = document.getElementById("saved_zyid"+i)) != null){
-						saved_zyid_value=saved_zy.value;
-					}
-					for(var j=0; j<zyList_wk.length; j++){
-						opt = new Option();
-						opt.text = zyList_wk[j];
-						opt.value = zyList_wk_id[j];
-						if(saved_zyid_value==zyList_wk_id[j])
-							opt.selected=true;
-						selObj.options.add(opt);
-					}
+
+		for(var i=1; i<=5; i++) {
+			if((selObj=document.getElementById("pzhiyuan"+i)) != null) {
+				len = selObj.options.length;
+				for(var j=1; j<len; j++){
+					selObj.remove(1);
 				}
-			} else {
-				if((selObj=document.getElementById("pzhiyuan"+i)) != null) {
-					len = selObj.options.length;
-					for(var j=1; j<len; j++){
-						selObj.remove(1);
-					}
-					if((saved_zy = document.getElementById("saved_zyid"+i)) != null){
-						saved_zyid_value=saved_zy.value;
-					}
-					for(var j=0; j<zyList_lk.length; j++){
+				if((saved_zy = document.getElementById("saved_zyid" + i)) != null){
+					saved_zy_value=saved_zy.value;
+				}
+				
+				try {
+					for(var j=0; j<eval("zyList_"+ obj.value + ".length"); j++){
 						opt = new Option();
-						opt.text = zyList_lk[j];
-						opt.value = zyList_lk_id[j];
-						if(saved_zyid_value==zyList_lk_id[j]) {
-							opt.selected=true;
-						}
+						opt.text = eval("zyList_"+ obj.value + "[" + j +"].mc");
+						opt.value = eval("zyList_"+ obj.value + "[" + j +"].id");
+						//alert(saved_zy_value + ":" + opt.value);
+						if(saved_zy_value==opt.value)
+     						opt.selected=true;
 						selObj.options.add(opt);
 					}
+				} catch(e) {
 				}
 			}
 		}

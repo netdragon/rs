@@ -51,7 +51,10 @@ a:hover {
 <br /><br />
 <%
 Calendar c = Calendar.getInstance();
-long timestamp = c.getTimeInMillis();
+long time = c.getTimeInMillis();
+
+String uuid = UUID.randomUUID().toString();
+String timestamp = time + uuid;
 %>
 <table width="451"  border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>

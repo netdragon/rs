@@ -206,6 +206,10 @@ table a:hover{
 	int score = 0;
 	String s_operate="";
 	String s_isPublic = "";
+	SqbklyList sqbklyList=null;
+	Sqbkly sqbkly=null;
+	ArrayList al_sqly=null;
+	HashMap hm_sqly=new HashMap();
 	try {
 		SystemSettingsList ssl;
 		ArrayList al_settings;
@@ -357,32 +361,33 @@ table a:hover{
     <td height="6"></td>
   </tr>
 </table>
-<table width="97%" border="1" cellspacing="0" cellpadding="0" align="center">
+<table width="98%" border="1" cellspacing="0" cellpadding="0" align="center">
   <tr>
     <td height="20" width="3%"  align="center"><input type="checkbox" name="checkbox" onclick="sel_all(this);" value="checkbox" /></td>
-    <td width="12%"  align="center"><span class="tbl_bt">准考证号</span></td>
+    <td width="14%"  align="center"><span class="tbl_bt">准考证号</span></td>
 <%
 		if(orderColName.length()==0) orderColName=" zhkzhid";
 		if(orderColName.indexOf("desc")>0) isDesc="";
 		else isDesc=" desc";
 %>
-    <td width="10%"  align="center"><span class="tbl_bt">姓名</span></td>
-    <td width="5%"  align="center"><span class="tbl_bt">性别</span></td>
-    <td width="8%"  align="center"><span class="tbl_bt">考生科类</span></td>
+    <td width="13%"  align="center"><span class="tbl_bt">姓名</span></td>
+    <td width="4%"  align="center"><span class="tbl_bt">性别</span></td>
+    
+	<td width="9%"  align="center" nowrap="nowrap"><span class="tbl_bt">面试分组</span></td>
 <%
 		ArrayList alKm = dbo.getList(kl);
 		int kmLen = alKm.size();
 		for(int i=0; i<kmLen; i++) {
 			km = (Kemu) alKm.get(i);
 %>
-    <td width="6%"  align="center"><span class="tbl_bt"><%=km.getKmmc() %></span></td>
+    <td width="12%"  align="center"><span class="tbl_bt"><%=km.getKmmc() %></span></td>
 <%
 		}
 %>
-    <td width="10%"  align="center"><span class="tbl_bt">录取操作</span></td>
-	<td width="19%"  align="center"><span class="tbl_bt">录取专业</span></td>
+    <td width="8%"  align="center"><span class="tbl_bt">录取操作</span></td>
+	<td width="18%"  align="center"><span class="tbl_bt">录取专业</span></td>
 <!--	<td width="9%"  align="center"><span class="tbl_bt"><a href="lq.jsp?order=sflq<%=isDesc%>">是否录取</a></span></td>-->
-	<td width="8%"  align="center"><span class="tbl_bt">是否录取</span></td>
+	<td width="7%"  align="center"><span class="tbl_bt">是否录取</span></td>
   </tr>
 <%
 		if(orderColName.length() > 0) icl.setOrder(orderColName);
@@ -392,7 +397,12 @@ table a:hover{
 		al = dbo.getQueryList(icl.getAdmitResult(score), icl);
 		String shqk = "";
 		String btn_yj = "";
-
+		sqbklyList = new SqbklyList();
+		al_sqly = dbo.getList(sqbklyList);
+		for(int k=0; k<al_sqly.size(); k++) {
+		    sqbkly = (Sqbkly) al_sqly.get(k);
+		    hm_sqly.put(sqbkly.getId()+"", sqbkly.getMc());
+		}
 		ScoreList sl = new ScoreList();
 		BkzyList zyl = new BkzyList();
 		ArrayList al_score,al_zy;
@@ -404,11 +414,8 @@ table a:hover{
 			sl.setBmxxid(bmxx.getBmxxid());
 			zyl.setBmxxid(bmxx.getBmxxid());
 			al_zy = dbo.getList(zyl);
+
 			al_score = dbo.getList(sl);
-			if(al_score.size() == 2) {
-				cj_1 = ((Score)al_score.get(0)).getFenshu();
-				cj_2 = ((Score)al_score.get(1)).getFenshu();
-			}
 			if(((Bkzy)al_zy.get(0)).getTjf() == 1) {
 				sfty = "是";
 			}
@@ -426,10 +433,13 @@ table a:hover{
      <td height="24"  class="tdfont"><%=bmxx.getZhkzhid()%></td>
      <td  class="tdfont"><%=bmxx.getKsxm()%></td>
      <td  class="tdfont"><%=((1 == bmxx.getKsxb()) ? "男":"女")%></td>
-     <td  class="tdfont"><%=bmxx.getKskl() %></td>
+     
+	 <td  class="tdfont"><%=hm_sqly.get(bmxx.getSqly()) %></td>
+	 
 <%
 			for(int j=0; j<kmLen; j++) {
-			cj_1 = ((Score)al_score.get(j)).getFenshu();
+
+			    cj_1 = ((Score)al_score.get(j)).getFenshu();
 %>
      <td  class="tdfont" align="center"><%=cj_1%></td>
 <%
@@ -464,20 +474,19 @@ table a:hover{
      </tr>
 </table>
 <%
-		ArrayList al_zszy, al_zszy_w, al_zszy_l;
+		ArrayList al_zszy;
 		ZhshzyList zl = new ZhshzyList();
-		zl.setType(1);
-		al_zszy_w = dbo.getList(zl);
-		zl.setType(0);
-		al_zszy_l = dbo.getList(zl);
+
 		Zhshzy zszy = null;
 		boolean isIn;
 		for(int i = 0; i < al.size(); i++) {
 			bmxx = (Bmxx) al.get(i);
 			zyl.setBmxxid(bmxx.getBmxxid());
+			
 			al_zy = dbo.getList(zyl);
-			if("理工".equals(bmxx.getKskl())) al_zszy = al_zszy_l;
-			else  al_zszy = al_zszy_w;
+			logger.debug(bmxx.getSqly() + "ddee");
+			zl.setType(Integer.parseInt(bmxx.getSqly()));
+		    al_zszy = dbo.getList(zl);
 %>
 <div id="linkDiv_<%=bmxx.getBmxxid()%>" style="border: 1px solid #00FF00; display:none; background-color: #FFFF99;" >
 <table border="0" align="center">

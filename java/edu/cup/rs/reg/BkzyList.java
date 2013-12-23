@@ -35,7 +35,7 @@ public class BkzyList implements ICommonList{
 	}
 
 	public String getQL() {
-		return "select a.bmxxid,a.zyid,a.tjf,a.xh,b.zymc from bkzy a, zhshzy b where a.zyid = b.zyid and bmxxid=" + this.bmxxId + " order by xh";
+		return "select a.bmxxid,a.zyid,a.tjf,a.xh,b.zymc from bkzy a left join zhshzy b on a.zyid = b.zyid where a.bmxxid=" + this.bmxxId + " order by xh";
 	}
 
 	public String delete(Object obj) {

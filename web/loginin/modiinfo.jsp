@@ -119,7 +119,12 @@ body{
 	Bmxx bmxx;
 	Hjqk gzhj1,gzhj2,gzhj3;
 	Hdqk shgz1,shgz2,shgz3;
-	Bkzy bkzy1,bkzy2,bkzy3,bkzy4,bkzy5,bkzy6,bkzy7,bkzy8;
+	int bkzy1 = 0;
+	int bkzy2 = 0;
+	int bkzy3 = 0;
+	int bkzy4 = 0;
+	int bkzy5 = 0;
+	
 	DBOperator dbo = new DBOperator();
 	try{
 		dbo.init(false);
@@ -136,10 +141,11 @@ body{
 	ArrayList al_settings;
 	ZhshzyList zyl;
 	Zhshzy zy;
+	Sqbkly bkly;
+	SqbklyList bklyList;
+	ArrayList al_bkly;
 	int i;
-	SqbklyList sqbklyList;
-	Sqbkly sqbkly;
-	ArrayList alSqly;
+
 	Calendar c_curr = Calendar.getInstance();
 	Calendar cl = Calendar.getInstance();
 	try {
@@ -198,19 +204,14 @@ body{
 		gzhj3 = (Hjqk)al.get(2);
 		icl = new BkzyList(bmxx.getBmxxid());
 		al = dbo.getList(icl);
-		if(al.size() < 2){
-            logger.error("数据错误！");
-            response.sendRedirect("/error.jsp?error=" + new UTF8String("数据错误！").toUTF8String());
-			return;
-		}
-		bkzy1 = (Bkzy)al.get(0);
-		bkzy2 = (Bkzy)al.get(1);
-		bkzy3 = (Bkzy)al.get(2);
-		bkzy4 = (Bkzy)al.get(3);
-		bkzy5 = (Bkzy)al.get(4);
-		bkzy6 = (Bkzy)al.get(5);
-		bkzy7 = (Bkzy)al.get(6);
-		bkzy8 = (Bkzy)al.get(7);
+		int len_zy = al.size();
+
+		if(len_zy > 0) bkzy1 = ((Bkzy)al.get(0)).getZyid();
+		if(len_zy > 1) bkzy2 = ((Bkzy)al.get(1)).getZyid();
+		if(len_zy > 2) bkzy3 = ((Bkzy)al.get(2)).getZyid();
+		if(len_zy > 3) bkzy4 = ((Bkzy)al.get(3)).getZyid();
+		if(len_zy > 4) bkzy5 = ((Bkzy)al.get(4)).getZyid();
+
 		icl = new HdqkList(bmxx.getBmxxid());
 		al = dbo.getList(icl);
 		if(al.size() < 3){
@@ -224,9 +225,8 @@ body{
 		zyl = new ZhshzyList();
 		al = dbo.getList(zyl);
 
-
-		sqbklyList = new SqbklyList();
-		alSqly = dbo.getList(sqbklyList);
+		bklyList = new SqbklyList();
+		al_bkly = dbo.getList(bklyList);
 	}catch(Exception e) {
 		logger.error(e.getMessage());
 		return;
@@ -237,20 +237,36 @@ body{
 <script>
 
 <%
+        int ksLeibie = 0;
+		
+		for(i=0; i<al_bkly.size(); i++) {
+			bkly = (Sqbkly)al_bkly.get(i);
+			ksLeibie = bkly.getType();
 
-		for(i=1; i<al.size(); i++) {
+%>
+    var leiBie = new Object();
+	if(null == lyList_<%=ksLeibie%>)
+	   var lyList_<%=ksLeibie%> = new Array();
+	leiBie.id = <%=bkly.getId()%>;
+	leiBie.mc = "<%=bkly.getMc()%>";
+	lyList_<%=ksLeibie%>[lyList_<%=ksLeibie%>.length] = leiBie;
+<%
+		}
+%>
+<%
+        int zyLeibie = 0;
+		for(i=0; i<al.size(); i++) {
 			zy = (Zhshzy)al.get(i);
-			if(zy.getType()>0) {
+			zyLeibie = zy.getType();
+
 %>
-	zyList_wk[zyList_wk.length] = "<%=zy.getZymc()%>";
-	zyList_wk_id[zyList_wk_id.length] = "<%=zy.getZyid()%>";
+    var zy = new Object();
+	if(null == zyList_<%=zyLeibie%>)
+	   var zyList_<%=zyLeibie%> = new Array();
+	zy.id = <%=zy.getZyid()%>;
+	zy.mc = "<%=zy.getZymc()%>";
+	zyList_<%=zyLeibie%>[zyList_<%=zyLeibie%>.length] = zy;
 <%
-			} else {
-%>
-	zyList_lk[zyList_lk.length] = "<%=zy.getZymc()%>";
-	zyList_lk_id[zyList_lk_id.length] = "<%=zy.getZyid()%>";
-<%
-			}
 		}
 %>
 </script>
@@ -268,14 +284,14 @@ body{
     </tr-->
     <tr>
       <td width="101" align="center"  class="td1 STYLE6">姓名<span class="star">﹡</span></td>
-      <td width="185"  height="37" align="left" class="td1"><input name="pname" type="text" id="pname" value="<%=bmxx.getKsxm() %>" size="20" maxlength="100"/></td>
-      <td width="58"  height="37" align="center" class="td1 STYLE6" >性别</td>
+      <td width="185"  height="38" align="left" class="td1"><input name="pname" type="text" id="pname" value="<%=bmxx.getKsxm() %>" size="20" maxlength="100"/></td>
+      <td width="58"  height="38" align="center" class="td1 STYLE6" >性别</td>
       <td width="143" align="left" class="td1"><input type="radio" <%=(1 == bmxx.getKsxb()) ? "checked":""%> name="pxb" value="1" />
         <span class="STYLE7">男</span>&nbsp;&nbsp;&nbsp;
         <input type="radio" <%=(0 == bmxx.getKsxb()) ? "checked":""%> name="pxb" value="0" />
       <span class="STYLE7">女</span></td>
-      <td width="73"  height="37" align="center" class="STYLE6 td1">外语语种</td>
-      <td width="218"  height="37" align="left" class="td2"><input type="radio" <%=("英语".equals(bmxx.getWyyz())) ? "checked":""%> name="pwyyz" value="英语" />
+      <td width="73"  height="38" align="center" class="STYLE6 td1">外语语种</td>
+      <td width="218"  height="38" align="left" class="td2"><input type="radio" <%=("英语".equals(bmxx.getWyyz())) ? "checked":""%> name="pwyyz" value="英语" />
         <span class="STYLE7">英语</span>&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="radio" <%=("其它".equals(bmxx.getWyyz())) ? "checked":""%>  name="pwyyz"  value="其它" />
       <span class="STYLE7">其它</span></td>
@@ -283,7 +299,7 @@ body{
   
     <tr>
       <td width="101" align="center"  class="td1 STYLE6">高考省份</td>
-      <td height="37" align="left" class="td1"><select id="pjg" name="pjg">
+      <td height="38" align="left" class="td1"><select id="pjg" name="pjg">
         <option value="北京" <%=("北京".equals(bmxx.getJg())) ? "selected":""%>>北京</option> 
         <option value="天津" <%=("天津".equals(bmxx.getJg())) ? "selected":""%>>天津</option> 
         <option value="河北" <%=("河北".equals(bmxx.getJg())) ? "selected":""%>>河北</option> 
@@ -389,7 +405,7 @@ body{
     
   <tr>
     <td width="101" align="center"  class="STYLE6 td1">中学名称<span class="star">﹡</span></td>
-    <td height="37" colspan="3" align="left" class="STYLE6 td1">
+    <td height="38" colspan="3" align="left" class="STYLE6 td1">
 	   <input name="pzxmc" type="text" class="iptbox" id="pzxmc" value="<%=bmxx.getZxmc() %>" size="56" maxlength="200"/></td>
     <td align="center" class="td1"><span class="STYLE6">考生科类</span></td>
     <td align="left" class="td2"><input type="radio" onchange="kskl_change(this);"  onclick="kskl_change(this);" <%=("理工".equals(bmxx.getKskl())) ? "checked":""%> id="pkskl_1" name="pkskl" value="理工" />
@@ -399,25 +415,25 @@ body{
   </tr>
   <tr>
     <td width="101" align="center"  class="td1 STYLE6">身份证号<span class="star">﹡</span></td>
-    <td height="37" colspan="5" align="left" class="STYLE6 td2"><input name="pidcardnum" type="text" id="pidcardnum"  class="iptboxsf" size="50" maxlength="18" value="<%=bmxx.getShfzh()%>" /></td>
+    <td height="38" colspan="5" align="left" class="STYLE6 td2"><input name="pidcardnum" type="text" id="pidcardnum"  class="iptboxsf" size="64" maxlength="18" value="<%=bmxx.getShfzh()%>" /></td>
     </tr>
   <tr>
     <td width="101" align="center"  class="td1 STYLE6">通知书邮寄地址<span class="star">﹡</span></td>
-    <td height="37" colspan="5" align="left" class="STYLE6 td2"><input name="ptxdzh" type="text" id="ptxdzh" value="<%=bmxx.getTxdz() %>" size="76" maxlength="300"/></td>
+    <td height="38" colspan="5" align="left" class="STYLE6 td2"><input name="ptxdzh" type="text" id="ptxdzh" value="<%=bmxx.getTxdz() %>" size="92" maxlength="300"/></td>
     </tr>
   <tr>
     <td width="101" align="center"  class="td1 STYLE6">邮政编码<span class="star">﹡</span></td>
-    <td height="37" align="left" class="td1"><input name="pyzbm" type="text" id="pyzbm" value="<%=bmxx.getYzbm() %>" size="16" maxlength="6"/></td>
+    <td height="38" align="left" class="td1"><input name="pyzbm" type="text" id="pyzbm" value="<%=bmxx.getYzbm() %>" size="16" maxlength="6"/></td>
     <td align="center" class="td1 STYLE6">收信人<span class="star">﹡</span></td>
     <td align="left" class="td1"><input name="pshxr" type="text" id="pshxr" value="<%=bmxx.getShxr() %>" maxlength="100"/></td>
     <td align="center" class="td1 STYLE6">联系电话<span class="star">﹡</span></td>
     <td align="left" class="td2"><input name="pyddh" type="text" class="iptbox" id="pyddh" value="<%=bmxx.getKsshji() %>"   size="30" maxlength="100"/></td>
   </tr>
   <tr>
-    <td height="37" colspan="6" align="center"  class="td2 fnt">家庭情况</td>
+    <td height="36" colspan="6" align="center"  class="td2 fnt">家庭情况</td>
     </tr>
   <tr>
-    <td height="37" colspan="6" align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <td height="38" colspan="6" align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="13%" align="center" class="td1 STYLE6">父亲姓名</td>
         <td width="36%" align="left" class="td1"><input name="pfmxm" type="text" class="iptbox" id="pfmxm" value="<%=bmxx.getFmxm() %>" size="34" maxlength="100"/></td>
@@ -436,67 +452,62 @@ body{
       </tr>
       <tr>
         <td align="center" class="td1 STYLE6">母亲工作单位</td>
-        <td colspan="3" align="left" class="td1"><input name="mmgzdw" type="text" class="iptbox" id="mmgzdw" value="<%=bmxx.getMmgzdw() %>"  size="100" maxlength="200"/></td> <!-- <input name="mmgzzw" type="text" class="iptbox" id="mmgzzw" value="<%=bmxx.getMmzw() %>"  size="26" maxlength="100"/> -->
+        <td colspan="3" align="left" class="td1"><input name="mmgzdw" type="text" class="iptbox" id="mmgzdw" value="<%=bmxx.getMmgzdw() %>"  size="100" maxlength="200"/></td> 
       </tr>
 
     </table></td>
   </tr>
+ <tr>
+    <td height="36" colspan="6" align="center"  class="td2 fnt">面试分组</td>
+    </tr>
   <tr>
-    <td height="37" colspan="6" align="center"  class="td2 fnt">专业志愿</td>
+    <td height="42" colspan="6" align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="19%" align="center" class="td1 STYLE6">申请理由（面试分组）</td>
+        <td width="81%" align="left" class="td1"><select name="psqly" id="psqly" onChange="leiBie_change(this);" onclick="leiBie_change(this);">
+        <option value="qxz" selected="selected">--请选择--</option> 
+      </select></td> 
+      </tr>
+
+    </table></td>
+  </tr>  <tr>
+    <td height="36" colspan="6" align="center"  class="td2 fnt">专业志愿</td>
   </tr>
   <tr>
-    <td height="37" colspan="6" align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <td height="38" colspan="6" align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="10%" align="left" class="td1 STYLE6">第一志愿<span class="star">﹡</span></td>
-        <td width="22%" align="left" class="td1"><select name="pzhiyuan1" id="pzhiyuan1">
+        <td width="22%" align="left" class="td1"><select name="pzhiyuan1" id="pzhiyuan1"><option value="0" selected="selected">--请选择--</option>
 <%
 
 		for(i=0; i<al.size(); i++) {
 			zy = (Zhshzy)al.get(i);
-			if("理工".equals(bmxx.getKskl())) {
-				if(zy.getType()>0) continue;
-			}
-			else {
-				if(zy.getType()==0) continue;
-			}
 %>
-			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy1.getZyid()) ? "selected": ""%>><%=((zy.getZymc().length()==0)?"请选择":zy.getZymc())%></option>
+			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy1) ? "selected": ""%>><%=zy.getZymc()%></option>
 <%
 		}
 %>
       </select></td>
         <td width="10%" align="left" class="td1 STYLE6">第二志愿</td>
-        <td width="24%" class="td1"><select name="pzhiyuan2" id="pzhiyuan2">
+        <td width="24%" class="td1"><select name="pzhiyuan2" id="pzhiyuan2"><option value="0" selected="selected">--请选择--</option>
 <%
 
 		for(i=0; i<al.size(); i++) {
 			zy = (Zhshzy)al.get(i);
-			if("理工".equals(bmxx.getKskl())) {
-				if(zy.getType()>0) continue;
-			}
-			else {
-				if(zy.getType()==0) continue;
-			}
 %>
-			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy2.getZyid()) ? "selected": ""%>><%=((zy.getZymc().length()==0)?"请选择":zy.getZymc())%></option>
+			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy2) ? "selected": ""%>><%=zy.getZymc()%></option>
 <%
 		}
 %>
       </select></td>
         <td width="11%" align="left" class="td1 STYLE6">第三志愿</td>
-        <td width="23%" align="left" class="td2"><select name="pzhiyuan3" id="pzhiyuan3">
+        <td width="23%" align="left" class="td2"><select name="pzhiyuan3" id="pzhiyuan3"><option value="0" selected="selected">--请选择--</option>
 <%
 
 		for(i=0; i<al.size(); i++) {
 			zy = (Zhshzy)al.get(i);
-			if("理工".equals(bmxx.getKskl())) {
-				if(zy.getType()>0) continue;
-			}
-			else {
-				if(zy.getType()==0) continue;
-			}
 %>
-			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy3.getZyid()) ? "selected": ""%>><%=((zy.getZymc().length()==0)?"请选择":zy.getZymc())%></option>
+			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy3) ? "selected": ""%>><%=zy.getZymc()%></option>
 <%
 		}
 %>
@@ -504,108 +515,40 @@ body{
       </tr>
       <tr>
         <td align="left" class="td1 STYLE6">第四志愿</td>
-        <td align="left" class="td1"><select name="pzhiyuan4" id="pzhiyuan4">
+        <td align="left" class="td1"><select name="pzhiyuan4" id="pzhiyuan4"><option value="0" selected="selected">--请选择--</option>
 <%
 
 		for(i=0; i<al.size(); i++) {
 			zy = (Zhshzy)al.get(i);
-			if("理工".equals(bmxx.getKskl())) {
-				if(zy.getType()>0) continue;
-			}
-			else {
-				if(zy.getType()==0) continue;
-			}
 %>
-			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy4.getZyid()) ? "selected": ""%>><%=((zy.getZymc().length()==0)?"请选择":zy.getZymc())%></option>
+			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy4) ? "selected": ""%>><%=zy.getZymc()%></option>
 <%
 		}
 %>
       </select></td>
         <td align="left" class="td1 STYLE6">第五志愿</td>
-        <td class="td1"><select name="pzhiyuan5" id="pzhiyuan5">
+        <td class="td1"><select name="pzhiyuan5" id="pzhiyuan5"><option value="0" selected="selected">--请选择--</option>
 <%
 
 		for(i=0; i<al.size(); i++) {
 			zy = (Zhshzy)al.get(i);
-			if("理工".equals(bmxx.getKskl())) {
-				if(zy.getType()>0) continue;
-			}
-			else {
-				if(zy.getType()==0) continue;
-			}
 %>
-			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy5.getZyid()) ? "selected": ""%>><%=((zy.getZymc().length()==0)?"请选择":zy.getZymc())%></option>
+			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy5) ? "selected": ""%>><%=zy.getZymc()%></option>
 <%
 		}
 %>
       </select></td>
-        <td align="left" class="td1 STYLE6">第六志愿</td>
-        <td align="left" class="td2"><select name="pzhiyuan6" id="pzhiyuan6">
-<%
-
-		for(i=0; i<al.size(); i++) {
-			zy = (Zhshzy)al.get(i);
-			if("理工".equals(bmxx.getKskl())) {
-				if(zy.getType()>0) continue;
-			}
-			else {
-				if(zy.getType()==0) continue;
-			}
-%>
-			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy6.getZyid()) ? "selected": ""%>><%=((zy.getZymc().length()==0)?"请选择":zy.getZymc())%></option>
-<%
-		}
-%>
-      </select></td>
-      </tr>
-      <tr>
-        <td align="left" class="td1 STYLE6">第七志愿</td>
-        <td align="left" class="td1"><select name="pzhiyuan7" id="pzhiyuan7">
-<%
-
-		for(i=0; i<al.size(); i++) {
-			zy = (Zhshzy)al.get(i);
-			if("理工".equals(bmxx.getKskl())) {
-				if(zy.getType()>0) continue;
-			}
-			else {
-				if(zy.getType()==0) continue;
-			}
-%>
-			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy7.getZyid()) ? "selected": ""%>><%=((zy.getZymc().length()==0)?"请选择":zy.getZymc())%></option>
-<%
-		}
-%>
-      </select></td>
-        <td align="left" class="td1 STYLE6">第八志愿</td>
-        <td class="td1"><select name="pzhiyuan8" id="pzhiyuan8">
-<%
-
-		for(i=0; i<al.size(); i++) {
-			zy = (Zhshzy)al.get(i);
-			if("理工".equals(bmxx.getKskl())) {
-				if(zy.getType()>0) continue;
-			}
-			else {
-				if(zy.getType()==0) continue;
-			}
-%>
-			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy8.getZyid()) ? "selected": ""%>><%=((zy.getZymc().length()==0)?"请选择":zy.getZymc())%></option>
-<%
-		}
-%>
-      </select></td>
-        <td align="center" class="td1 STYLE6">&nbsp;</td>
-        <td class="td2">&nbsp;</td>
+        <td align="left" class="td1 STYLE6">&nbsp;</td>
+        <td align="left" class="td2">&nbsp;</td>
       </tr>
 
     </table></td>
   </tr>
 <tr>
-    <td height="37" colspan="6" align="center"  class="td2 fnt">高中阶段获省市级以上荣誉称号和竞赛获奖情况</td>
+    <td height="36" colspan="6" align="center"  class="td2 fnt">高中阶段获省市级以上荣誉称号和竞赛获奖情况</td>
   </tr>
 <tr>
-  <td height="37" colspan="6" align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <td height="38" colspan="6" align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td width="18%" align="center" class="STYLE6 td1">获奖时间</td>
       <td width="34%" align="center" class="STYLE6 td1">获奖名称</td>
@@ -746,10 +689,10 @@ body{
   </table></td>
 </tr>
 <tr>
-  <td height="37" colspan="6" align="center"  class="td2 fnt">参加或组织的社会工作或课外活动，受过何种奖励</td>
+  <td height="36" colspan="6" align="center"  class="td2 fnt">参加或组织的社会工作或课外活动，受过何种奖励</td>
 </tr>
 <tr>
-  <td height="37" colspan="6" align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <td height="38" colspan="6" align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td width="18%" align="center" class="STYLE6 td1">时间</td>
       <td width="43%" align="center" class="STYLE6 td1">活动名称</td>
@@ -866,27 +809,12 @@ body{
     
     <tr>
       <td align="center"   class="td1 STYLE6">爱好特长</td>
-      <td height="37" colspan="5" align="left"  class="STYLE6 td2"><input name="pksah" type="text" class="iptbox" id="pksah" value="<%=bmxx.getKsah()%>" size="88" maxlength="390" /></td>
+      <td height="38" colspan="5" align="left"  class="STYLE6 td2"><input name="pksah" type="text" class="iptbox" id="pksah" value="<%=bmxx.getKsah()%>" size="88" maxlength="390" /></td>
     </tr>
   
-    <tr>
-      <td align="center"   class="td1 STYLE6">申请理由 <br>（面试分组）</td>
-      <td height="37" colspan="5" align="left"  class="td2"><select name="psqly" id="psqly">
-<%
-
-		for(i=0; i<alSqly.size(); i++) {
-			sqbkly = (Sqbkly)alSqly.get(i);
-			if(null == sqbkly.getMc() || 0 == sqbkly.getMc().length()) continue;
-%>
-        <option value="<%=sqbkly.getMc()%>" <%=((sqbkly.getMc().equals(bmxx.getSqly())) ? "selected":"")%>><%=sqbkly.getMc()%></option>
-<%
-		}
-%>
-      </select></td>
-    </tr>
-
+ 
      <tr>
-      <td colspan="5"  align="left"   class="td1 fnt">本人本着诚实、严谨的态度郑重递交以上材料，如有与事实不符，一切后果自己承担。</td>
+      <td height="34" colspan="5"  align="left"   class="td1 fnt">本人本着诚实、严谨的态度郑重递交以上材料，如有与事实不符，一切后果自己承担。</td>
       <td align="left"  class="td2 STYLE6" >申请人签字：</td>
     </tr>
 
@@ -894,18 +822,16 @@ body{
 
 <table width="780" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#D0D0D0">
   <tr>
-    <td colspan="5" bgcolor="#FFFFFF" align="center" height="40"><input name="Submit" type="button" onclick="sub_chk();" value=" 提 交 " style="width:70px; height:32px;"/>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="Submit2" onclick="window.history.back();" value=" 取 消 " style="width:70px; height:32px;"/>       </td>
+    <td colspan="5" bgcolor="#FFFFFF" align="center" height="40"><input name="Submit" type="button" onclick="sub_chk();" value="  提    交  " style="width:70px; height:32px;"/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="Submit2" onclick="window.history.back();" value="  取    消  " style="width:70px; height:32px;"/>       </td>
   </tr>
 </table>
-<input type="hidden" name="saved_zyid1" id="saved_zyid1" value="<%=bkzy1.getZyid()%>">
-<input type="hidden" name="saved_zyid2" id="saved_zyid2" value="<%=bkzy2.getZyid()%>">
-<input type="hidden" name="saved_zyid3" id="saved_zyid3" value="<%=bkzy3.getZyid()%>">
-<input type="hidden" name="saved_zyid4" id="saved_zyid4" value="<%=bkzy4.getZyid()%>">
-<input type="hidden" name="saved_zyid5" id="saved_zyid5" value="<%=bkzy5.getZyid()%>">
-<input type="hidden" name="saved_zyid6" id="saved_zyid6" value="<%=bkzy6.getZyid()%>">
-<input type="hidden" name="saved_zyid7" id="saved_zyid7" value="<%=bkzy7.getZyid()%>">
-<input type="hidden" name="saved_zyid8" id="saved_zyid8" value="<%=bkzy8.getZyid()%>">
+<input type="hidden" name="saved_zyid1" id="saved_zyid1" value="<%=bkzy1%>">
+<input type="hidden" name="saved_zyid2" id="saved_zyid2" value="<%=bkzy2%>">
+<input type="hidden" name="saved_zyid3" id="saved_zyid3" value="<%=bkzy3%>">
+<input type="hidden" name="saved_zyid4" id="saved_zyid4" value="<%=bkzy4%>">
+<input type="hidden" name="saved_zyid5" id="saved_zyid5" value="<%=bkzy5%>">
+<input type="hidden" name="saved_sqly" id="saved_sqly" value="<%=bmxx.getSqly()%>">
 
 <script>
 	//if(document.getElementById('pkskl_1').checked) kskl_change(document.getElementById('pkskl_1')); else kskl_change(document.getElementById('pkskl_2'));

@@ -83,7 +83,7 @@ public class ExportExamResultAction extends BaseAction{
 		int colCount_bmxx = 0, colCount_grjl = 0, colCount_hdqk =0, tjf = 0;
 		String columnName, columnValue;
 		HashMap<String, String> hm = new HashMap<String, String>();
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		ResultSetMetaData rsmd_bmxx = null, rsmd_hdqk =null, rsmd_grjl = null;
 		Workbook workbook = null;
 		WritableWorkbook copy = null;

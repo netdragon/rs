@@ -205,9 +205,9 @@ function printIt(n){
   <tr>
     <td  colspan="6" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td width="11%" align="center" class="td1 STYLE6">考生姓名</td>
+    <td width="11%" align="center" class="td1 STYLE6 brfnt">考生姓名</td>
     <td width="22%" class="td1 STYLE6"><%=bmxx.getKsxm() %></td>
-    <td width="11%" align="center" class="td1 STYLE6">中学名称</td>
+    <td width="11%" align="center" class="td1 STYLE6 brfnt">中学名称</td>
     <td width="56%" class="tda2 STYLE6"><%=bmxx.getZxmc() %></td>
   </tr>
 </table>
@@ -216,19 +216,19 @@ function printIt(n){
   <tr>
    <td  colspan="6" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td  width="13%" nowrap="nowrap" align="left" class="td1 STYLE6">&nbsp;&nbsp;中学通信地址</td>
+    <td  width="13%" nowrap="nowrap" align="left" class="td1 STYLE6">&nbsp;&nbsp;<span class="brfnt">中学通信地址</span></td>
     <td  width="62%" class="td1 STYLE6"><%=gzcjjd.getZxtxdz() %></td>
-    <td  width="11%" nowrap="nowrap" align="center" class="td1 STYLE6">中学级别</td>
+    <td  width="11%" align="center" nowrap="nowrap" class="td1 STYLE6 brfnt">中学级别</td>
     <td  width="14%" nowrap="nowrap" class="tda2 STYLE6"><%=gzcjjd.getZxjb() %></td>
   </tr>
   <tr>
     <td colspan="4"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td nowrap="nowrap" align="center" class="td1 STYLE6">邮政编码</td>
+        <td align="center" nowrap="nowrap" class="td1 STYLE6 brfnt">邮政编码</td>
         <td nowrap="nowrap" class="td1 STYLE6"><%=gzcjjd.getZxybm() %></td>
-        <td nowrap="nowrap" align="center" class="td1 STYLE6">联系电话</td>
+        <td align="center" nowrap="nowrap" class="td1 STYLE6 brfnt">联系电话</td>
         <td class="td1 STYLE6"><%=gzcjjd.getZxlxdh() %></td>
-        <td nowrap="nowrap" align="center" class="td1 STYLE6">年级负责人</td>
+        <td align="center" nowrap="nowrap" class="td1 STYLE6 brfnt">年级负责人</td>
         <td nowrap="nowrap" class="tda2 STYLE6"><%=gzcjjd.getNjfzr() %></td>
       </tr>
     </table></td>
@@ -317,7 +317,7 @@ function printIt(n){
         <td align="center" class="td1 brfnt"><%if (gzcjjd.getGesbjrs()==0) {%>&nbsp; <% } %> <%if (gzcjjd.getGesbjrs()!=0) {%> <%=gzcjjd.getGesbjrs() %><% } %></td>
         <td align="center" class="td1 brfnt"><%if (gzcjjd.getGesnjmc()==0) {%>&nbsp; <% } %> <%if (gzcjjd.getGesnjmc()!=0) {%> <%=gzcjjd.getGesnjmc() %><% } %></td>
         <td align="center" class="tda2 brfnt"><%if (gzcjjd.getGesnjrs()==0) {%>&nbsp; <% } %> <%if (gzcjjd.getGesnjrs()!=0) {%> <%=gzcjjd.getGesnjrs() %><% } %></td
-      </tr>
+      ></tr>
       <tr>
         <td align="center" class="td1 STYLEcj">高二（下）期末</td>
         <td align="center" class="td1 brfnt"><%=gzcjjd.getGexyw() %>&nbsp;</td>
@@ -335,7 +335,7 @@ function printIt(n){
         <td align="center" class="td1 brfnt"><%if (gzcjjd.getGexbjrs()==0) {%>&nbsp; <% } %> <%if (gzcjjd.getGexbjrs()!=0) {%> <%=gzcjjd.getGexbjrs() %><% } %></td>
         <td align="center" class="td1 brfnt"><%if (gzcjjd.getGexnjmc()==0) {%>&nbsp; <% } %> <%if (gzcjjd.getGexnjmc()!=0) {%> <%=gzcjjd.getGexnjmc() %><% } %></td>
         <td align="center" class="tda2 brfnt"><%if (gzcjjd.getGexnjrs()==0) {%>&nbsp; <% } %> <%if (gzcjjd.getGexnjrs()!=0) {%> <%=gzcjjd.getGexnjrs() %><% } %></td
-      </tr>
+      ></tr>
       <tr>
         <td align="center" class="td1 STYLEcj">高三（上）期末</td>
         <td align="center" class="td1 brfnt"><%=gzcjjd.getGssyw() %>&nbsp;</td>
@@ -353,7 +353,7 @@ function printIt(n){
         <td align="center" class="td1 brfnt"><%if (gzcjjd.getGssbjrs()==0) {%>&nbsp; <% } %> <%if (gzcjjd.getGssbjrs()!=0) {%> <%=gzcjjd.getGssbjrs() %><% } %></td>
         <td align="center" class="td1 brfnt"><%if (gzcjjd.getGssnjmc()==0) {%>&nbsp; <% } %> <%if (gzcjjd.getGssnjmc()!=0) {%> <%=gzcjjd.getGssnjmc() %><% } %></td>
         <td align="center" class="tda2 brfnt"><%if (gzcjjd.getGssnjrs()==0) {%>&nbsp; <% } %> <%if (gzcjjd.getGssnjrs()!=0) {%> <%=gzcjjd.getGssnjrs() %><% } %></td
-      </tr>
+      ></tr>
       <tr>
         <td align="center" class="td1 STYLEcj">会考成绩</td>
         <td align="center" class="td1 brfnt"><%=gzcjjd.getHkyw() %>&nbsp;</td>
@@ -394,7 +394,7 @@ function printIt(n){
   </tr>
   
   <tr>
-    <td width="57" align="center" class="td1 STYLE6">班主任<br />综合评价</td>
+    <td width="57" align="center" class="td1 STYLE6 brfnt brfnt brfnt">班主任<br />综合评价</td>
         <td class="tda2" colspan="5" align="left" valign="top">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
@@ -417,7 +417,7 @@ function printIt(n){
           </table></td>
   </tr>
   <tr>
-    <td width="57" align="center" class="tda1 STYLE6">中学审查意见</td>
+    <td width="57" align="center" class="tda1 STYLE6 brfnt">中学审查意见</td>
     <td colspan="5" class="STYLE6"><table width="100%" border="0" cellspacing="0" cellpadding="0">
      <tr>
         <td colspan="8" valign="top">&nbsp;</td>

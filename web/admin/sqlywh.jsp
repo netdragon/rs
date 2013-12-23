@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>申请理由维护</title>
+<title>面试分组维护</title>
 <style type="text/css">
 <!--
 .con{
@@ -69,7 +69,7 @@
 </style>
 <script>
 	function deleteLy(name){
-	    if(!window.confirm("您将要删除'" + name + "'申请理由，请确认。")) return;
+	    if(!window.confirm("您将要删除'" + name + "'面试分组，请确认。")) return;
 		document.getElementById("mc").value = name;
 		document.forms[0].method = "post";
 		document.forms[0].action = "/delete_sqbkly";
@@ -87,7 +87,7 @@
 <div class="con">
 <br />
 <form action="" method="post">
-  <table width="522" border="0" align="center" cellpadding="0" cellspacing="0">
+  <table width="534" border="0" align="center" cellpadding="0" cellspacing="0">
    <tr>
     <td height="19">
 <%
@@ -123,7 +123,7 @@
 	<br>
 <table width="522" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td width="600" height="43" class="tdbline"><img src="../images/zkzpic01.gif" alt="pic" width="40" height="42" align="absmiddle" /><span class="STYLE1">申请理由维护(注：在本期报名时间内不能修改申请理由设置，否则会引起数据不一致。)</span></td>
+    <td width="600" height="43" class="tdbline"><img src="../images/zkzpic01.gif" alt="pic" width="40" height="42" align="absmiddle" /><span class="STYLE1">面试分组维护(注：在本期报名时间内不能修改面试分组设置，否则会引起数据不一致。)</span></td>
   </tr>
     <tr>
     <td align="right"><input type="button" name="add" onclick="addsqbkly()" value="增  加" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" name="Subkssj" value="取 消"  onclick="window.history.back();"/></td>
@@ -132,7 +132,8 @@
 
   <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#999999">
       <tr>
-        <td width="80%" align="center" bgcolor="#FFFFFF" class="km_bt">名&nbsp;&nbsp;称</td>
+	    <td width="26%" align="center" bgcolor="#FFFFFF" class="km_bt">科&nbsp;类</td>
+        <td width="54%" align="center" bgcolor="#FFFFFF" class="km_bt">名&nbsp;称</td>
 		<td width="20%" bgcolor="#FFFFFF">&nbsp;</td>
       </tr>  
   <%
@@ -141,7 +142,8 @@
 			if(null == sqbkly.getMc() || 0 == sqbkly.getMc().length()) continue;
   %>
       <tr>
-        <td width="80%" bgcolor="#FFFFFF" class="km_bt"><a href="sqly.jsp?mc=<%=sqbkly.getMc()%>"><%=sqbkly.getMc()%></a> </td>
+	    <td width="26%" bgcolor="#FFFFFF" class="km_bt"><%=((sqbkly.getType() == 0) ? "文科":"理科")%></td>
+        <td width="54%" bgcolor="#FFFFFF" class="km_bt"><a href="sqly.jsp?id=<%=sqbkly.getId()%>&&mc=<%=sqbkly.getMc()%>&&type=<%=sqbkly.getType()%>"><%=sqbkly.getMc()%></a> </td>
 		<td width="20%" bgcolor="#FFFFFF">&nbsp;&nbsp;<input type="button" onclick="deleteLy('<%=sqbkly.getMc()%>', '<%=sqbkly.getMc()%>')" value="删除"></td>
       </tr>
 <%

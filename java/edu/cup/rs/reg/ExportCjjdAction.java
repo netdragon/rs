@@ -82,7 +82,7 @@ public class ExportCjjdAction extends BaseAction{
 		int colCount_bmxx = 0;
 		String columnName, columnValue;
 		
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		ResultSetMetaData rsmd_bmxx = null;
 		Workbook workbook = null;
 		WritableWorkbook copy = null;

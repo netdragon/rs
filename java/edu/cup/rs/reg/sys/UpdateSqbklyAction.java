@@ -45,7 +45,9 @@ public class UpdateSqbklyAction extends BaseAction
     		}
 			
 			String mc = BaseFunction.null2value(request.getParameter("mc"));
-			String oldMc = BaseFunction.null2value(request.getParameter("original"));
+
+			String oldId = BaseFunction.null2value(request.getParameter("original_id"));
+			String zytype = BaseFunction.null2value(request.getParameter("zytype"));
 
             DBOperator dbo=new DBOperator();
             SqbklyList zl;
@@ -89,19 +91,19 @@ public class UpdateSqbklyAction extends BaseAction
 						c2.setTime(sdf.parse(ss.getValue()));
 				}
 				if(c_curr.after(cl) && c_curr.before(c2)) {
-					response.sendRedirect("/error.jsp?error=" + new UTF8String("在本期报名时间内不能修改申请理由设置，否则会引起数据不一致!").toUTF8String());
+					response.sendRedirect("/error.jsp?error=" + new UTF8String("在本期报名时间内不能修改面试分组设置，否则会引起数据不一致!").toUTF8String());
 					return;
 				}
 				Sqbkly ly = new Sqbkly();
 				ly.setMc(mc);
+				ly.setType(Integer.parseInt(zytype));
 				zl = new SqbklyList();
-				dbo.update(zl.delete(oldMc));
-				dbo.insert(zl.insert(ly));
+				dbo.update(zl.update(oldId,ly));
 				
 				ICommonList logslist;
 				Log log = new Log();
 				logslist = new LogsList();
-				log.setContent(USERNAME + " 修改了申请理由。");
+				log.setContent(USERNAME + " 修改了面试分组。");
 				dbo.insert(logslist.insert(log));
                 dbo.commit();
 

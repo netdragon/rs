@@ -96,6 +96,9 @@ body{
 	font-size: 18px;
 	
 }
+#textaream {
+	border: 1px solid #000000;
+}
 -->
 </style>
 <script src="../common/validate.js"></script>
@@ -383,7 +386,8 @@ body{
     <td align="center" class="td1 STYLE6">&nbsp;&nbsp;&nbsp;&nbsp;班主任<br />
       &nbsp;&nbsp;综合评价</td>
     <td class="tda2" colspan="5" align="left" valign="top"><p class="STYLE9">(此栏可打印后手写)</p>
-	<textarea name="bzrpj" style="width=100%;height=80"></textarea><br/>
+	<textarea name="bzrpj" cols="70" rows="6" id="textaream" style="width=90%;height=80"></textarea>
+	<br/>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;班主任（签章）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日 </td>
     </tr>
   <tr>

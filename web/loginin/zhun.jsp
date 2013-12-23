@@ -4,6 +4,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <%@ page import="edu.cup.rs.reg.*"%>
+<%@ page import="edu.cup.rs.reg.sys.*"%>
 <%@include file="../common/access_control.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -53,6 +54,8 @@ a:hover{
 	ArrayList al;
 	ICommonList icl;
 	Bmxx bmxx;
+	SqbklyList sqbklyList;
+	Sqbkly sqbkly;
 	DBOperator dbo = new DBOperator();
 	try{
 		dbo.init(false);
@@ -100,6 +103,11 @@ a:hover{
             response.sendRedirect("/error.jsp?error=" + new UTF8String("没有准考证信息！").toUTF8String());
 			return;
 		} 
+		sqbklyList = new SqbklyList(bmxx.getSqly());
+		ArrayList al_sqly = dbo.getList(sqbklyList);
+		String sqly_value="";
+		if(al_sqly.size()==1) 
+		    sqly_value=((Sqbkly)(al_sqly.get(0))).getMc();
 		KemulxList kl;
 		Kemulx kemu;
 		kl = new KemulxList();
@@ -145,8 +153,8 @@ a:hover{
         <td valign="middle" class="cuti tbl_a"><%=bmxx.getJg()%>&nbsp;</td>
       </tr>
       <tr>
-        <td height="34" valign="middle" class="tbl_a">科　类：</td>
-        <td valign="middle" class="cuti tbl_a"><%=bmxx.getKskl()%>&nbsp;</td>
+        <td height="34" valign="middle" class="tbl_a">面试分组：</td>
+        <td valign="middle" class="cuti tbl_a"><%=sqly_value%>&nbsp;</td>
       </tr>
       <tr>
         <td height="34" valign="middle" nowrap="nowrap"  class="tbl_a">身份证号：</td>

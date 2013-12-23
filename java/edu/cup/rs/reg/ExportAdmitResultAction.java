@@ -83,7 +83,7 @@ public class ExportAdmitResultAction extends BaseAction{
 		int colCount_bmxx = 0, colCount_hdqk = 0, colCount_grjl = 0, tjf = 0;
 		String columnName, columnValue;
 		HashMap<String, String> hm = new HashMap<String, String>();
-		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		ResultSetMetaData rsmd_bmxx = null,rsmd_hdqk = null, rsmd_grjl = null;
 		Workbook workbook = null;
 		WritableWorkbook copy = null;
@@ -104,8 +104,8 @@ public class ExportAdmitResultAction extends BaseAction{
 			while(rs.next()) {
 				hm.put(rs.getString("zyid"), rs.getString("zymc")+" ");
 			}
-			rs = dbo.query("select a.bmxxid,zhkzhid,ksxm,ksxb,shfzh,wyyz,jg,mz,zzmm,kskl,txdz,shxr,yzbm,ksshji,ksah,sqly,zxmc,b.zxtxdz,b.zxybm,b.zxlxdh,fmxm,fmgzdw,fmyddh," +
-			"mmxm,mmgzdw,mmyddh,bmsj from bmxx a left join cjjd b on a.bmxxid=b.bmxxid where zhkzhid is not null and zhkzhid != 0 order by a.bmxxid");
+			rs = dbo.query("select a.bmxxid,zhkzhid,ksxm,ksxb,shfzh,wyyz,jg,mz,zzmm,kskl,txdz,shxr,yzbm,ksshji,ksah,c.mc as sqly,zxmc,b.zxtxdz,b.zxybm,b.zxlxdh,fmxm,fmgzdw,fmyddh," +
+			"mmxm,mmgzdw,mmyddh,bmsj from bmxx a left join cjjd b on a.bmxxid=b.bmxxid left join sqbkly c on a.sqly=c.id where zhkzhid is not null and zhkzhid != 0 order by a.bmxxid");
 			rsmd_bmxx = rs.getMetaData();
 			colCount_bmxx = rsmd_bmxx.getColumnCount();
 			int j = 1;
@@ -178,13 +178,20 @@ public class ExportAdmitResultAction extends BaseAction{
                 }
 
 				rs_bkzy = dbo.query("select zyid,tjf from bkzy where bmxxid="+bmxxid+" order by xh");
+				int zy_i = 0;
                 while (rs_bkzy.next()){
 					columnValue = rs_bkzy.getString("zyid");
 					label = new Label(k, j, hm.get(columnValue), border); 
 					sheet.addCell(label);
 					k++;
 					tjf = rs_bkzy.getInt("tjf");
+					zy_i++;
                 }
+				for(int zy_index=zy_i; zy_index<5; zy_index++) {
+					label = new Label(k, j, "", border); 
+					sheet.addCell(label);
+					k++;
+				}
 				if(tjf == 1)
 					columnValue = "是";
 				else

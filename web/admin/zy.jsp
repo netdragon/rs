@@ -4,6 +4,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <%@ page import="edu.cup.rs.reg.*"%>
+<%@ page import="edu.cup.rs.reg.sys.*"%>
 <%@include file="../common/admin_control.jsp"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -50,11 +51,11 @@
 	border: 1px solid #DFE7EC;
 }
 .km_bt {color: #0033FF; font-size: 16px; font-weight: bold; }
-.STYLE9 {
-	color: #000000;
+.p1{font-size:12px;color:black}
+.STYLE11 {font-size: 12}
+.con .km_bt {
 	font-size: 12px;
 }
-.p1{font-size:12px;color:black}
 -->
 </style>
 <script>
@@ -81,9 +82,9 @@ int year = c.get(Calendar.YEAR);
 <div class="con">
 <br />
 <form action="" method="post">
-  <table width="522" border="0" align="center" cellpadding="0" cellspacing="0">
+  <table width="654" border="0" align="center" cellpadding="0" cellspacing="0">
    <tr>
-    <td height="19">
+    <td width="652" height="19">
 <%
 	LogHandler logger=LogHandler.getInstance("zy.jsp");
 	String zyid = BaseFunction.null2value(request.getParameter("zyid"));
@@ -94,48 +95,62 @@ int year = c.get(Calendar.YEAR);
 	Zhshzy zy = null;
 	int i = 0;
 	DBOperator dbo = null;
-	if(null != zyid && zyid.length() > 0) {
-		dbo = new DBOperator();
-		try{
-			dbo.init(false);
-		}catch(Exception e){
-			logger.error(e.getMessage());
-			response.sendRedirect("/error.jsp?error=" + new UTF8String("数据库访问错误！").toUTF8String());
-			return;
-		}
-		try{
+	Sqbkly bkly;
+	SqbklyList bklyList;
+	ArrayList al_bkly = new ArrayList();
+
+	dbo = new DBOperator();
+	try{
+		dbo.init(false);
+	}catch(Exception e){
+		logger.error(e.getMessage());
+		response.sendRedirect("/error.jsp?error=" + new UTF8String("数据库访问错误！").toUTF8String());
+		return;
+	}
+	try{
+		bklyList = new SqbklyList();
+		al_bkly = dbo.getList(bklyList);
+		if(null != zyid && zyid.length() > 0) {
 			zyList = new ZhshzyList(zyid);
 			al = dbo.getList(zyList);
 			zy = (Zhshzy)al.get(0);
 			zymc = zy.getZymc();
 			zytype = zy.getType();
-		}catch(Exception e){
-			logger.error(e.getMessage());
-			response.sendRedirect("/error.jsp?error=" + new UTF8String("没有找到招生专业信息！").toUTF8String());
-			return;
 		}
+	}catch(Exception e){
+		logger.error(e.getMessage());
+		response.sendRedirect("/error.jsp?error=" + new UTF8String("没有找到招生专业信息！").toUTF8String());
+		return;
 	}
 	try {
 
 %>
 	<br>
-<table width="522" border="0" align="center" cellpadding="0" cellspacing="0">
+<table width="654" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
-    <td width="600" height="43" class="tdbline"><img src="../images/zkzpic01.gif" alt="pic" width="40" height="42" align="absmiddle" /><span class="STYLE1">招生专业信息</span></td>
+    <td width="587" height="43" class="tdbline"><img src="../images/zkzpic01.gif" alt="pic" width="40" height="42" align="absmiddle" /><span class="STYLE1">招生专业信息</span></td>
   </tr>
   </table>
 
   <table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#999999">
       <tr>
-        <td width="30%" bgcolor="#FFFFFF" class="km_bt">类别</td>
-        <td width="70%" bgcolor="#FFFFFF" class="km_bt"><input type="radio" id="zytype" name="zytype"  <%=(0 == zytype) ? "checked":""%> value="0" />
-        <span class="STYLE7">理工</span>&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="radio"  id="zytype" name="zytype" <%=(1 == zytype) ? "checked":""%> value="1" />
-      <span class="STYLE7">文史</span></td>
+        <td width="13%" height="40" bgcolor="#FFFFFF" class="km_bt">类别</td>
+        <td width="87%" bgcolor="#FFFFFF" class="km_bt">
+<%
+			for(i=0; i<al_bkly.size(); i++) {
+				bkly = (Sqbkly) al_bkly.get(i);
+
+%>
+		<input type="radio" id="zytype" name="zytype"  <%=(bkly.getId() == zytype) ? "checked":""%> value="<%=bkly.getId()%>" />
+        <span class="STYLE7 STYLE11"><%=bkly.getMc()%></span>&nbsp;&nbsp;
+<%
+			}
+%>	  
+	  </td>
       </tr>
       <tr>
-        <td width="30%" bgcolor="#FFFFFF" class="km_bt">名称</td>
-        <td width="70%" bgcolor="#FFFFFF" class="km_bt"><input size="20" maxlength="20" id="zymc" name="zymc" value="<%=zymc%>"></td>
+        <td width="13%" height="40" bgcolor="#FFFFFF" class="km_bt">名称</td>
+        <td width="87%" bgcolor="#FFFFFF" class="km_bt"><input size="20" maxlength="20" id="zymc" name="zymc" value="<%=zymc%>"></td>
       </tr>  
    </table>
 <%
