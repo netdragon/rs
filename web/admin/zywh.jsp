@@ -106,6 +106,7 @@
 	ArrayList al_bkly;
 	int i = 0;
 	HashMap hm_sqly= new HashMap();
+	HashMap hm_sqly_kelei= new HashMap();
 	DBOperator dbo = new DBOperator();
 	
 	String userId = (String)session.getAttribute("user_id");
@@ -129,6 +130,7 @@
 		for(i=0; i<al_bkly.size(); i++) {
 		    bkly = (Sqbkly) al_bkly.get(i);
 		    hm_sqly.put(bkly.getId()+ "", bkly.getMc());
+			hm_sqly_kelei.put(bkly.getId()+ "", (1==bkly.getType())?"理工":"文史");
 		}
 		zyList = new ZhshzyList();
 		al = dbo.getList(zyList);
@@ -155,7 +157,7 @@
 			if(null == zy.getZymc() || 0 == zy.getZymc().length()) continue;
   %>
       <tr>
-        <td width="20%" nowrap="nowrap" bgcolor="#FFFFFF" class="km_bt"><%=hm_sqly.get(zy.getType()+"")%></td>
+        <td width="20%" nowrap="nowrap" bgcolor="#FFFFFF" class="km_bt"><%=hm_sqly.get(zy.getType()+"")%>(<%=hm_sqly_kelei.get(zy.getType()+"")%>)</td>
         <td width="60%" bgcolor="#FFFFFF" class="km_bt"><a href="zy.jsp?zyid=<%=zy.getZyid()%>"><%=zy.getZymc()%></a> </td>
 		<td width="20%" bgcolor="#FFFFFF">&nbsp;&nbsp;<input type="button" onclick="deleteZy('<%=zy.getZyid()%>', '<%=zy.getZymc()%>')" value="删除"></td>
       </tr>

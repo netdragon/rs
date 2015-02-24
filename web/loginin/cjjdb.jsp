@@ -99,6 +99,8 @@ body{
 #textaream {
 	border: 1px solid #000000;
 }
+
+.STYLE10 {font-size: 18px; font-family: "宋体";}
 -->
 </style>
 <script src="../common/validate.js"></script>
@@ -396,7 +398,7 @@ body{
     <td colspan="5" class="STYLE6"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td><p>&nbsp;</p>
-          <p class="STYLE8">&nbsp;&nbsp;&nbsp;&nbsp;该生是我校高中应届毕业生，以上材料全部属实，同意报考。若有虚假，我校愿意承担后果。</p>
+          <p class="STYLE8">&nbsp;&nbsp;&nbsp;&nbsp;该生是我校高中(应届</span><span class="STYLE10">□</span><span class="STYLE8">&nbsp;&nbsp;往届</span><span class="STYLE10">□</span><span class="STYLE8">)毕业生，以上材料全部属实，同意报考。若有虚假，我校愿意承担后果。</p>
           <br /></td>
       </tr>
       <tr>

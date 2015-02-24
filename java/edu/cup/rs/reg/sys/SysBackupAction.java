@@ -71,7 +71,7 @@ public class SysBackupAction extends BaseAction
 			
 				inStream=new FileInputStream(s_tempFileName.toString());
 				response.reset();
-				response.setContentType("bin");
+				response.setContentType("application/x-tar");
 				response.setHeader("Content-disposition","filename=backup_"+fName+".tar");
 
 				byte[] buffer = new byte[2097152]; 

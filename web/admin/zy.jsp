@@ -142,7 +142,7 @@ int year = c.get(Calendar.YEAR);
 
 %>
 		<input type="radio" id="zytype" name="zytype"  <%=(bkly.getId() == zytype) ? "checked":""%> value="<%=bkly.getId()%>" />
-        <span class="STYLE7 STYLE11"><%=bkly.getMc()%></span>&nbsp;&nbsp;
+        <span class="STYLE7 STYLE11"><%=bkly.getMc()%>(<%=((1==bkly.getType())?"理工":"文史")%>)</span>&nbsp;&nbsp;
 <%
 			}
 %>	  

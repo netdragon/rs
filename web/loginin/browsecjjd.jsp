@@ -94,7 +94,7 @@ body{
 	border-bottom-color: #333333;
 }
 .brfnt {font-size: 12px}
-
+.STYLE10 {font-size: 18px; font-family: "宋体";}
 -->
 </style>
 
@@ -415,7 +415,7 @@ body{
         <td colspan="8" valign="top">&nbsp;</td>
       </tr>
 	  <tr>
-        <td colspan="8" valign="top"><p class="STYLE8">&nbsp;&nbsp;&nbsp;&nbsp;该生是我校高中应届毕业生，以上材料全部属实，同意报考。若有虚假，我校愿意承担后果。</p></td>
+        <td colspan="8" valign="top"><p class="STYLE8">&nbsp;&nbsp;&nbsp;&nbsp;该生是我校高中(应届</span><span class="STYLE10">□</span><span class="STYLE8">&nbsp;&nbsp;往届</span><span class="STYLE10">□</span><span class="STYLE8">)毕业生，以上材料全部属实，同意报考。若有虚假，我校愿意承担后果。</p></td>
       </tr>
       <tr>
         <td colspan="8"  valign="top">&nbsp;</td>
