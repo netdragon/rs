@@ -110,6 +110,7 @@ a:hover{
 	int bkzy3 = 0;
 	int bkzy4 = 0;
 	int bkzy5 = 0;
+	int tjf = 0;
 	String sqly = "";
 	DBOperator dbo = new DBOperator();
 	try{
@@ -183,7 +184,7 @@ a:hover{
 		if(len_zy > 2) bkzy3 = ((Bkzy)al.get(2)).getZyid();
 		if(len_zy > 3) bkzy4 = ((Bkzy)al.get(3)).getZyid();
 		if(len_zy > 4) bkzy5 = ((Bkzy)al.get(4)).getZyid();
-
+		tjf = ((Bkzy)al.get(0)).getTjf();
 		icl = new HdqkList(bmxx.getBmxxid());
 		al = dbo.getList(icl);
 		if(al.size() < 3){
@@ -332,10 +333,8 @@ int year = c.get(Calendar.YEAR);
         <td class="td2"><strong>第三志愿</strong>：<%=((null == hm.get(""+bkzy3))?"":hm.get(""+bkzy3))%>&nbsp;</td>
       </tr>
       <tr>
-        <td class="td2"><strong>第四志愿</strong>：<%=((null == hm.get(""+bkzy4))?"":hm.get(""+bkzy4))%>&nbsp;</td>
-        <td class="td2"><strong>第五志愿</strong>：<%=((null == hm.get(""+bkzy5))?"":hm.get(""+bkzy5))%>&nbsp;</td>
-        <td class="td2">&nbsp;</td>
-      </tr>
+        <td colspan="3" class="td2"><strong>是否服从调剂</strong>：<%=(tjf == 1) ? "是":"否" %>&nbsp;</td>
+        </tr>
     </table></td>
   </tr>
   <tr>

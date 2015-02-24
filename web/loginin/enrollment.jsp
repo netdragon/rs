@@ -473,15 +473,12 @@ body{
       </select></td>
       </tr>
       <tr>
-        <td align="center" class="td1 STYLE6">第四志愿</td>
-        <td class="td1"><select name="pzhiyuan4" id="pzhiyuan4"> <option value="0" selected="selected">--请选择--</option> 
-      </select></td>
-        <td align="center" class="td1 STYLE6">第五志愿</td>
-        <td class="td1"><select name="pzhiyuan5" id="pzhiyuan5"> <option value="0" selected="selected">--请选择--</option> 
-      </select></td>
-        <td align="center" class="td1 STYLE6">&nbsp;</td>
-        <td class="td2">&nbsp;</td>
-      </tr>
+        <td align="center" class="td1 STYLE6">是否服从调剂</td>
+        <td colspan="5" class="td1"><input type="radio" name="psftj" value="1"  checked="checked"/>
+        <span class="STYLE7">是</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="psftj" value="0" />
+        <span class="STYLE7">否</span></td>
+        </tr>
     </table></td>
   </tr>
 <tr>

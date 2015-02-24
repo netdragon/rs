@@ -124,7 +124,7 @@ body{
 	int bkzy3 = 0;
 	int bkzy4 = 0;
 	int bkzy5 = 0;
-	
+	int tjf = 0;
 	DBOperator dbo = new DBOperator();
 	try{
 		dbo.init(false);
@@ -209,9 +209,9 @@ body{
 		if(len_zy > 0) bkzy1 = ((Bkzy)al.get(0)).getZyid();
 		if(len_zy > 1) bkzy2 = ((Bkzy)al.get(1)).getZyid();
 		if(len_zy > 2) bkzy3 = ((Bkzy)al.get(2)).getZyid();
-		if(len_zy > 3) bkzy4 = ((Bkzy)al.get(3)).getZyid();
-		if(len_zy > 4) bkzy5 = ((Bkzy)al.get(4)).getZyid();
 
+		tjf = ((Bkzy)al.get(0)).getTjf();
+		
 		icl = new HdqkList(bmxx.getBmxxid());
 		al = dbo.getList(icl);
 		if(al.size() < 3){
@@ -477,70 +477,21 @@ body{
     <td height="38" colspan="6" align="center" ><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="10%" align="left" class="td1 STYLE6">第一志愿<span class="star">﹡</span></td>
-        <td width="22%" align="left" class="td1"><select name="pzhiyuan1" id="pzhiyuan1"><option value="0" selected="selected">--请选择--</option>
-<%
-
-		for(i=0; i<al.size(); i++) {
-			zy = (Zhshzy)al.get(i);
-%>
-			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy1) ? "selected": ""%>><%=zy.getZymc()%></option>
-<%
-		}
-%>
-      </select></td>
+        <td width="22%" align="left" class="td1"><select name="pzhiyuan1" id="pzhiyuan1"><option value="0" selected="selected">--请选择--</option></select></td>
         <td width="10%" align="left" class="td1 STYLE6">第二志愿</td>
         <td width="24%" class="td1"><select name="pzhiyuan2" id="pzhiyuan2"><option value="0" selected="selected">--请选择--</option>
-<%
-
-		for(i=0; i<al.size(); i++) {
-			zy = (Zhshzy)al.get(i);
-%>
-			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy2) ? "selected": ""%>><%=zy.getZymc()%></option>
-<%
-		}
-%>
-      </select></td>
+</select></td>
         <td width="11%" align="left" class="td1 STYLE6">第三志愿</td>
         <td width="23%" align="left" class="td2"><select name="pzhiyuan3" id="pzhiyuan3"><option value="0" selected="selected">--请选择--</option>
-<%
-
-		for(i=0; i<al.size(); i++) {
-			zy = (Zhshzy)al.get(i);
-%>
-			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy3) ? "selected": ""%>><%=zy.getZymc()%></option>
-<%
-		}
-%>
-      </select></td>
+</select></td>
       </tr>
       <tr>
-        <td align="left" class="td1 STYLE6">第四志愿</td>
-        <td align="left" class="td1"><select name="pzhiyuan4" id="pzhiyuan4"><option value="0" selected="selected">--请选择--</option>
-<%
-
-		for(i=0; i<al.size(); i++) {
-			zy = (Zhshzy)al.get(i);
-%>
-			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy4) ? "selected": ""%>><%=zy.getZymc()%></option>
-<%
-		}
-%>
-      </select></td>
-        <td align="left" class="td1 STYLE6">第五志愿</td>
-        <td class="td1"><select name="pzhiyuan5" id="pzhiyuan5"><option value="0" selected="selected">--请选择--</option>
-<%
-
-		for(i=0; i<al.size(); i++) {
-			zy = (Zhshzy)al.get(i);
-%>
-			<option value="<%=zy.getZyid()%>" <%=(zy.getZyid() == bkzy5) ? "selected": ""%>><%=zy.getZymc()%></option>
-<%
-		}
-%>
-      </select></td>
-        <td align="left" class="td1 STYLE6">&nbsp;</td>
-        <td align="left" class="td2">&nbsp;</td>
-      </tr>
+        <td align="left" class="td1 STYLE6">是否服从调剂</td>
+        <td colspan="5" align="left" class="td1"><input type="radio" <%=(1 == tjf) ? "checked": ""%> name="psftj" value="1" />
+      <span class="STYLE7">是</span>&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="radio" <%=(0 == tjf) ? "checked": ""%> name="psftj" value="0" />
+      <span class="STYLE7">否</span>&nbsp;</td>
+        </tr>
 
     </table></td>
   </tr>
@@ -834,7 +785,7 @@ body{
 <input type="hidden" name="saved_sqly" id="saved_sqly" value="<%=bmxx.getSqly()%>">
 
 <script>
-	//if(document.getElementById('pkskl_1').checked) kskl_change(document.getElementById('pkskl_1')); else kskl_change(document.getElementById('pkskl_2'));
+	if(document.getElementById('pkskl_1').checked) kskl_change(document.getElementById('pkskl_1')); else kskl_change(document.getElementById('pkskl_2'));
 </script>
 </form>
 </body>

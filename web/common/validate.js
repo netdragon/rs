@@ -111,40 +111,27 @@
 		var bk_obj1=document.getElementById("pzhiyuan1");	
 		var bk_obj2=document.getElementById("pzhiyuan2");
 		var bk_obj3=document.getElementById("pzhiyuan3");	
-		var bk_obj4=document.getElementById("pzhiyuan4");
-		var bk_obj5=document.getElementById("pzhiyuan5");	
+	
 
 		
 		var bk1 = (null == bk_obj1) ? "" : bk_obj1.value;
 		var bk2 = (null == bk_obj2) ? "" : bk_obj2.value;
 		var bk3 = (null == bk_obj3) ? "" : bk_obj3.value;
-		var bk4 = (null == bk_obj4) ? "" : bk_obj4.value;
-		var bk5 = (null == bk_obj5) ? "" : bk_obj5.value;
 
-		if(bk1 == bk2 || bk1==bk3 || bk1==bk4 || bk1==bk5 ) {
+
+		if(bk1 == bk2 || bk1==bk3 ) {
 			if(bk1!="0") {
 				alert("报考志愿中不能选择相同专业。请确认！");
 				return false;
 			}
 		}
-		if(bk2==bk3 || bk2==bk4 || bk2==bk5  ) {
+		if(bk2==bk3 ) {
 			if(bk2!="0") {
 				alert("报考志愿中不能选择相同专业。请确认！");
 				return false;
 			}
 		}
-		if(bk3==bk4 || bk3==bk5) {
-			if(bk3!="0") {
-				alert("报考志愿中不能选择相同专业。请确认！");
-				return false;
-			}
-		}
-		if(bk4==bk5) {
-			if(bk4!="0") {
-				alert("报考志愿中不能选择相同专业。请确认！");
-				return false;
-			}
-		}
+
 		
 		
 		document.forms[0].submit();
@@ -227,7 +214,7 @@
 		var saved_zy_value = "";
 
 
-		for(var i=1; i<=5; i++) {
+		for(var i=1; i<=3; i++) {
 			if((selObj=document.getElementById("pzhiyuan"+i)) != null) {
 				len = selObj.options.length;
 				for(var j=1; j<len; j++){

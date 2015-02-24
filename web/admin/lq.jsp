@@ -380,11 +380,11 @@ table a:hover{
 		for(int i=0; i<kmLen; i++) {
 			km = (Kemu) alKm.get(i);
 %>
-    <td width="12%"  align="center"><span class="tbl_bt"><%=km.getKmmc() %></span></td>
+    <td width="10%"  align="center"><span class="tbl_bt"><%=km.getKmmc() %></span></td>
 <%
 		}
-%>
-    <td width="8%"  align="center"><span class="tbl_bt">录取操作</span></td>
+%> 
+    <td width="14%"  align="center"><span class="tbl_bt">录取操作</span></td>
 	<td width="18%"  align="center"><span class="tbl_bt">录取专业</span></td>
 <!--	<td width="9%"  align="center"><span class="tbl_bt"><a href="lq.jsp?order=sflq<%=isDesc%>">是否录取</a></span></td>-->
 	<td width="7%"  align="center"><span class="tbl_bt">是否录取</span></td>
@@ -417,10 +417,10 @@ table a:hover{
 
 			al_score = dbo.getList(sl);
 			if(((Bkzy)al_zy.get(0)).getTjf() == 1) {
-				sfty = "是";
+				sfty = "服从调剂";
 			}
 			else {
-				sfty = "否";
+				sfty = "不服从调剂";
 			}
 			if(!("1".equals(s_isPublic)))
 				btn_tj = "<input name=\"btn_lq\" type=\"button\" class=\"tdinpt\" value=\"录取\" onclick=\"showDiv(this," + bmxx.getBmxxid() +")\">";
@@ -445,7 +445,7 @@ table a:hover{
 <%
 			}
 %>
-	 <td  class="tdfont" align="left"><%=btn_tj%></td>
+	 <td  class="tdfont" align="left"><%=sfty%><%=btn_tj%></td>
      <td  class="tdfont" align="left"><%=bmxx.getLqzy()%>&nbsp;</td>
 	 <td  class="tdfont" align="left"><%=((1 == bmxx.getSflq())?"已录取":"未录取")%>&nbsp;</td>
    </tr>
@@ -507,6 +507,7 @@ table a:hover{
 			for(int j = 0; j < al_zszy.size(); j++) {
 				zszy = (Zhshzy)al_zszy.get(j);
 				isIn = false;
+				logger.debug(al_zy.size() + ":ddee");
 				for(int k = 0; k < al_zy.size(); k++) {
 					bkzy = (Bkzy)al_zy.get(k);
 					if(bkzy.getTjf() != 1) isIn = true;
