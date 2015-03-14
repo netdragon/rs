@@ -425,7 +425,7 @@ body{
     <td width="101" align="center"  class="td1 STYLE6">邮政编码<span class="star">﹡</span></td>
     <td height="38" align="left" class="td1"><input name="pyzbm" type="text" id="pyzbm" value="<%=bmxx.getYzbm() %>" size="16" maxlength="6"/></td>
     <td align="center" class="td1 STYLE6">收信人<span class="star">﹡</span></td>
-    <td align="left" class="td1"><input name="pshxr" type="text" id="pshxr" value="<%=bmxx.getShxr() %>" maxlength="100"/></td>
+    <td align="left" class="td1"><input name="pshxr" type="text" id="pshxr" value="<%=bmxx.getShxr() %>" maxlength="100" size="16" /></td>
     <td align="center" class="td1 STYLE6">联系电话<span class="star">﹡</span></td>
     <td align="left" class="td2"><input name="pyddh" type="text" class="iptbox" id="pyddh" value="<%=bmxx.getKsshji() %>"   size="30" maxlength="100"/></td>
   </tr>
@@ -683,7 +683,7 @@ body{
 %>
 	  </select><span class="STYLE7">月</span>	  </td>
       <td align="left" class="td1"><input name="phdmc1" type="text" class="iptbox" id="phdmc1" value="<%=shgz1.getHdmc()%>" size="50" maxlength="200" /></td>
-      <td align="left" class="td2"><input name="phdjs1" type="text" class="iptbox" id="phdjs1"  value="<%=shgz1.getBrjsgx()%>" size="46" maxlength="300" /></td>
+      <td align="left" class="td2"><input name="phdjs1" type="text" class="iptbox" id="phdjs1"  value="<%=shgz1.getBrjsgx()%>" size="44" maxlength="300" /></td>
     </tr>
     <tr>
 <td align="left" class="td1"><%
@@ -718,7 +718,7 @@ body{
 %>
 	  </select><span class="STYLE7">月</span></td>
       <td align="left" class="td1"><input name="phdmc2" type="text" class="iptbox" id="phdmc2"  value="<%=shgz2.getHdmc()%>" size="50" maxlength="200" /></td>
-      <td align="left" class="td2"><input name="phdjs2" type="text" class="iptbox" id="phdjs2" value="<%=shgz2.getBrjsgx()%>" size="46" maxlength="300" /></td>
+      <td align="left" class="td2"><input name="phdjs2" type="text" class="iptbox" id="phdjs2" value="<%=shgz2.getBrjsgx()%>" size="44" maxlength="300" /></td>
   </tr>
     <tr>
 <td align="left" class="td1"><%
@@ -753,7 +753,7 @@ body{
 %>
 	  </select><span class="STYLE7">月</span></td>
       <td align="left" class="td1"><input name="phdmc3" type="text" class="iptbox" id="phdmc3"  value="<%=shgz3.getHdmc()%>" size="50" maxlength="200" /></td>
-      <td align="left" class="td2"><input name="phdjs3" type="text" class="iptbox" id="phdjs3"  value="<%=shgz3.getBrjsgx()%>" size="46" maxlength="300" /></td>
+      <td align="left" class="td2"><input name="phdjs3" type="text" class="iptbox" id="phdjs3"  value="<%=shgz3.getBrjsgx()%>" size="44" maxlength="300" /></td>
 </tr>
   </table></td>
 </tr>

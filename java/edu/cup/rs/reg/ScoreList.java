@@ -32,7 +32,7 @@ public class ScoreList implements ICommonList{
 
 
 	public String getQL() {
-		return "select bmxxid,kmid,fenshu from score where bmxxid=" + this.bmxxId + " order by kmid";
+		return "select bmxxid,a.kmid,fenshu from score a left join kemu b on a.kmid=b.kmid where bmxxid=" + this.bmxxId + " order by b.kmlxid,a.kmid";
 	}
 
 	public String delete(Object obj) {

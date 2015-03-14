@@ -215,7 +215,7 @@ body{
   </tr>
   <tr>
     <td align="center" class="td1 STYLE6 STYLE9">中学通信地址</td>
-    <td colspan="3" class="td1"><input name="pzxdz" type="text" size="70" value="<%=gzcjjd.getZxtxdz() %>" class="STYLE6"/></td>
+    <td colspan="3" class="td1"><input name="pzxdz" type="text" size="66" value="<%=gzcjjd.getZxtxdz() %>" class="STYLE6"/></td>
     <td width="119" align="center" class="td1 STYLE6 STYLE9">中学级别</td>
     <td width="216" class="tda2 STYLE6"><input type="radio" name="pzxjb" <%=("省级示范性高中".equals(gzcjjd.getZxjb())) ? "checked":""%> value="省级示范性高中">省级示范性高中<br />
                     <input type="radio" name="pzxjb" <%=("市级示范性高中".equals(gzcjjd.getZxjb())) ? "checked":""%> value="市级示范性高中">市级示范性高中<br />
@@ -225,7 +225,7 @@ body{
     <td align="center" class="td1 STYLE6 STYLE9">邮政编码</td>
     <td width="209" class="td1 STYLE6"><input name="pzxyb" type="text" size="12" value="<%=gzcjjd.getZxybm() %>"/></td>
     <td width="104" align="center" class="td1 STYLE6 STYLE9">联系电话</td>
-    <td class="td1 STYLE6"><input name="pzxdh" type="text" size="30" value="<%=gzcjjd.getZxlxdh() %>"/></td>
+    <td class="td1 STYLE6"><input name="pzxdh" type="text" size="28" value="<%=gzcjjd.getZxlxdh() %>"/></td>
     <td align="center" class="td1 STYLE6 STYLE9">年级负责人</td>
     <td class="tda2 STYLE6"><input name="pzxfzr" type="text" size="14" value="<%=gzcjjd.getNjfzr() %>"/></td>
   </tr>
@@ -390,7 +390,7 @@ body{
     <td colspan="5" class="STYLE6"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td><p>&nbsp;</p>
-          <p class="STYLE8">&nbsp;&nbsp;&nbsp;&nbsp;该生是我校高中(应届</span><span class="STYLE10">□</span><span class="STYLE8">&nbsp;&nbsp;往届</span><span class="STYLE10">□</span><span class="STYLE8">)毕业生，以上材料全部属实，同意报考。若有虚假，我校愿意承担后果。</p>
+          <p class="STYLE8">&nbsp;&nbsp;该生是我校高中(应届</span><span class="STYLE10">□</span><span class="STYLE8">&nbsp;&nbsp;往届</span><span class="STYLE10">□</span><span class="STYLE8">)毕业生，以上材料全部属实，同意报考。若有虚假，我校愿意承担后果。</p>
           <br /></td>
       </tr>
       <tr>

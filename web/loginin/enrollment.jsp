@@ -273,7 +273,7 @@ body{
     </tr -->
     <tr>
       <td width="104" align="center"  class="td1 STYLE6">姓名<span class="star">﹡</span></td>
-      <td width="181"  height="38" align="left" class="td1"><input name="pname" type="text" class="iptbox" id="pname"  size="28" maxlength="100"/></td>
+      <td width="181"  height="38" align="left" class="td1"><input name="pname" type="text" class="iptbox" id="pname"  size="24" maxlength="100"/></td>
       <td width="55"  height="38" align="center" class="td1 STYLE6" >性别<span class="star">﹡</span></td>
       <td width="147" align="left" class="td1"><input type="radio" name="pxb" value="1" checked="checked"/>
 			      <span class="STYLE7">男</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="pxb" value="0" />
@@ -284,7 +284,8 @@ body{
     </tr>
   
     <tr>
-      <td width="104" align="center"  class="td1 STYLE6">高考省份<span class="star">﹡</span></td>
+<td width="104" align="center"  class="td1 STYLE6" nowrap="nowrap"
+>高考省份<span class="star">﹡</span></td>
       <td height="38" align="left" class="td1"><select id="pjg" name="pjg">
 					  <option value="北京"  selected>北京</option>
 					  <option value="天津">天津</option>
@@ -388,8 +389,9 @@ body{
     </tr>
     
   <tr>
-    <td width="104" align="center"  class="STYLE6 td1">中学名称<span class="star">﹡</span></td>
-    <td height="38" colspan="3" align="left" class="STYLE6 td1"><input name="pzxmc" type="text" class="iptbox" id="pzxmc"  size="60" maxlength="200"/></td>
+    <td width="104" align="center"  class="STYLE6 td1" nowrap="nowrap"
+>中学名称<span class="star">﹡</span></td>
+    <td height="38" colspan="3" align="left" class="STYLE6 td1"><input name="pzxmc" type="text" class="iptbox" id="pzxmc"  size="56" maxlength="200"/></td>
     <td align="center" class="td1"><span class="STYLE6">考生科类<span class="star">﹡</span></span></td>
     <td align="left" class="td2"><input type="radio" onChange="kskl_change(this);" onClick="kskl_change(this);" id="pkskl_1" name="pkskl" value="理工" checked="checked"/>
       <span class="STYLE7">理工</span>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -397,20 +399,23 @@ body{
       <span class="STYLE7">文史</span></td>
   </tr>
   <tr>
-    <td width="104" align="center"  class="td1 STYLE6">身份证号<span class="star">﹡</span></td>
+    <td width="104" align="center"  class="td1 STYLE6" nowrap="nowrap"
+>身份证号<span class="star">﹡</span></td>
     <td height="38" colspan="5" align="left" class="STYLE6 tdax"><input class="iptbox" name="pidcardnum" type="text" id="pidcardnum" size="66" maxlength="18" /></td>
     </tr>
   <tr>
-    <td width="104" align="center"  class="td1 STYLE6">通知书邮寄地址<span class="star">﹡</span></td>
-    <td height="38" colspan="5" align="left" class="STYLE6 tdax"><input name="ptxdzh" type="text" class="iptbox" id="ptxdzh"   size="94" maxlength="300"/></td>
+    <td width="104" align="center"  class="td1 STYLE6" nowrap="nowrap"
+>通知书邮寄地址<span class="star">﹡</span></td>
+    <td height="38" colspan="5" align="left" class="STYLE6 tdax"><input name="ptxdzh" type="text" class="iptbox" id="ptxdzh"   size="88" maxlength="300"/></td>
     </tr>
   <tr>
-    <td width="104" align="center"  class="tdjc STYLE6">邮政编码<span class="star">﹡</span></td>
-    <td height="38" align="left" class="tdjc"><input name="pyzbm" type="text" class="iptbox" id="pyzbm"   size="14" maxlength="6"/></td>
+    <td width="104" align="center"  class="tdjc STYLE6" nowrap="nowrap"
+>邮政编码<span class="star">﹡</span></td>
+    <td height="38" align="left" class="tdjc"><input name="pyzbm" type="text" class="iptbox" id="pyzbm"   size="16" maxlength="8"/></td>
     <td align="center" class="tdjc STYLE6">收信人<span class="star">﹡</span></td>
-    <td align="left" class="tdjc"><input name="pshxr" type="text" class="iptbox" id="pshxr"   size="22" maxlength="100"/></td>
+    <td align="left" class="tdjc"><input name="pshxr" type="text" class="iptbox" id="pshxr"   size="16" maxlength="100"/></td>
     <td align="center" class="tdjc STYLE6">联系电话<span class="star">﹡</span></td>
-    <td align="left" class="td2jc"><input name="pyddh" type="text" class="iptbox" id="pyddh"   size="32" maxlength="100"/></td>
+    <td align="left" class="td2jc"><input name="pyddh" type="text" class="iptbox" id="pyddh"   size="22" maxlength="100"/></td>
   </tr>
   <tr>
     <td height="36" colspan="6" align="center"  class="tdax fnt">家庭情况</td>
@@ -419,24 +424,24 @@ body{
     <td height="38" colspan="6" align="center"  class="td2 fnt"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td width="13%" align="center" class="td1 STYLE6">父亲姓名</td>
-        <td width="27%" class="td1"><input name="pfmxm" type="text" class="iptbox" id="pfmxm"  size="30" maxlength="100"/></td>
+        <td width="27%" class="td1"><input name="pfmxm" type="text" class="iptbox" id="pfmxm"  size="24" maxlength="100"/></td>
         <td width="12%" align="center" class="td1 STYLE6">联系电话</td>
         <td width="48%" class="td2"><input name="fmyddh" type="text" class="iptbox" id="fmyddh"  size="30" maxlength="100"/></td>
       </tr>
       <tr>
         <td align="center" class="td1 STYLE6">父亲工作单位</td>
-        <td colspan="3" class="td1"><input name="fmgzdw" type="text" class="iptbox" id="fmgzdw"  size="90" maxlength="200"/>
+        <td colspan="3" class="td1"><input name="fmgzdw" type="text" class="iptbox" id="fmgzdw"  size="86" maxlength="200"/>
         &nbsp;<input name="fmgzzw" type="text" class="iptbox" id="fmgzzw"  size="8" value="fzw" style="display:none"/></td>
         </tr>
       <tr>
         <td align="center" class="td1 STYLE6">母亲姓名</td>
-        <td class="td1"><input name="pmmxm" type="text" class="iptbox" id="pmmxm"  size="30" maxlength="100"/></td>
+        <td class="td1"><input name="pmmxm" type="text" class="iptbox" id="pmmxm"  size="24" maxlength="100"/></td>
         <td align="center" class="td1 STYLE6">联系电话</td>
         <td class="td2"><input name="mmyddh" type="text" class="iptbox" id="mmyddh"  size="30" maxlength="100"/></td>
       </tr>
       <tr>
         <td align="center" class="td1 STYLE6">母亲工作单位</td>
-        <td colspan="3" class="td1"><input name="mmgzdw" type="text" class="iptbox" id="mmgzdw"  size="90" maxlength="200"/>
+        <td colspan="3" class="td1"><input name="mmgzdw" type="text" class="iptbox" id="mmgzdw"  size="86" maxlength="200"/>
         &nbsp;<input name="mmgzzw" type="text" class="iptbox" id="mmgzzw"  size="8" value="mzw" style="display:none"/></td>
         </tr>
 
@@ -602,15 +607,15 @@ body{
         </select>
         
       <span class="STYLE7">月</span></td>
-    <td  class="td1" ><input name="phjmc1" type="text" class="iptbox"  size="34" maxlength="200" /></td>
+    <td  class="td1" ><input name="phjmc1" type="text" class="iptbox"  size="30" maxlength="200" /></td>
     <td  class="td1" ><select name="pjsjb1" id="pjsjb1">
          <option value="" selected="selected"></option>
         <option value="国家级">国家级</option>
         <option value="省级复赛">省级复赛</option>
         <option value="省级初赛">省级初赛</option>
       </select></td>
-    <td  class="td1" ><input name="phjdj1" type="text" class="iptbox"  size="14" maxlength="120" /></td>
-    <td  class="td2" ><input name="psjbm1" type="text" class="iptbox"  size="28" maxlength="200" /></td>
+    <td  class="td1" ><input name="phjdj1" type="text" class="iptbox"  size="11" maxlength="120" /></td>
+    <td  class="td2" ><input name="psjbm1" type="text" class="iptbox"  size="25" maxlength="200" /></td>
     </tr>
     <tr>
 <td  class="td1" ><select name="pzhenian2"  class="p1">
@@ -720,15 +725,15 @@ body{
           <option value="12" >12</option>      
         </select>        
       <span class="STYLE7">月</span></td>
-    <td  class="td1" ><input name="phjmc2" type="text" class="iptbox"  size="34" maxlength="200" /></td>
+    <td  class="td1" ><input name="phjmc2" type="text" class="iptbox"  size="30" maxlength="200" /></td>
     <td  class="td1" ><select name="pjsjb2" id="pjsjb2">
          <option value="" selected="selected"></option>
         <option value="国家级">国家级</option>
         <option value="省级复赛">省级复赛</option>
         <option value="省级初赛">省级初赛</option>
       </select></td>
-    <td  class="td1" ><input name="phjdj2" type="text" class="iptbox"  size="14" maxlength="120" /></td>
-    <td  class="td2" ><input name="psjbm2" type="text" class="iptbox"  size="28" maxlength="200" /></td>    
+    <td  class="td1" ><input name="phjdj2" type="text" class="iptbox"  size="11" maxlength="120" /></td>
+    <td  class="td2" ><input name="psjbm2" type="text" class="iptbox"  size="25" maxlength="200" /></td>    
 </tr>
 <tr>
 <td  class="td1" ><select name="pzhenian3"  class="p1">
@@ -839,15 +844,15 @@ body{
         </select>
         
       <span class="STYLE7">月</span></td>
-    <td  class="td1" ><input name="phjmc3" type="text" class="iptbox"  size="34" maxlength="200" /></td>
+    <td  class="td1" ><input name="phjmc3" type="text" class="iptbox"  size="30" maxlength="200" /></td>
     <td  class="td1" ><select name="pjsjb3" id="pjsjb3">
         <option value="" selected="selected"></option>
         <option value="国家级">国家级</option>
         <option value="省级复赛">省级复赛</option>
         <option value="省级初赛">省级初赛</option>
       </select></td>
-    <td  class="td1" ><input name="phjdj3" type="text" class="iptbox"  size="14" maxlength="120" /></td>
-    <td  class="td2" ><input name="psjbm3" type="text" class="iptbox"  size="28" maxlength="200" /></td>
+    <td  class="td1" ><input name="phjdj3" type="text" class="iptbox"  size="11" maxlength="120" /></td>
+    <td  class="td2" ><input name="psjbm3" type="text" class="iptbox"  size="25" maxlength="200" /></td>
 </tr>
   </table></td>
 </tr>
@@ -970,8 +975,8 @@ body{
         </select>
         
       <span class="STYLE7">月</span></td>
-      <td class="td1"><input name="phdmc1" type="text" class="iptbox"  size="52" maxlength="200" /></td>
-      <td class="td2"><input name="phdjs1" type="text" class="iptbox"  size="48" maxlength="300" /></td>
+      <td class="td1"><input name="phdmc1" type="text" class="iptbox"  size="46" maxlength="200" /></td>
+      <td class="td2"><input name="phdjs1" type="text" class="iptbox"  size="46" maxlength="300" /></td>
     </tr>
     <tr>
 <td class="td1"><select name="phdn2"  class="p1">
@@ -1081,8 +1086,8 @@ body{
         </select>
         
       <span class="STYLE7">月</span></td>
-      <td class="td1"><input name="phdmc2" type="text" class="iptbox"  size="52" maxlength="200" /></td>
-      <td class="td2"><input name="phdjs2" type="text" class="iptbox"  size="48" maxlength="300" /></td>
+      <td class="td1"><input name="phdmc2" type="text" class="iptbox"  size="46" maxlength="200" /></td>
+      <td class="td2"><input name="phdjs2" type="text" class="iptbox"  size="46" maxlength="300" /></td>
   </tr>
     <tr>
 <td class="td1"><select name="phdn3"  class="p1">
@@ -1192,15 +1197,16 @@ body{
         </select>
         
       <span class="STYLE7">月</span></td>
-      <td class="td1"><input name="phdmc3" type="text" class="iptbox"  size="52" maxlength="200" /></td>
-      <td class="td2"><input name="phdjs3" type="text" class="iptbox"  size="48" maxlength="300" /></td>
+      <td class="td1"><input name="phdmc3" type="text" class="iptbox"  size="46" maxlength="200" /></td>
+      <td class="td2"><input name="phdjs3" type="text" class="iptbox"  size="46" maxlength="300" /></td>
 </tr>
   </table></td>
 </tr>
     
     <tr>
-      <td align="center"   class="td1 STYLE6">爱好特长</td>
-      <td height="40" colspan="5" align="left"  class="STYLE6 td2"><input name="pksah" type="text" class="iptbox"  size="120" maxlength="390" /></td>
+      <td align="center"   class="td1 STYLE6" nowrap="nowrap"
+>爱好特长</td>
+      <td height="40" colspan="5" align="left"  class="STYLE6 td2"><input name="pksah" type="text" class="iptbox"  size="100" maxlength="390" /></td>
     </tr>
 
      <tr>

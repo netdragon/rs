@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=utf-8"%>
+﻿<%@ page contentType="text/html; charset=utf-8"%>
 <%@ page import="edu.cup.rs.common.*"%>
 <%@ page import="edu.cup.rs.log.*"%>
 <%@ page import="java.util.*" %>
@@ -364,13 +364,13 @@ table a:hover{
 <table width="98%" border="1" cellspacing="0" cellpadding="0" align="center">
   <tr>
     <td height="20" width="3%"  align="center"><input type="checkbox" name="checkbox" onclick="sel_all(this);" value="checkbox" /></td>
-    <td width="14%"  align="center"><span class="tbl_bt">准考证号</span></td>
+    <td width="12%"  align="center"><span class="tbl_bt">准考证号</span></td>
 <%
 		if(orderColName.length()==0) orderColName=" zhkzhid";
 		if(orderColName.indexOf("desc")>0) isDesc="";
 		else isDesc=" desc";
 %>
-    <td width="13%"  align="center"><span class="tbl_bt">姓名</span></td>
+    <td width="12%"  align="center"><span class="tbl_bt">姓名</span></td>
     <td width="4%"  align="center"><span class="tbl_bt">性别</span></td>
     
 	<td width="9%"  align="center" nowrap="nowrap"><span class="tbl_bt">面试分组</span></td>
@@ -384,10 +384,10 @@ table a:hover{
 <%
 		}
 %> 
-    <td width="14%"  align="center"><span class="tbl_bt">录取操作</span></td>
-	<td width="18%"  align="center"><span class="tbl_bt">录取专业</span></td>
+    <td width="17%"  align="center"><span class="tbl_bt">录取操作</span></td>
+	<td width="17%"  align="center"><span class="tbl_bt">录取专业</span></td>
 <!--	<td width="9%"  align="center"><span class="tbl_bt"><a href="lq.jsp?order=sflq<%=isDesc%>">是否录取</a></span></td>-->
-	<td width="7%"  align="center"><span class="tbl_bt">是否录取</span></td>
+<td width="7%"  align="center" nowrap="nowrap" ><span class="tbl_bt">是否录取</span></td>
   </tr>
 <%
 		if(orderColName.length() > 0) icl.setOrder(orderColName);
@@ -445,7 +445,7 @@ table a:hover{
 <%
 			}
 %>
-	 <td  class="tdfont" align="left"><%=sfty%><%=btn_tj%></td>
+	 <td  class="tdfont" align="left"><%=sfty%>&nbsp;<%=btn_tj%></td>
      <td  class="tdfont" align="left"><%=bmxx.getLqzy()%>&nbsp;</td>
 	 <td  class="tdfont" align="left"><%=((1 == bmxx.getSflq())?"已录取":"未录取")%>&nbsp;</td>
    </tr>

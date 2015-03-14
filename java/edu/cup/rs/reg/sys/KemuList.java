@@ -24,11 +24,11 @@ public class KemuList implements ICommonList{
 	
     public String getQL(){
 		if(lxid != null)
-			return "select * from kemu where kmlxid=" + lxid + " order by kmid";
+			return "select * from kemu where kmlxid=" + lxid + " order by kmlxid,kmid";
 		else if(id != 0)
-			return "select * from kemu where kmid=" + id + " order by kmid";
+			return "select * from kemu where kmid=" + id + " order by kmlxid,kmid";
 		else
-			return "select * from kemu order by kmid";
+			return "select * from kemu order by kmlxid,kmid";
 	}
     public String insert(Object obj){
 		Kemu zy = (Kemu)obj;

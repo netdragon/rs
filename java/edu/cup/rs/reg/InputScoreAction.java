@@ -134,7 +134,7 @@ public class InputScoreAction extends BaseAction
 
 				for(int j=8; j<all_cells; j++) {
 					xslKmName = sheet.getCell(j, 1).getContents().trim();
-					
+					logger.debug(j + "科目:" + xslKmName);
 					//get kmid by kemu
 					kl = new KemuList();
 					al = dbo.getQueryList(kl.getByKemuName(xslKmName), kl);
@@ -144,7 +144,7 @@ public class InputScoreAction extends BaseAction
 						hmKm.put(j + "", kmid + "");
 					} else {
 						logger.error("Can not find:" + kmid);
-						response.sendRedirect("/error.jsp?error=" + new UTF8String("没有该考生或数据发生错误！").toUTF8String());
+						response.sendRedirect("/error.jsp?error=" + new UTF8String("科目名称错误！").toUTF8String());
 						return;
 					}
 				}
@@ -177,7 +177,7 @@ public class InputScoreAction extends BaseAction
 				ICommonList logslist;
 				Log log = new Log();
 				logslist = new LogsList();
-				log.setContent(USERNAME + " 修改考生分数。");
+				log.setContent(USERNAME + " 导入考生分数。");
 				dbo.insert(logslist.insert(log));
                 dbo.commit();
             } catch (Exception ess) {

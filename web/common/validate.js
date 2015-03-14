@@ -39,6 +39,16 @@
 		//var fqydh = (null == fqydh_obj) ? "": fqydh_obj.value;
 		//var mqydh = (null == mqydh_obj) ? "": mqydh_obj.value;
 
+		var bk_obj1=document.getElementById("pzhiyuan1");	
+		var bk_obj2=document.getElementById("pzhiyuan2");
+		var bk_obj3=document.getElementById("pzhiyuan3");	
+	
+
+		
+		var bk1 = (null == bk_obj1) ? "" : bk_obj1.value;
+		var bk2 = (null == bk_obj2) ? "" : bk_obj2.value;
+		var bk3 = (null == bk_obj3) ? "" : bk_obj3.value;
+
 		if(fm.pname.value =="") {
 			alert("姓名不能为空！");
 			fm.pname.focus();
@@ -108,15 +118,7 @@
 		}	
 	
  
-		var bk_obj1=document.getElementById("pzhiyuan1");	
-		var bk_obj2=document.getElementById("pzhiyuan2");
-		var bk_obj3=document.getElementById("pzhiyuan3");	
-	
 
-		
-		var bk1 = (null == bk_obj1) ? "" : bk_obj1.value;
-		var bk2 = (null == bk_obj2) ? "" : bk_obj2.value;
-		var bk3 = (null == bk_obj3) ? "" : bk_obj3.value;
 
 
 		if(bk1 == bk2 || bk1==bk3 ) {

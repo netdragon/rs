@@ -392,12 +392,7 @@ body{
             <tr>
               <td colspan="6"><p class="STYLE9">(此栏可打印后手写)</p><pre><%=gzcjjd.getBzrpj()%></pre><br /></td>
             </tr>
-			<tr>
-              <td colspan="6">&nbsp;</td>
-            </tr>
-			<tr>
-              <td colspan="6">&nbsp;</td>
-            </tr>
+
             <tr>
               <td width="7%">&nbsp;</td>
               <td width="41%">班主任（签章）</td>
@@ -415,7 +410,7 @@ body{
         <td colspan="8" valign="top">&nbsp;</td>
       </tr>
 	  <tr>
-        <td colspan="8" valign="top"><p class="STYLE8">&nbsp;&nbsp;&nbsp;&nbsp;该生是我校高中(应届</span><span class="STYLE10">□</span><span class="STYLE8">&nbsp;&nbsp;往届</span><span class="STYLE10">□</span><span class="STYLE8">)毕业生，以上材料全部属实，同意报考。若有虚假，我校愿意承担后果。</p></td>
+        <td colspan="8" valign="top"><p class="STYLE8">&nbsp;&nbsp;该生是我校高中(应届</span><span class="STYLE10">□</span><span class="STYLE8">&nbsp;&nbsp;往届</span><span class="STYLE10">□</span><span class="STYLE8">)毕业生，以上材料全部属实，同意报考。若有虚假，我校愿意承担后果。</p></td>
       </tr>
       <tr>
         <td colspan="8"  valign="top">&nbsp;</td>

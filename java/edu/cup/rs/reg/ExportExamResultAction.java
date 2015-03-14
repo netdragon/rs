@@ -10,6 +10,7 @@ import java.sql.*;
 import java.text.*;
 import edu.cup.rs.common.*;
 import edu.cup.rs.log.*;
+import edu.cup.rs.reg.sys.*;
 import edu.cup.rs.util.*;
 import jxl.*; 
 import jxl.write.*; 
@@ -95,6 +96,10 @@ public class ExportExamResultAction extends BaseAction{
 		}
 
        try{
+			Kemu km;
+			KemuList kl = new KemuList();
+			ArrayList alKm = dbo.getList(kl);
+			int kmLen = alKm.size();
 			Label label;
 			zongfen = "0";
 			workbook = Workbook.getWorkbook(new File(template)); 
@@ -112,6 +117,15 @@ public class ExportExamResultAction extends BaseAction{
 			int k;
 			border = new WritableCellFormat();
 			border.setBorder(Border.ALL, BorderLineStyle.THIN); 
+
+			for (int i = 0; i < kmLen; i++){
+				km = (Kemu) alKm.get(i);
+				columnValue = km.getKmmc();
+				columnValue = ((null == columnValue) || (columnValue.length() == 0)) ? " " : columnValue;
+				label = new Label(8+i, 1, columnValue, border); 
+				sheet.addCell(label);
+			}
+
             while (rs.next()){
 				j++;
 				k = 0;
