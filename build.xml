@@ -1,4 +1,4 @@
-<project name="RS" default="war" basedir=".">
+<project name="rs" default="war" basedir=".">
     <property environment="env" />
     <property name="RS_DEPLOY" value="../../" />
     <property name="cactus.home.tomcat5x" value="${RS_DEPLOY}/system/apache-tomcat-6.0.26" />
@@ -108,7 +108,7 @@
             <fileset dir="${web.dir}/meta-inf" />
         </copy>
 
-        <war casesensitive="false" destfile="${build.dir}/RS.war" webxml="${web.dir}/WEB-INF/web.xml">
+        <war casesensitive="false" destfile="${build.dir}/rs.war" webxml="${web.dir}/WEB-INF/web.xml">
             <lib dir="${warlib.dir}"></lib>
         	<classes dir="${classes.dir}"/>
         	<metainf dir="${web.dir}/meta-inf"/>
@@ -123,10 +123,10 @@
         <echo>#       RS.Web.deploy           #</echo>
         <echo>#                               #</echo>
         <echo>#################################</echo>
-        <delete file="${tomcat.home}/RS.war" />
-    	<delete dir="${tomcat.home}/RS"></delete>
-        <copy file="${build.dir}/RS.war" todir="${tomcat.home}" />
-	<unwar dest="${tomcat.home}/RS" src="${tomcat.home}/RS.war" />
+        <delete file="${tomcat.home}/rs.war" />
+    	<delete dir="${tomcat.home}/rs"></delete>
+        <copy file="${build.dir}/rs.war" todir="${tomcat.home}" />
+	<unwar dest="${tomcat.home}/rs" src="${tomcat.home}/rs.war" />
     </target>
 </project>
 

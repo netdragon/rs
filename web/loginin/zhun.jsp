@@ -20,7 +20,11 @@
 }
 .cuti{font-weight: bold;}
 
-.xuzhi {font-size: 24px; color: #000000; }
+.xuzhi {
+	font-size: 14px;
+	color: #000000;
+	font-weight: bold;
+}
 .tbl_a {
 	color: #000000;
 	font-size: 18px;
@@ -46,6 +50,7 @@ a:hover{
 	border-left-color: #333333;
 }
 .STYLE1 {font-size: 12px}
+.STYLE3 {color: #000000; font-size: 12px; }
 -->
 </style>
 </head>
@@ -137,7 +142,7 @@ a:hover{
     <td height="30"></td>
   </tr>
 </table>
-<table width="649" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#000000">
+<table width="649" border="1" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
   <tr>
     <td  width="75%" bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
@@ -226,66 +231,115 @@ a:hover{
         <td height="7" colspan="2" ></td>
       </tr>
       <tr>
-        <td height="32" colspan="2" align="center" class="xuzhi">笔试须知：</td>
+        <td height="32" colspan="2" align="left" class="xuzhi">笔试须知：</td>
       </tr>
        <tr>
         <td height="7" colspan="2" ></td>
       </tr>
 
       <tr>
-        <td width="5%" align="right" valign="top"  class="tbl_b">1、</td>
-        <td width="95%"  class="tbl_b">遵守考场纪律，服从工作人员管理，违者按有关规定处理并取消考试资格；</td>
+        <td width="5%" align="right" valign="top"  class="STYLE3">1、</td>
+        <td width="95%"  class="STYLE3">遵守考场纪律，服从工作人员管理，违者按有关规定处理并取消考试资格；</td>
       </tr>
        <tr>
         <td height="4" colspan="2" ></td>
       </tr>
 
       <tr>
-        <td align="right" valign="top"  class="tbl_b">2、</td>
-        <td  class="tbl_b">凭准考证及有效身份证参加考试，对号入座，并将证件放在桌角备查；</td>
+        <td align="right" valign="top"  class="STYLE3">2、</td>
+        <td  class="STYLE3">凭准考证及有效身份证参加考试，对号入座，并将证件放在桌角备查；</td>
       </tr>
        <tr>
         <td height="4" colspan="2" ></td>
       </tr>
 
       <tr>
-        <td align="right" valign="top"  class="tbl_b">3、</td>
-        <td  class="tbl_b">提前10分钟入场，迟到15分钟以上者取消考试资格，开考30分钟后方可交卷离开考场，交卷后的考生不得在考场周围停留或互相交谈；</td>
+        <td align="right" valign="top"  class="STYLE3">3、</td>
+        <td  class="STYLE3">提前10分钟入场，迟到15分钟以上者取消考试资格，开考30分钟后方可交卷离开考场，交卷后的考生不得在考场周围停留或互相交谈；</td>
       </tr>
        <tr>
         <td height="4" colspan="2" ></td>
       </tr>
       <tr>
-        <td align="right" valign="top"  class="tbl_b">4、</td>
-        <td  class="tbl_b">进入考场只准携带必要的文具（笔、橡皮、尺子、简易计算器）禁止携带任何书籍、资料，以及手机、小灵通、BP机等通讯设备；</td>
+        <td align="right" valign="top"  class="STYLE3">4、</td>
+        <td  class="STYLE3">进入考场只准携带必要的文具（笔、橡皮、尺子）禁止携带任何书籍、资料，以及手机等通讯设备；</td>
       </tr>
        <tr>
         <td height="3" colspan="2" ></td>
       </tr>
       <tr>
-        <td align="right" valign="top"  class="tbl_b">5、</td>
-        <td  class="tbl_b">禁止与他人合用计算器，禁止使用具有存储功能的计算工具等（商务通），禁止交头接耳、传递纸条、夹带、冒名顶替等违纪行为；</td>
+        <td align="right" valign="top"  class="STYLE3">5、</td>
+        <td  class="STYLE3">禁止交头接耳、传递纸条、夹带、冒名顶替等违纪行为；</td>
       </tr>
         <tr>
         <td height="4" colspan="2" ></td>
       </tr>
      <tr>
-        <td align="right" valign="top"  class="tbl_b">6、</td>
-        <td  class="tbl_b">所有答案必须写在答题纸上，试卷与答题纸及草稿纸一律不得带出考场；</td>
+        <td align="right" valign="top"  class="STYLE3">6、</td>
+        <td  class="STYLE3">所有答案必须写在答题纸上，试卷与答题纸及草稿纸一律不得带出考场；</td>
       </tr>
        <tr>
         <td height="4" colspan="2" ></td>
       </tr>
       <tr>
-        <td align="right" valign="top"  class="tbl_b">7、</td>
-        <td  class="tbl_b">考生必须按时交卷，否则视为违纪试卷，按作废处理，考试结束时，待监考老师收卷后方可离开考场；</td>
+        <td align="right" valign="top"  class="STYLE3">7、</td>
+        <td  class="STYLE3">考生必须按时交卷，否则视为违纪试卷，按作废处理，考试结束时，待监考老师收卷后方可离开考场；</td>
       </tr >
        <tr>
         <td height="4" colspan="2" ></td>
       </tr>
       <tr>
-        <td align="right" valign="top"  class="tbl_b">8、</td>
-        <td  class="tbl_b">考试过程中，无特殊情况，考生不得离开考场，若离开考场按交卷处理。</td>
+        <td align="right" valign="top"  class="STYLE3">8、</td>
+        <td  class="STYLE3">考试过程中，无特殊情况，考生不得离开考场，若离开考场按交卷处理。</td>
+      </tr>
+	  <tr><td height="5"></td></tr>
+	  <tr>
+	  <td height="32" colspan="2" align="left" class="xuzhi">面试须知：</td>
+      </tr>
+       <tr>
+        <td height="7" colspan="2" ></td>
+      </tr>
+
+      <tr>
+        <td width="5%" align="right" valign="top"  class="STYLE3">1、</td>
+        <td width="95%"  class="STYLE3">面试时间：12:30开始进入指定的等候教室备考，13:00未到的，视为放弃考试；</td>
+      </tr>
+       <tr>
+        <td height="4" colspan="2" ></td>
+      </tr>
+
+      <tr>
+        <td align="right" valign="top"  class="STYLE3">2、</td>
+        <td  class="STYLE3">面试须持身份证、准考证、本抽签单和获奖证书原件；</td>
+      </tr>
+       <tr>
+        <td height="4" colspan="2" ></td>
+      </tr>
+
+      <tr>
+        <td align="right" valign="top"  class="STYLE3">3、</td>
+        <td  class="STYLE3">面试时间以实际进度为准；</td>
+      </tr>
+       <tr>
+        <td height="4" colspan="2" ></td>
+      </tr>
+      <tr>
+        <td align="right" valign="top"  class="STYLE3">4、</td>
+        <td  class="STYLE3">禁止携带手机等通讯工具进入考场大楼；</td>
+      </tr>
+       <tr>
+        <td height="3" colspan="2" ></td>
+      </tr>
+      <tr>
+        <td align="right" valign="top"  class="STYLE3">5、</td>
+        <td  class="STYLE3">面试结束请离开考场，不要与未考同学和家长讨论考试内容；</td>
+      </tr>
+        <tr>
+        <td height="4" colspan="2" ></td>
+      </tr>
+     <tr>
+        <td align="right" valign="top"  class="STYLE3">6、</td>
+        <td  class="STYLE3">随行家长按照标示到新综合楼一层的教室休息。</td>
       </tr>
        <tr>
         <td height="4" colspan="2" ></td>
@@ -293,13 +347,10 @@ a:hover{
       <tr>
         <td align="right" valign="top" class="tbl_b">&nbsp;</td>
         <td class="tbl_b">&nbsp;</td>
-      </tr>
-      <tr>
-        <td colspan="2">&nbsp;</td>
-      </tr>
-    </table></td>
+	  </tr>
+      </table></td>
   </tr>
-</table>
+  </table>
 <table width="648" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td height="7" align="center"></td>

@@ -237,7 +237,7 @@ function login() {
 <!-- 最上方一栏样式(颜色是否可以取536877)及内容 -->
 		<div class="toptright">
 
-			<a class="floatright" href="http://jwc.cup.edu.cn/public/zsb/index.html">石大本科招生办&nbsp;&nbsp;&nbsp;｜</a>	
+			<a class="floatright" href="http://www.cup.edu.cn/bkzs">石大本科招生办&nbsp;&nbsp;&nbsp;｜</a>	
 			<a class="floatright" href="contact/lxwm.html" target="_blank">联系我们&nbsp;&nbsp;&nbsp;｜</a>
 <%
 Calendar c = Calendar.getInstance();
