@@ -24,15 +24,15 @@ public class SqbklyList implements ICommonList {
 
 	public String getQL() {
 		if (id != null)
-			return "select * from Sqbkly where id=" + id
+			return "select * from sqbkly where id=" + id
 					+ " order by convert(mc using gbk)";
 		else
-			return "select * from Sqbkly order by convert(mc using gbk)";
+			return "select * from sqbkly order by convert(mc using gbk)";
 	}
 
 	public String insert(Object obj) {
 		Sqbkly zy = (Sqbkly) obj;
-		StringBuffer sql = new StringBuffer("insert Sqbkly("
+		StringBuffer sql = new StringBuffer("insert sqbkly("
 				+ "mc,type) values('");
 		sql.append(zy.getMc());
 		sql.append("',");
@@ -47,7 +47,7 @@ public class SqbklyList implements ICommonList {
 
 	public String delete(String mc) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("delete from Sqbkly where mc='");
+		sql.append("delete from sqbkly where mc='");
 		sql.append(mc);
 		sql.append("'");
 		return sql.toString();
@@ -63,7 +63,7 @@ public class SqbklyList implements ICommonList {
 
 	public String update(String oldId, Object obj) {
 		Sqbkly zy = (Sqbkly) obj;
-		StringBuffer sql = new StringBuffer("update Sqbkly " + "set mc='");
+		StringBuffer sql = new StringBuffer("update sqbkly " + "set mc='");
 		sql.append(zy.getMc());
 		sql.append("', type=");
 		sql.append(zy.getType());

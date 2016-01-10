@@ -1,1 +1,1 @@
-drop database cup;create database cup; 
+drop database cup; create database cup;
